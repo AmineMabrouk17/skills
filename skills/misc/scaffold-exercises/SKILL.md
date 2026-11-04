@@ -34,9 +34,9 @@ Chaque sous-dossier (`problem/`, `solution/`, `explainer/`) doit avoir un `readm
 Lorsque vous créez des stubs, écrivez un readme minimal avec un titre et une description :
 
 ```md
-# Exercise Title
+# Titre de l'exercice
 
-Description here
+Description ici
 ```
 
 Si le sous-dossier contient du code, il lui faut aussi un `main.ts` (>1 ligne). Mais pour des stubs, un exercice avec seulement un readme suffit.

@@ -31,25 +31,25 @@ Toute la carte à basse résolution, chargée une fois par session. Les tickets 
 ```markdown
 ## Destination
 
-<what reaching the end of this map looks like: the spec, decision, or change this effort is finding its way to. One or two lines; every session orients to it before choosing a ticket.>
+<ce à quoi ressemble l'arrivée au bout de cette carte : la spec, la décision ou le changement vers lequel cet effort cherche son chemin. Une ou deux lignes ; chaque session s'y oriente avant de choisir un ticket.>
 
 ## Notes
 
-<domain; skills every session should consult; standing preferences for this effort>
+<domaine ; skills que chaque session doit consulter ; préférences permanentes pour cet effort>
 
 ## Decisions so far
 
-<!-- the index: one line per closed ticket, enough to judge relevance, then zoom the link for the detail the ticket holds -->
+<!-- l'index : une ligne par ticket fermé, assez pour juger de la pertinence, puis zoomez le lien pour le détail que porte le ticket -->
 
-- [<closed ticket title>](link): <one-line gist of the answer>
+- [<titre du ticket fermé>](link): <résumé en une ligne de la réponse>
 
 ## Not yet specified
 
-<!-- see "Fog of war": in-scope fog you can't ticket yet; graduates as the frontier advances -->
+<!-- voir « Fog of war » : brouillard dans le périmètre que vous ne pouvez pas encore transformer en ticket ; il en sort à mesure que la frontière avance -->
 
 ## Out of scope
 
-<!-- see "Out of scope": work ruled beyond the destination; closed, never graduates -->
+<!-- voir « Hors périmètre » : travail jugé au-delà de la destination ; fermé, jamais promu -->
 ```
 
 ### Tickets
@@ -59,7 +59,7 @@ Chaque ticket est une **issue enfant** de la carte ; l'id d'issue du tracker es
 ```markdown
 ## Question
 
-<the decision or investigation this ticket resolves>
+<la décision ou l'investigation que ce ticket résout>
 ```
 
 Chaque ticket porte un label `wayfinder:<type>`, l'un de `research`, `prototype`, `grilling`, `task` (voir [Types de tickets](#types-de-tickets)). Les labels `wayfinder:` sont les seuls labels que portent une carte et ses tickets, jamais un label de triage comme `ready-for-agent` : ce sont des décisions, pas du travail d'implémentation.

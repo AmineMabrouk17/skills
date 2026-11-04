@@ -12,24 +12,24 @@ metadata:
 Utilisez ce modèle pour rédiger le corps de la pull request :
 
 ```markdown
-## Summary
+## Résumé
 
-<diagram, diff-sketch, or tree>
+<diagramme, croquis de diff ou arbre>
 
-## Evidence
+## Preuves
 
-- **Before:** <screenshot/output/failing test run>
-  **After:** <screenshot/output/passing test run>
+- **Avant :** <capture d'écran/sortie/exécution de test en échec>
+  **Après :** <capture d'écran/sortie/exécution de test réussie>
 
-## Merge Danger
+## Danger du merge
 
-**Door:** <one-way or two-way>
+**Porte :** <à sens unique ou à double sens>
 
-<optional: description>
+<facultatif : description>
 
-**Blast Radius:** <one-word description>
+**Rayon d'impact :** <description en un mot>
 
-<optional: potential ramifications of merge>
+<facultatif : ramifications potentielles du merge>
 ```
 
 ## Sections

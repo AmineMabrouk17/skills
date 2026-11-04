@@ -42,28 +42,28 @@ Le journal du romancier est le modèle : des années d'observations non structu
 ## Format de fichier
 
 ```markdown
-# Working title
+# Titre de travail
 
-A first fragment lives here.
+Un premier fragment vit ici.
 
-It can be multiple paragraphs. It can include lists, code, quotes: whatever
-shape the fragment naturally takes.
-
----
-
-A second fragment.
+Il peut faire plusieurs paragraphes. Il peut inclure des listes, du code, des citations : la
+forme que le fragment prend naturellement.
 
 ---
 
-> A quoted line that the user wants to keep around.
-
-A reaction to it.
+Un second fragment.
 
 ---
 
-- A cluster of related observations
-- That hang together by feel
-- And want to be near each other
+> Une citation que l'utilisateur veut garder sous la main.
+
+Une réaction à celle-ci.
+
+---
+
+- Un ensemble d'observations liées
+- Qui tiennent ensemble à l'intuition
+- Et qui veulent être proches les unes des autres
 ```
 
 Les fragments sont séparés par une règle horizontale (`\n---\n`). Aucun titre dans le corps. Aucun tag. Aucun ordre autre que celui dans lequel ils ont été ajoutés.

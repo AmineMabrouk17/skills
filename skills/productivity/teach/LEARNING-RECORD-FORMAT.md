@@ -7,9 +7,9 @@ Ils sont l'équivalent pédagogique des ADR : ils capturent des leçons non év
 ## Modèle
 
 ```md
-# {Short title of what was learned or established}
+# {Titre court de ce qui a été appris ou établi}
 
-{1-3 sentences: what was learned (or what prior knowledge was established), and why it matters for future sessions.}
+{1 à 3 phrases : ce qui a été appris (ou quelle connaissance préalable a été établie), et pourquoi cela compte pour les sessions futures.}
 ```
 
 C'est tout le format. Un learning record peut tenir en un seul paragraphe. La valeur est de consigner _que_ ce point est désormais connu et _pourquoi_ cela change ce qu'il faut enseigner ensuite, pas de remplir des sections.

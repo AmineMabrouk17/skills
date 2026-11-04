@@ -3,23 +3,23 @@
 ## Structure
 
 ```md
-# {Context Name}
+# {Nom du contexte}
 
-{One or two sentence description of what this context is and why it exists.}
+{Description en une ou deux phrases de ce qu'est ce contexte et pourquoi il existe.}
 
-## Language
+## Langage
 
-**Order**:
-{A one or two sentence description of the term}
-_Avoid_: Purchase, transaction
+**Commande :**
+{Description en une ou deux phrases du terme}
+_Avoid_ : Achat, transaction
 
-**Invoice**:
-A request for payment sent to a customer after delivery.
-_Avoid_: Bill, payment request
+**Facture :**
+Une demande de paiement envoyée à un client après livraison.
+_Avoid_ : Note, demande de paiement
 
-**Customer**:
-A person or organization that places orders.
-_Avoid_: Client, buyer, account
+**Client :**
+Une personne ou une organisation qui passe des commandes.
+_Avoid_ : Consommateur, acheteur, compte
 ```
 
 ## Règles
@@ -36,19 +36,19 @@ _Avoid_: Client, buyer, account
 **Contextes multiples :** un `GLOSSARY-MAP.md` à la racine du repo liste les contextes, où ils vivent et comment ils se rapportent les uns aux autres :
 
 ```md
-# Glossary Map
+# Carte du glossaire
 
-## Contexts
+## Contextes
 
-- [Ordering](./src/ordering/GLOSSARY.md): receives and tracks customer orders
-- [Billing](./src/billing/GLOSSARY.md): generates invoices and processes payments
-- [Fulfillment](./src/fulfillment/GLOSSARY.md): manages warehouse picking and shipping
+- [Ordering](./src/ordering/GLOSSARY.md) : reçoit et suit les commandes client
+- [Billing](./src/billing/GLOSSARY.md) : génère les factures et traite les paiements
+- [Fulfillment](./src/fulfillment/GLOSSARY.md) : gère la préparation et l'expédition en entrepôt
 
-## Relationships
+## Relations
 
-- **Ordering → Fulfillment**: Ordering emits `OrderPlaced` events; Fulfillment consumes them to start picking
-- **Fulfillment → Billing**: Fulfillment emits `ShipmentDispatched` events; Billing consumes them to generate invoices
-- **Ordering ↔ Billing**: Shared types for `CustomerId` and `Money`
+- **Ordering → Fulfillment** : Ordering émet des événements `OrderPlaced` ; Fulfillment les consomme pour lancer la préparation
+- **Fulfillment → Billing** : Fulfillment émet des événements `ShipmentDispatched` ; Billing les consomme pour générer des factures
+- **Ordering ↔ Billing** : types partagés pour `CustomerId` et `Money`
 ```
 
 Le skill déduit quelle structure s'applique :

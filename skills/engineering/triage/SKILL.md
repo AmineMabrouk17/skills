@@ -92,20 +92,20 @@ Si le mainteneur dit « passe #42 à ready-for-agent », faites-lui confiance 
 ## Modèle needs-info
 
 ```markdown
-## Triage Notes
+## Notes de triage
 
-**What we've established so far:**
+**Ce que nous avons établi jusqu'ici :**
 
 - point 1
 - point 2
 
-**What we still need from you (@reporter):**
+**Ce dont nous avons encore besoin de votre part (@reporter) :**
 
 - question 1
 - question 2
 ```
 
-Consignez tout ce qui a été résolu pendant le grilling sous « established so far » afin que le travail ne soit pas perdu. Les questions doivent être spécifiques et exploitables, pas « merci de fournir plus d'informations ».
+Consignez tout ce qui a été résolu pendant le grilling sous « ce que nous avons établi jusqu'ici » afin que le travail ne soit pas perdu. Les questions doivent être spécifiques et exploitables, pas « merci de fournir plus d'informations ».
 
 ## Reprendre une session précédente
 

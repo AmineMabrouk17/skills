@@ -7,9 +7,9 @@ Créez le répertoire `docs/adr/` paresseusement : seulement quand le premier A
 ## Modèle
 
 ```md
-# {Short title of the decision}
+# {Titre court de la décision}
 
-{1-3 sentences: what's the context, what did we decide, and why.}
+{1 à 3 phrases : quel est le contexte, qu'avons-nous décidé, et pourquoi.}
 ```
 
 Voilà tout. Un ADR peut tenir en un seul paragraphe. La valeur réside dans le fait d'enregistrer *qu'*une décision a été prise et *pourquoi*, pas dans le remplissage de sections.

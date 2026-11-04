@@ -5,23 +5,23 @@
 ## Structure
 
 ```md
-# {Topic} Glossary
+# Glossaire : {Sujet}
 
-{One or two sentence description of the topic this glossary covers.}
+{Description en une ou deux phrases du sujet que couvre ce glossaire.}
 
-## Terms
+## Termes
 
-**Hypertrophy**:
-Muscle growth driven by mechanical tension and metabolic stress over repeated training sessions.
-_Avoid_: Bulking, getting big
+**Hypertrophie :**
+Croissance musculaire entraînée par la tension mécanique et le stress métabolique au fil de séances d'entraînement répétées.
+_Avoid_ : Prise de masse, devenir massif
 
-**Progressive overload**:
-Systematically increasing the demand on a muscle over time, via load, volume, or intensity.
-_Avoid_: Pushing harder, levelling up
+**Surcharge progressive :**
+Augmenter systématiquement la demande imposée à un muscle au fil du temps, via la charge, le volume ou l'intensité.
+_Avoid_ : Forcer toujours plus, monter en niveau
 
-**RPE (Rate of Perceived Exertion)**:
-A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two reps left in the tank.
-_Avoid_: Effort score, intensity rating
+**RPE (effort perçu) :**
+Une auto-évaluation de 1 à 10 de la difficulté ressentie d'une série, où 10 correspond à l'échec et 8 signifie qu'il restait deux répétitions en réserve.
+_Avoid_ : Score d'effort, note d'intensité
 ```
 
 ## Règles

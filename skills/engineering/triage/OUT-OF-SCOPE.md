@@ -21,22 +21,22 @@ Un fichier par **concept**, pas par issue. Plusieurs issues demandant la même c
 Le fichier doit être rédigé dans un style détendu et lisible, plus proche d'un court document de conception que d'une entrée de base de données. Utilisez des paragraphes, des exemples de code et des exemples pour rendre le raisonnement clair et utile à quelqu'un qui le découvre pour la première fois.
 
 ```markdown
-# Dark Mode
+# Mode sombre
 
-This project does not support dark mode or user-facing theming.
+Ce projet ne prend pas en charge le mode sombre ni le theming destiné aux utilisateurs.
 
-## Why this is out of scope
+## Pourquoi c'est hors périmètre
 
-The rendering pipeline assumes a single color palette defined in
-`ThemeConfig`. Supporting multiple themes would require:
+Le pipeline de rendu suppose une palette de couleurs unique définie dans
+`ThemeConfig`. Prendre en charge plusieurs thèmes nécessiterait :
 
-- A theme context provider wrapping the entire component tree
-- Per-component theme-aware style resolution
-- A persistence layer for user theme preferences
+- Un fournisseur de contexte de thème enveloppant tout l'arbre de composants
+- Une résolution de style sensible au thème pour chaque composant
+- Une couche de persistance pour les préférences de thème de l'utilisateur
 
-This is a significant architectural change that doesn't align with the
-project's focus on content authoring. Theming is a concern for downstream
-consumers who embed or redistribute the output.
+C'est un changement architectural important qui ne correspond pas à l'orientation du
+projet vers l'écriture de contenu. Le theming est une préoccupation des consommateurs
+en aval qui intègrent ou redistribuent la sortie.
 
 ```ts
 // The current ThemeConfig interface is not designed for runtime switching:
@@ -46,11 +46,11 @@ interface ThemeConfig {
 }
 ```
 
-## Prior requests
+## Demandes antérieures
 
-- #42: "Add dark mode support"
-- #87: "Night theme for accessibility"
-- #134: "Dark theme option"
+- #42 : « Ajouter la prise en charge du mode sombre »
+- #87 : « Thème nocturne pour l'accessibilité »
+- #134 : « Option de thème sombre »
 ```
 
 ### Nommer le fichier
@@ -77,7 +77,7 @@ Pendant le triage (Étape 1 : Rassembler le contexte), lisez tous les fichiers 
 
 Le mainteneur peut :
 
-- **Confirmer** : la nouvelle issue est ajoutée à la liste « Prior requests » du fichier existant, puis fermée
+- **Confirmer** : la nouvelle issue est ajoutée à la liste « Demandes antérieures » du fichier existant, puis fermée
 - **Reconsidérer** : le fichier hors périmètre est supprimé ou mis à jour, et l'issue poursuit le triage normal
 - **Ne pas être d'accord** : les issues sont liées mais distinctes, poursuivez le triage normal
 
@@ -91,7 +91,7 @@ Le flux :
 
 1. Le mainteneur décide qu'une demande de fonctionnalité est hors périmètre
 2. Vérifiez si un fichier `.out-of-scope/` correspondant existe déjà
-3. Si oui : ajoutez la nouvelle issue à la liste « Prior requests »
+3. Si oui : ajoutez la nouvelle issue à la liste « Demandes antérieures »
 4. Si non : créez un nouveau fichier avec le nom du concept, la décision, la raison et la première demande antérieure
 5. Publiez un commentaire sur l'issue expliquant la décision et mentionnant le fichier `.out-of-scope/`
 6. Fermez l'issue avec le label `wontfix`

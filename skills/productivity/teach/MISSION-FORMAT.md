@@ -5,21 +5,21 @@
 ## Modèle
 
 ```md
-# Mission: {Topic}
+# Mission : {Sujet}
 
-## Why
-{1-3 sentences. The concrete real-world goal the user is chasing. What changes in their life or work when they have this skill? Avoid abstract framings like "to understand X"; push for the underlying outcome.}
+## Pourquoi
+{1 à 3 phrases. L'objectif concret et réel que l'utilisateur poursuit. Qu'est-ce qui change dans sa vie ou son travail quand il maîtrise ce skill ? Évitez les formulations abstraites du type « comprendre X » ; visez le résultat sous-jacent.}
 
-## Success looks like
-- {A specific, observable thing the user will be able to do}
-- {Another specific thing}
+## À quoi ressemble la réussite
+- {Une chose précise et observable que l'utilisateur saura faire}
+- {Une autre chose précise}
 - {…}
 
-## Constraints
-- {Time, budget, prior commitments, learning preferences, anything that bounds the approach}
+## Contraintes
+- {Temps, budget, engagements antérieurs, préférences d'apprentissage, tout ce qui borne l'approche}
 
-## Out of scope
-- {Adjacent topics the user explicitly does not want to chase right now, protecting the zone of proximal development}
+## Hors périmètre
+- {Sujets adjacents que l'utilisateur ne veut explicitement pas poursuivre pour l'instant, afin de protéger la zone de développement proximal}
 ```
 
 ## Règles

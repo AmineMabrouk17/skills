@@ -41,30 +41,30 @@ Indiquez ce qui est hors périmètre. Cela empêche l'agent de surenchérir ou d
 ```markdown
 ## Agent Brief
 
-**Category:** bug / enhancement
-**Summary:** one-line description of what needs to happen
+**Catégorie :** bug / enhancement
+**Résumé :** description en une ligne de ce qui doit se passer
 
-**Current behavior:**
-Describe what happens now. For bugs, this is the broken behavior.
-For enhancements, this is the status quo the feature builds on.
+**Comportement actuel :**
+Décrivez ce qui se passe maintenant. Pour les bugs, c'est le comportement cassé.
+Pour les améliorations, c'est le statu quo sur lequel la fonctionnalité se construit.
 
-**Desired behavior:**
-Describe what should happen after the agent's work is complete.
-Be specific about edge cases and error conditions.
+**Comportement souhaité :**
+Décrivez ce qui devrait se passer une fois le travail de l'agent terminé.
+Soyez précis sur les cas limites et les conditions d'erreur.
 
-**Key interfaces:**
-- `TypeName`: what needs to change and why
-- `functionName()` return type: what it currently returns vs what it should return
-- Config shape: any new configuration options needed
+**Interfaces clés :**
+- `TypeName` : ce qui doit changer et pourquoi
+- type de retour de `functionName()` : ce qu'elle renvoie actuellement vs ce qu'elle devrait renvoyer
+- forme de la configuration : toute nouvelle option de configuration nécessaire
 
-**Acceptance criteria:**
-- [ ] Specific, testable criterion 1
-- [ ] Specific, testable criterion 2
-- [ ] Specific, testable criterion 3
+**Critères d'acceptation :**
+- [ ] Critère 1 spécifique et testable
+- [ ] Critère 2 spécifique et testable
+- [ ] Critère 3 spécifique et testable
 
-**Out of scope:**
-- Thing that should NOT be changed or addressed in this issue
-- Adjacent feature that might seem related but is separate
+**Hors périmètre :**
+- Chose qui ne doit PAS être modifiée ou traitée dans cette issue
+- Fonctionnalité adjacente qui pourrait sembler liée mais qui est distincte
 ```
 
 ## Exemples
@@ -74,34 +74,34 @@ Be specific about edge cases and error conditions.
 ```markdown
 ## Agent Brief
 
-**Category:** bug
-**Summary:** Skill description truncation drops mid-word, producing broken output
+**Catégorie :** bug
+**Résumé :** la troncature de la description de skill coupe au milieu d'un mot et produit une sortie cassée
 
-**Current behavior:**
-When a skill description exceeds 1024 characters, it is truncated at exactly
-1024 characters regardless of word boundaries. This produces descriptions
-that end mid-word (e.g. "Use when the user wants to confi").
+**Comportement actuel :**
+Lorsqu'une description de skill dépasse 1024 caractères, elle est tronquée à
+exactement 1024 caractères sans tenir compte des limites de mots. Cela produit
+des descriptions qui se terminent au milieu d'un mot (par exemple « Use when the user wants to confi »).
 
-**Desired behavior:**
-Truncation should break at the last word boundary before 1024 characters
-and append "..." to indicate truncation.
+**Comportement souhaité :**
+La troncature devrait couper à la dernière limite de mot avant 1024 caractères
+et ajouter "..." pour indiquer la troncature.
 
-**Key interfaces:**
-- The `SkillMetadata` type's `description` field: no type change needed,
-  but the validation/processing logic that populates it needs to respect
-  word boundaries
-- Any function that reads SKILL.md frontmatter and extracts the description
+**Interfaces clés :**
+- Le champ `description` du type `SkillMetadata` : aucun changement de type
+  nécessaire, mais la logique de validation/traitement qui le remplit doit
+  respecter les limites de mots
+- Toute fonction qui lit le frontmatter de SKILL.md et en extrait la description
 
-**Acceptance criteria:**
-- [ ] Descriptions under 1024 chars are unchanged
-- [ ] Descriptions over 1024 chars are truncated at the last word boundary
-      before 1024 chars
-- [ ] Truncated descriptions end with "..."
-- [ ] The total length including "..." does not exceed 1024 chars
+**Critères d'acceptation :**
+- [ ] Les descriptions de moins de 1024 caractères sont inchangées
+- [ ] Les descriptions de plus de 1024 caractères sont tronquées à la dernière
+      limite de mot avant 1024 caractères
+- [ ] Les descriptions tronquées se terminent par "..."
+- [ ] La longueur totale, "..." compris, ne dépasse pas 1024 caractères
 
-**Out of scope:**
-- Changing the 1024 char limit itself
-- Multi-line description support
+**Hors périmètre :**
+- Changer la limite de 1024 caractères elle-même
+- Prise en charge des descriptions multilignes
 ```
 
 ### Bon agent brief (amélioration)
@@ -109,40 +109,40 @@ and append "..." to indicate truncation.
 ```markdown
 ## Agent Brief
 
-**Category:** enhancement
-**Summary:** Add `.out-of-scope/` directory support for tracking rejected feature requests
+**Catégorie :** enhancement
+**Résumé :** ajouter la prise en charge d'un répertoire `.out-of-scope/` pour suivre les demandes de fonctionnalités rejetées
 
-**Current behavior:**
-When a feature request is rejected, the issue is closed with a `wontfix` label
-and a comment. There is no persistent record of the decision or reasoning.
-Future similar requests require the maintainer to recall or search for the
-prior discussion.
+**Comportement actuel :**
+Lorsqu'une demande de fonctionnalité est rejetée, l'issue est fermée avec un label `wontfix`
+et un commentaire. Il n'existe aucun enregistrement persistant de la décision ni du raisonnement.
+Les demandes similaires futures obligent le mainteneur à se souvenir ou à rechercher la
+discussion antérieure.
 
-**Desired behavior:**
-Rejected feature requests should be documented in `.out-of-scope/<concept>.md`
-files that capture the decision, reasoning, and links to all issues that
-requested the feature. When triaging new issues, these files should be
-checked for matches.
+**Comportement souhaité :**
+Les demandes de fonctionnalités rejetées devraient être documentées dans des fichiers
+`.out-of-scope/<concept>.md` qui capturent la décision, le raisonnement et des liens vers
+toutes les issues qui ont demandé la fonctionnalité. Lors du triage de nouvelles issues,
+ces fichiers devraient être vérifiés pour trouver des correspondances.
 
-**Key interfaces:**
-- Markdown file format in `.out-of-scope/`: each file should have a
-  `# Concept Name` heading, a `**Decision:**` line, a `**Reason:**` line,
-  and a `**Prior requests:**` list with issue links
-- The triage workflow should read all `.out-of-scope/*.md` files early
-  and match incoming issues against them by concept similarity
+**Interfaces clés :**
+- Format de fichier Markdown dans `.out-of-scope/` : chaque fichier devrait avoir un
+  titre `# Concept Name`, une ligne `**Decision:**`, une ligne `**Reason:**`
+  et une liste `**Prior requests:**` avec des liens vers les issues
+- Le workflow de triage devrait lire tous les fichiers `.out-of-scope/*.md` tôt
+  et faire correspondre les issues entrantes par similarité de concept
 
-**Acceptance criteria:**
-- [ ] Closing a feature as wontfix creates/updates a file in `.out-of-scope/`
-- [ ] The file includes the decision, reasoning, and link to the closed issue
-- [ ] If a matching `.out-of-scope/` file already exists, the new issue is
-      appended to its "Prior requests" list rather than creating a duplicate
-- [ ] During triage, existing `.out-of-scope/` files are checked and surfaced
-      when a new issue matches a prior rejection
+**Critères d'acceptation :**
+- [ ] Fermer une fonctionnalité comme wontfix crée/met à jour un fichier dans `.out-of-scope/`
+- [ ] Le fichier inclut la décision, le raisonnement et un lien vers l'issue fermée
+- [ ] Si un fichier `.out-of-scope/` correspondant existe déjà, la nouvelle issue est
+      ajoutée à sa liste « Prior requests » plutôt que de créer un doublon
+- [ ] Pendant le triage, les fichiers `.out-of-scope/` existants sont vérifiés et remontés
+      lorsqu'une nouvelle issue correspond à un rejet antérieur
 
-**Out of scope:**
-- Automated matching (human confirms the match)
-- Reopening previously rejected features
-- Bug reports (only enhancement rejections go to `.out-of-scope/`)
+**Hors périmètre :**
+- Correspondance automatisée (un humain confirme la correspondance)
+- Rouvrir des fonctionnalités précédemment rejetées
+- Rapports de bug (seuls les rejets d'amélioration vont dans `.out-of-scope/`)
 ```
 
 ### Bon agent brief (PR)
@@ -152,34 +152,34 @@ Pour une PR, le « Current behavior » décrit l'état du diff, et l'agent bri
 ```markdown
 ## Agent Brief
 
-**Category:** enhancement
-**Summary:** Finish the contributor's `--json` output flag for `triage list`
+**Catégorie :** enhancement
+**Résumé :** terminer le flag de sortie `--json` du contributeur pour `triage list`
 
-**Current behavior:**
-The PR adds a `--json` flag that serializes the issue list to JSON. The happy
-path works and the diff matches the project's command structure. Two gaps
-remain: errors are still printed as human text (not JSON), and the new flag has
-no test coverage.
+**Comportement actuel :**
+La PR ajoute un flag `--json` qui sérialise la liste des issues en JSON. Le chemin
+nominal fonctionne et le diff correspond à la structure de commandes du projet. Deux lacunes
+subsistent : les erreurs sont encore imprimées en texte humain (pas en JSON), et le nouveau flag n'a
+aucune couverture de test.
 
-**Desired behavior:**
-With `--json`, all output (including errors) is well-formed JSON on stdout,
-and the command's exit codes are unchanged. The existing human-readable output
-is untouched when the flag is absent.
+**Comportement souhaité :**
+Avec `--json`, toute la sortie (y compris les erreurs) est du JSON bien formé sur stdout,
+et les codes de sortie de la commande sont inchangés. La sortie lisible par un humain existante
+reste intacte lorsque le flag est absent.
 
-**Key interfaces:**
-- The command's error path should emit `{ "error": string }` under `--json`
-  instead of the plain-text error
-- Reuse the existing serializer the PR already added; don't introduce a second
+**Interfaces clés :**
+- Le chemin d'erreur de la commande devrait émettre `{ "error": string }` sous `--json`
+  au lieu de l'erreur en texte brut
+- Réutilisez le sérialiseur existant que la PR a déjà ajouté ; n'en introduisez pas un second
 
-**Acceptance criteria:**
-- [ ] `triage list --json` emits valid JSON for both success and error cases
-- [ ] Exit codes match the non-JSON command
-- [ ] A test covers the `--json` success output and one error case
-- [ ] Default (non-JSON) output is byte-for-byte unchanged
+**Critères d'acceptation :**
+- [ ] `triage list --json` émet du JSON valide pour les cas de succès comme d'erreur
+- [ ] Les codes de sortie correspondent à ceux de la commande non-JSON
+- [ ] Un test couvre la sortie de succès `--json` et un cas d'erreur
+- [ ] La sortie par défaut (non-JSON) est identique octet pour octet
 
-**Out of scope:**
-- Adding `--json` to any other command
-- Changing the JSON shape of the success payload the PR already defined
+**Hors périmètre :**
+- Ajouter `--json` à toute autre commande
+- Changer la forme JSON de la charge utile de succès déjà définie par la PR
 ```
 
 ### Mauvais agent brief
@@ -187,15 +187,15 @@ is untouched when the flag is absent.
 ```markdown
 ## Agent Brief
 
-**Summary:** Fix the triage bug
+**Résumé :** corriger le bug de triage
 
-**What to do:**
-The triage thing is broken. Look at the main file and fix it.
-The function around line 150 has the issue.
+**Quoi faire :**
+Le truc de triage est cassé. Regardez le fichier principal et corrigez-le.
+La fonction vers la ligne 150 a le problème.
 
-**Files to change:**
-- src/triage/handler.ts (line 150)
-- src/types.ts (line 42)
+**Fichiers à modifier :**
+- src/triage/handler.ts (ligne 150)
+- src/types.ts (ligne 42)
 ```
 
 C'est mauvais parce que :
