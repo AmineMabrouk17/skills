@@ -1,17 +1,17 @@
 ---
 name: implement
-description: "Implement a piece of work based on a spec or set of tickets."
+description: "Implémentez un travail à partir d'une spec ou d'un ensemble de tickets."
 disable-model-invocation: true
 ---
 
-Implement the work described by the user in the spec or tickets.
+Implémentez le travail décrit par l'utilisateur dans la spec ou les tickets.
 
-If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
+Si l'utilisateur fournit une référence de ticket, récupérez-la depuis l'issue tracker et énoncez son titre avant de commencer. Si la référence est ambiguë, demandez.
 
-Call the Skill tool with "tdd" where possible, at pre-agreed seams.
+Appelez l'outil Skill avec « tdd » lorsque c'est possible, aux seams convenus à l'avance.
 
-Run typechecking regularly, single test files regularly, and the full test suite once at the end.
+Lancez la vérification de types régulièrement, les fichiers de test isolés régulièrement, et la suite de tests complète une fois à la fin.
 
-Once done, call the Skill tool with "code-review" to review the work.
+Une fois terminé, appelez l'outil Skill avec « code-review » pour faire la revue de code du travail.
 
-Commit your work to the current branch.
+Faites un commit de votre travail sur la branch actuelle.

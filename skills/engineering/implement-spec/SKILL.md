@@ -1,42 +1,42 @@
 ---
 name: implement-spec
-description: "Implement the result of /to-spec and /to-tickets in code."
+description: "Implémentez en code le résultat de /to-spec et /to-tickets."
 disable-model-invocation: true
 ---
 
-You have been provided a spec. This spec should have tickets associated with it, describing how to implement the spec.
+Une spec vous a été fournie. Des tickets devraient y être associés, décrivant comment implémenter la spec.
 
-The issue tracker should have been provided to you. If not, tell the user to run `/setup-matt-pocock-skills`.
+L'issue tracker devrait vous avoir été fourni. Sinon, demandez à l'utilisateur de lancer `/setup-matt-pocock-skills`.
 
-The goal is the entire spec implemented on a single **integration branch**, with every ticket resolved the way the issue tracker closes work.
+L'objectif est que toute la spec soit implémentée sur une seule **branch d'intégration**, avec chaque ticket résolu de la manière dont l'issue tracker clôt le travail.
 
-The tickets are not a list of steps. They are a **task graph** with blocking relationships between them. This means there is always a **frontier** of tickets which are ready to be grabbed.
+Les tickets ne sont pas une liste d'étapes. Ils forment un **graphe de tâches** avec des relations de blocage entre eux. Cela signifie qu'il existe toujours une **frontière** de tickets prêts à être pris.
 
-Start every subagent with a fresh context window.
+Démarrez chaque subagent avec une fenêtre de contexte neuve.
 
-Communication to and from subagents should be sparse. Communicate primarily through **context pointers**: to the spec, tickets, research notes, and previous commits. Don't duplicate information already available via pointers.
+La communication vers et depuis les subagents doit être rare. Communiquez principalement via des **pointeurs de contexte** : vers la spec, les tickets, les notes de recherche et les commits précédents. Ne dupliquez pas les informations déjà disponibles via les pointeurs.
 
-**Implementer subagents** should be run in the background where possible for maximum concurrency.
+Les **subagents implémenteurs** doivent être lancés en arrière-plan lorsque c'est possible, pour une concurrence maximale.
 
-## Steps
+## Étapes
 
-1. Read the spec and tickets to understand the task graph.
+1. Lisez la spec et les tickets pour comprendre le graphe de tâches.
 
-2. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets - relevant codebase files or external documentation. Ensure the exploration subagent can save files - it should save its markdown notes in a directory outside the repo, accessible by all future subagents. This lets **implementer subagents** focus on implementation rather than exploration.
+2. (facultatif) Utilisez un **subagent d'exploration** pour mener toute exploration exigée par les tickets : fichiers pertinents de la base de code ou documentation externe. Assurez-vous que le subagent d'exploration peut enregistrer des fichiers : il doit sauvegarder ses notes markdown dans un répertoire hors du repo, accessible à tous les futurs subagents. Cela permet aux **subagents implémenteurs** de se concentrer sur l'implémentation plutôt que sur l'exploration.
 
-3. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 5 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
+3. Créez la branch d'intégration. Si l'issue tracker clôt le travail via des PR, ou si l'utilisateur en demande une, ouvrez une PR en brouillon après le premier merge de l'étape 5 (une branch sans commit en avance sur main ne peut pas en ouvrir une), marquée comme fermant la spec et les tickets.
 
-4. Use a fresh **implementer subagent** for each ticket, each in its own worktree on its own branch. Each implementer subagent:
-   - confirms its worktree is based on the integration branch before starting, and resets onto it if not;
-   - calls the Skill tool with `tdd` to build the ticket;
-   - merges the integration branch tip into its own branch before reporting done
+4. Utilisez un **subagent implémenteur** neuf pour chaque ticket, chacun dans son propre worktree sur sa propre branch. Chaque subagent implémenteur :
+   - confirme que son worktree est basé sur la branch d'intégration avant de commencer, et s'y réinitialise sinon ;
+   - appelle l'outil Skill avec `tdd` pour construire le ticket ;
+   - merge la pointe de la branch d'intégration dans sa propre branch avant de signaler qu'il a terminé
 
-5. Once an **implementer subagent** completes, merge its work to the integration branch with a **merger subagent**.
+5. Dès qu'un **subagent implémenteur** a terminé, mergez son travail dans la branch d'intégration avec un **subagent de merge**.
 
-6. If this changes the **frontier** of available tickets, kick off more **implementer subagents** to work on the new tickets. This allows for maximum concurrency.
+6. Si cela modifie la **frontière** des tickets disponibles, lancez d'autres **subagents implémenteurs** pour travailler sur les nouveaux tickets. Cela permet une concurrence maximale.
 
-7. Once all tickets are complete, call the Skill tool with `code-review` on the integration branch. Fix all issues raised by the code review in a single fresh **implementer subagent**.
+7. Une fois tous les tickets terminés, appelez l'outil Skill avec `code-review` sur la branch d'intégration. Corrigez tous les problèmes soulevés par la revue de code dans un seul **subagent implémenteur** neuf.
 
-8. If a draft PR exists, mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work, and report the integration branch.
+8. Si une PR en brouillon existe, marquez-la comme prête pour la revue. Sinon, résolvez chaque ticket de la manière dont l'issue tracker clôt le travail, et indiquez la branch d'intégration.
 
-9. Clean up all **implementer subagent** worktrees.
+9. Nettoyez tous les worktrees des **subagents implémenteurs**.
