@@ -1,54 +1,54 @@
 ---
 name: to-questionnaire
-description: Turn a decision you can't fully answer into a questionnaire for someone else to fill in.
+description: Transformez une décision que vous ne pouvez pas pleinement trancher en un questionnaire que quelqu'un d'autre remplira.
 disable-model-invocation: true
 ---
 
-Turn something the user can't answer alone into a **questionnaire**: a Markdown document they hand to one person to fill in async, or fill out together over a meeting. The recipient holds knowledge the user lacks; the questionnaire pulls it out of them.
+Transformez quelque chose que l'utilisateur ne peut pas trancher seul en un **questionnaire** : un document Markdown qu'il remet à une personne pour qu'elle le remplisse en asynchrone, ou qu'ils remplissent ensemble lors d'une réunion. Le destinataire détient un savoir qui manque à l'utilisateur ; le questionnaire le lui extirpe.
 
-**Grill the send, not the subject.** Interview the user only about the _send_, which they can always answer: who it goes to, and what they need back. The questions in the document then target the **gap** between what the recipient knows and what the user needs.
+**Interrogez l'envoi, pas le sujet.** N'interrogez l'utilisateur que sur l'_envoi_, auquel il peut toujours répondre : à qui cela va, et ce qu'il lui faut en retour. Les questions du document ciblent alors l'**écart** entre ce que le destinataire sait et ce dont l'utilisateur a besoin.
 
 
-1. **Who is it going to?** Ask, in one exchange, the recipient's role, expertise, and relationship to the user. This fixes the questionnaire's tone and how much context it must carry. Done when you know who the recipient is and what they know that the user doesn't.
+1. **À qui cela va-t-il ?** Demandez, en un seul échange, le rôle du destinataire, son expertise et sa relation avec l'utilisateur. Cela fixe le ton du questionnaire et la quantité de contexte qu'il doit porter. Terminé quand vous savez qui est le destinataire et ce qu'il sait que l'utilisateur ignore.
 
-2. **What do you need back?** Ask, in one exchange, the specific decisions or facts the user can't resolve alone and needs from this person. Done when you have a concrete list of what the user must walk away able to do or decide.
+2. **De quoi avez-vous besoin en retour ?** Demandez, en un seul échange, les décisions ou faits précis que l'utilisateur ne peut pas trancher seul et dont il a besoin de cette personne. Terminé quand vous disposez d'une liste concrète de ce que l'utilisateur doit être capable de faire ou de décider en sortant.
 
-3. **Write the questionnaire.** Draft questions aimed at the gap from steps 1–2, following the Document structure below. Write it to `to-questionnaire-<slug>.md` in the current directory (slug from the topic) and report the path. Done when the file exists and every item the user named in step 2 is covered by a question.
+3. **Rédigez le questionnaire.** Rédigez des questions visant l'écart des étapes 1–2, en suivant la structure de document ci-dessous. Écrivez-le dans `to-questionnaire-<slug>.md` dans le répertoire courant (slug tiré du sujet) et indiquez le chemin. Terminé quand le fichier existe et que chaque élément nommé par l'utilisateur à l'étape 2 est couvert par une question.
 
-## Document structure
+## Structure du document
 
-Frame the document as a **discovery questionnaire**: the user lacks context, the recipient holds it. Order questions most-important-first, since async means you may only get one pass, and group them under `##` headings by theme once there are more than a handful. Write it using the template below.
+Présentez le document comme un **questionnaire de découverte** : l'utilisateur manque de contexte, le destinataire le détient. Ordonnez les questions de la plus importante à la moins importante, car l'asynchrone signifie que vous n'aurez peut-être qu'une seule passe, et regroupez-les sous des titres `##` par thème dès qu'il y en a plus qu'une poignée. Rédigez-le à l'aide du modèle ci-dessous.
 
 <questionnaire-template>
 
-# <Questionnaire title>
+# <Titre du questionnaire>
 
-**Purpose:** why this questionnaire exists and the decision riding on it.
+**Objet :** pourquoi ce questionnaire existe et la décision qui en dépend.
 
-**From:** <the user>, **To:** <the recipient>, **How your answers will be used:** <where they go>
+**De :** <l'utilisateur>, **À :** <le destinataire>, **Utilisation de vos réponses :** <où elles vont>
 
-## Context
+## Contexte
 
-One paragraph orienting a recipient who wasn't in the user's head. Enough to answer well, not a page.
+Un paragraphe pour orienter un destinataire qui n'était pas dans la tête de l'utilisateur. Assez pour bien répondre, pas une page.
 
-## How to answer
+## Comment répondre
 
-Deadline and rough effort. Partial answers and "I don't know" are useful: flag anything you're unsure of rather than skipping it.
+Échéance et effort approximatif. Les réponses partielles et « je ne sais pas » sont utiles : signalez tout ce dont vous n'êtes pas sûr plutôt que de l'omettre.
 
-## <Theme heading>
+## <Titre du thème>
 
-One `##` section per theme. Under each, its questions, most-important-first. Every question is one idea, never compound, with an answer stub directly beneath, and a one-line _why this matters_ only where the question could be misread or invite a throwaway answer.
+Une section `##` par thème. Sous chacune, ses questions, de la plus importante à la moins importante. Chaque question est une seule idée, jamais composée, avec une amorce de réponse juste en dessous, et une ligne _pourquoi c'est important_ uniquement là où la question pourrait être mal lue ou inviter à une réponse bâclée.
 
 <question-example>
-### What load is the system expected to handle at launch?
+### Quelle charge le système doit-il supporter au lancement ?
 
-_Why this matters: it decides whether we provision for burst traffic now or defer it._
+_Pourquoi c'est important : cela décide si nous provisionnons pour le trafic en rafale maintenant ou si nous le reportons._
 
 >
 </question-example>
 
-## Anything else?
+## Autre chose ?
 
-A closing catch-all: anything we didn't ask that we should know?
+Une question finale fourre-tout : y a-t-il quelque chose que nous n'avons pas demandé et que nous devrions savoir ?
 
 </questionnaire-template>
