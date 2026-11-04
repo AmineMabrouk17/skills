@@ -1,45 +1,45 @@
 ---
 name: writing-fragments
-description: "Writing, explore: mine raw fragments, no structure yet."
+description: "Écriture, explore : puisez dans des fragments bruts, pas encore de structure."
 disable-model-invocation: true
 ---
 
 <what-to-do>
 
-This is pure **explore**: widen the space of what could be written without committing to structure. Committing is _exploit_, a separate skill's job. Run a grilling session that produces fragments, interviewing the user relentlessly about whatever they want to write about. Imposing phases, outlines, or article structure is out of scope here.
+C'est de l'**explore** pur : élargissez l'espace de ce qui pourrait être écrit sans vous engager sur une structure. S'engager, c'est de l'_exploit_, le travail d'un autre skill. Menez une session de grilling qui produit des fragments, en interrogeant l'utilisateur sans relâche sur ce qu'il veut écrire. Imposer des phases, des plans ou une structure d'article est hors périmètre ici.
 
-As fragments emerge from either side of the conversation, append them to a single markdown file.
+À mesure que des fragments émergent des deux côtés de la conversation, ajoutez-les à un même fichier markdown.
 
-If the user did not pass a path, ask once where to save the document, then remember it for the rest of the session.
+Si l'utilisateur n'a pas passé de chemin, demandez une fois où enregistrer le document, puis retenez-le pour le reste de la session.
 
-Capture fragments from the very first thing the user says, including the initial prompt.
+Capturez des fragments dès la première chose que dit l'utilisateur, y compris le prompt initial.
 
-On first write, put a single H1 at the top with a working title (it can change later) and nothing else: no metadata, no TOC, no date.
+À la première écriture, placez un seul H1 en haut avec un titre de travail (il peut changer ensuite) et rien d'autre : ni métadonnées, ni sommaire, ni date.
 
 </what-to-do>
 
 <supporting-info>
 
-## What is a fragment
+## Qu'est-ce qu'un fragment
 
-A fragment is any piece of text that might survive into the final article. It must be _readable by the author_ (the author can tell what it means), but it does not need to define its terms or be comprehensible to a cold reader. The bar is "is this a piece of good writing?", not "is this a self-contained argument?"
+Un fragment est tout morceau de texte susceptible de survivre dans l'article final. Il doit être _lisible par l'auteur_ (l'auteur peut dire ce qu'il signifie), mais il n'a pas besoin de définir ses termes ni d'être compréhensible pour un lecteur froid. Le critère est « est-ce un bon morceau d'écriture ? », pas « est-ce une argumentation autonome ? »
 
-Fragments are deliberately heterogeneous. Examples of what could be a fragment:
+Les fragments sont délibérément hétérogènes. Exemples de ce qui pourrait être un fragment :
 
-- A sharp sentence you'd want to deploy somewhere but don't yet know where.
-- A claim with a one-line justification.
-- A vignette: a thing that happened, a code snippet, a scenario, an analogy.
-- A half-thought: "something about how X feels like Y, work this out later."
-- A quote, a piece of dialogue, an overheard line.
-- A list of related observations that hang together by feel.
-- A complaint, a confession, a punchline.
-- A **leading word**: a compact metaphor or coinage the whole piece can hang on (one term that names the idea, the way _tracer bullets_ or _fog of war_ names a whole pattern).
+- Une phrase acérée que vous voudriez déployer quelque part sans encore savoir où.
+- Une affirmation avec une justification en une ligne.
+- Une vignette : une chose qui est arrivée, un extrait de code, un scénario, une analogie.
+- Une demi-pensée : « un truc sur le fait que X ressemble à Y, à creuser plus tard. »
+- Une citation, un morceau de dialogue, une phrase entendue.
+- Une liste d'observations liées qui tiennent ensemble à l'intuition.
+- Une plainte, une confession, une chute.
+- Un **mot directeur** : une métaphore compacte ou une création lexicale sur laquelle tout le texte peut s'accrocher (un seul terme qui nomme l'idée, comme _tracer bullets_ ou _fog of war_ nomme tout un motif).
 
-Of these, the leading word is the most valuable fragment to land. It is load-bearing: name the right one in explore and it shapes the structure, the transitions, and the title later, paying dividends through the entire exploit phase. When the conversation circles a recurring idea, push to coin a word for it.
+Parmi ceux-là, le mot directeur est le fragment le plus précieux à poser. Il porte la charge : nommez le bon mot en explore et il façonne ensuite la structure, les transitions et le titre, avec des bénéfices sur toute la phase d'exploit. Quand la conversation tourne autour d'une idée récurrente, poussez à forger un mot pour la nommer.
 
-The novelist's diary is the model: years of unstructured noticings that later get mined for raw material. Fragments are noticings.
+Le journal du romancier est le modèle : des années d'observations non structurées, ensuite exploitées comme matière brute. Les fragments sont des observations.
 
-## File format
+## Format de fichier
 
 ```markdown
 # Working title
@@ -66,14 +66,14 @@ A reaction to it.
 - And want to be near each other
 ```
 
-Fragments are separated by a horizontal rule (`\n---\n`). No headings inside the body. No tags. No order beyond the order they were added.
+Les fragments sont séparés par une règle horizontale (`\n---\n`). Aucun titre dans le corps. Aucun tag. Aucun ordre autre que celui dans lequel ils ont été ajoutés.
 
-## Writing rhythm
+## Rythme d'écriture
 
-Append silently. Don't ask permission for each fragment. Mention what you added in passing ("adding that"), but don't interrupt the conversation with save dialogs.
+Ajoutez en silence. Ne demandez pas la permission pour chaque fragment. Mentionnez en passant ce que vous avez ajouté (« j'ajoute ça »), mais n'interrompez pas la conversation avec des boîtes de dialogue d'enregistrement.
 
-Before every write: re-read the file from disk. The user may have edited, reordered, or deleted fragments between turns, so preserve their changes. Never overwrite the file; only append (or, if the user asks, edit a specific fragment in place).
+Avant chaque écriture : relisez le fichier depuis le disque. L'utilisateur a peut-être modifié, réordonné ou supprimé des fragments entre-temps, alors préservez ses changements. N'écrasez jamais le fichier ; ajoutez uniquement (ou, si l'utilisateur le demande, modifiez un fragment précis sur place).
 
-The user can say "cut the last one", "rewrite that one sharper", "merge those two" at any time. Treat those as first-class instructions.
+L'utilisateur peut dire à tout moment « coupe le dernier », « réécris celui-là plus acéré », « fusionne ces deux-là ». Traitez cela comme des instructions de premier ordre.
 
 </supporting-info>
