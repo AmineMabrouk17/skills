@@ -1,15 +1,15 @@
 ---
 name: domain-modeling
-description: Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR.
+description: Construire et affiner le modèle de domaine d'un projet. À utiliser lors de discussions sur la terminologie de la base de code, lors de la rédaction ou de la modification d'un GLOSSARY.md, ou lors de l'enregistrement ou de la modification d'un ADR.
 ---
 
-# Domain Modeling
+# Modélisation du domaine
 
-Actively build and sharpen the project's domain model as you design. This is the *active* discipline: challenging terms, inventing edge-case scenarios, and writing the glossary and decisions down the moment they crystallise. (Merely *reading* `GLOSSARY.md` for vocabulary is not this skill: that's a one-line habit any skill can do. This skill is for when you're changing the model, not just consuming it.)
+Construisez et affinez activement le modèle de domaine du projet pendant que vous concevez. C'est la discipline *active* : contester les termes, inventer des scénarios de cas limite et écrire le glossaire et les décisions au moment même où ils se cristallisent. (Lire simplement `GLOSSARY.md` pour le vocabulaire n'est pas ce skill : c'est une habitude d'une ligne que tout skill peut avoir. Ce skill sert quand vous modifiez le modèle, pas seulement quand vous le consommez.)
 
-## File structure
+## Structure des fichiers
 
-Most repos have a single context:
+La plupart des repos ont un seul contexte :
 
 ```
 /
@@ -21,7 +21,7 @@ Most repos have a single context:
 └── src/
 ```
 
-If a `GLOSSARY-MAP.md` exists at the root, the repo has multiple contexts. The map points to where each one lives:
+Si un `GLOSSARY-MAP.md` existe à la racine, le repo a plusieurs contextes. La carte indique où vit chacun :
 
 ```
 /
@@ -37,38 +37,38 @@ If a `GLOSSARY-MAP.md` exists at the root, the repo has multiple contexts. The m
 │       └── docs/adr/
 ```
 
-Create files lazily: only when you have something to write. If no `GLOSSARY.md` exists, create one when the first term is resolved. If no `docs/adr/` exists, create it when the first ADR is needed.
+Créez les fichiers paresseusement : seulement quand vous avez quelque chose à écrire. Si aucun `GLOSSARY.md` n'existe, créez-en un quand le premier terme est résolu. Si aucun `docs/adr/` n'existe, créez-le quand le premier ADR est nécessaire.
 
-## During the session
+## Pendant la session
 
-### Challenge against the glossary
+### Contester au regard du glossaire
 
-When the user uses a term that conflicts with the existing language in `GLOSSARY.md`, call it out immediately. "Your glossary defines 'cancellation' as X, but you seem to mean Y. Which is it?"
+Quand l'utilisateur emploie un terme qui entre en conflit avec le langage existant dans `GLOSSARY.md`, signalez-le immédiatement. « Votre glossaire définit “annulation” comme X, mais vous semblez vouloir dire Y. De quoi s'agit-il ? »
 
-### Sharpen fuzzy language
+### Affiner le langage flou
 
-When the user uses vague or overloaded terms, propose a precise canonical term. "You're saying 'account': do you mean the Customer or the User? Those are different things."
+Quand l'utilisateur emploie des termes vagues ou surchargés, proposez un terme canonique précis. « Vous dites “compte” : voulez-vous dire le Client ou l'Utilisateur ? Ce sont deux choses différentes. »
 
-### Discuss concrete scenarios
+### Discuter de scénarios concrets
 
-When domain relationships are being discussed, stress-test them with specific scenarios. Invent scenarios that probe edge cases and force the user to be precise about the boundaries between concepts.
+Lorsque des relations de domaine sont en discussion, mettez-les à l'épreuve avec des scénarios précis. Inventez des scénarios qui sondent les cas limites et forcent l'utilisateur à être précis sur les frontières entre les concepts.
 
-### Cross-reference with code
+### Recouper avec le code
 
-When the user states how something works, check whether the code agrees. If you find a contradiction, surface it: "Your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?"
+Quand l'utilisateur énonce comment quelque chose fonctionne, vérifiez si le code est d'accord. Si vous trouvez une contradiction, exposez-la : « Votre code annule des Commandes entières, mais vous venez de dire qu'une annulation partielle est possible. Laquelle est correcte ? »
 
-### Update GLOSSARY.md inline
+### Mettre à jour GLOSSARY.md au fil de l'eau
 
-When a term is resolved, update `GLOSSARY.md` right there. Don't batch these up: capture them as they happen. Use the format in [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
+Quand un terme est résolu, mettez à jour `GLOSSARY.md` sur-le-champ. Ne les groupez pas : capturez-les au moment où ils surviennent. Utilisez le format de [GLOSSARY-FORMAT.md](./GLOSSARY-FORMAT.md).
 
-`GLOSSARY.md` should be totally devoid of implementation details. Do not treat `GLOSSARY.md` as a spec, a scratch pad, or a repository for implementation decisions. It is a glossary and nothing else.
+`GLOSSARY.md` doit être totalement dépourvu de détails d'implémentation. Ne traitez pas `GLOSSARY.md` comme une spec, un brouillon ou un dépôt de décisions d'implémentation. C'est un glossaire et rien d'autre.
 
-### Offer ADRs sparingly
+### Proposer des ADR avec parcimonie
 
-Only offer to create an ADR when all three are true:
+Ne proposez de créer un ADR que lorsque les trois conditions suivantes sont réunies :
 
-1. **Hard to reverse**: the cost of changing your mind later is meaningful
-2. **Surprising without context**: a future reader will wonder "why did they do it this way?"
-3. **The result of a real trade-off**: there were genuine alternatives and you picked one for specific reasons
+1. **Difficile à inverser** : le coût de changer d'avis plus tard est significatif
+2. **Surprenant sans contexte** : un lecteur futur se demandera « pourquoi ont-ils fait ça comme ça ? »
+3. **Le résultat d'un vrai compromis** : il existait de véritables alternatives et vous en avez choisi une pour des raisons précises
 
-If any of the three is missing, skip the ADR. Use the format in [ADR-FORMAT.md](./ADR-FORMAT.md).
+Si l'une des trois manque, sautez l'ADR. Utilisez le format de [ADR-FORMAT.md](./ADR-FORMAT.md).

@@ -1,44 +1,44 @@
-# Design It Twice
+# Concevoir deux fois
 
-When the user wants to explore alternative interfaces for a chosen deepening candidate, use this parallel sub-agent pattern. Based on "Design It Twice" (Ousterhout): your first idea is unlikely to be the best.
+Lorsque l'utilisateur veut explorer des interfaces alternatives pour un candidat à l'approfondissement choisi, utilisez ce modèle de subagents parallèles. Inspiré de « Design It Twice » (Ousterhout) : votre première idée n'est probablement pas la meilleure.
 
-Uses the vocabulary in [SKILL.md](SKILL.md): **module**, **interface**, **seam**, **adapter**, **leverage**.
+Reprend le vocabulaire de [SKILL.md](SKILL.md) : **module**, **interface**, **seam**, **adaptateur**, **levier**.
 
-## Process
+## Processus
 
-### 1. Frame the problem space
+### 1. Cadrer l'espace du problème
 
-Before spawning sub-agents, write a user-facing explanation of the problem space for the chosen candidate:
+Avant de lancer les subagents, écrivez une explication destinée à l'utilisateur sur l'espace du problème pour le candidat choisi :
 
-- The constraints any new interface would need to satisfy
-- The dependencies it would rely on, and which category they fall into (see [DEEPENING.md](DEEPENING.md))
-- A rough illustrative code sketch to ground the constraints, not a proposal, just a way to make the constraints concrete
+- Les contraintes que toute nouvelle interface devrait satisfaire
+- Les dépendances sur lesquelles elle s'appuierait, et dans quelle catégorie elles tombent (voir [DEEPENING.md](DEEPENING.md))
+- Une esquisse de code approximative et illustrative pour ancrer les contraintes, pas une proposition, juste un moyen de rendre les contraintes concrètes
 
-Show this to the user, then immediately proceed to Step 2. The user reads and thinks while the sub-agents work in parallel.
+Montrez-la à l'utilisateur, puis passez immédiatement à l'étape 2. L'utilisateur lit et réfléchit pendant que les subagents travaillent en parallèle.
 
-### 2. Spawn sub-agents
+### 2. Lancer les subagents
 
-Spawn 3+ sub-agents in parallel, each with a fresh context window. Each must produce a **radically different** interface for the deepened module.
+Lancez 3 subagents ou plus en parallèle, chacun avec une fenêtre de contexte neuve. Chacun doit produire une interface **radicalement différente** pour le module approfondi.
 
-Prompt each sub-agent with a separate technical brief (file paths, coupling details, dependency category from [DEEPENING.md](DEEPENING.md), what sits behind the seam). The brief is independent of the user-facing problem-space explanation in Step 1. Give each agent a different design constraint:
+Donnez à chaque subagent un brief technique distinct (chemins de fichiers, détails de couplage, catégorie de dépendance issue de [DEEPENING.md](DEEPENING.md), ce qui se trouve derrière le seam). Le brief est indépendant de l'explication de l'espace du problème destinée à l'utilisateur à l'étape 1. Donnez à chaque agent une contrainte de conception différente :
 
-- Agent 1: "Minimize the interface: aim for 1–3 entry points max. Maximise leverage per entry point."
-- Agent 2: "Maximise flexibility: support many use cases and extension."
-- Agent 3: "Optimise for the most common caller: make the default case trivial."
-- Agent 4 (if applicable): "Design around ports & adapters for cross-seam dependencies."
+- Agent 1 : « Minimisez l'interface : visez 1 à 3 points d'entrée au maximum. Maximisez le levier par point d'entrée. »
+- Agent 2 : « Maximisez la flexibilité : prenez en charge de nombreux cas d'usage et l'extension. »
+- Agent 3 : « Optimisez pour l'appelant le plus courant : rendez le cas par défaut trivial. »
+- Agent 4 (le cas échéant) : « Concevez autour des ports et adaptateurs pour les dépendances qui traversent le seam. »
 
-Include both [SKILL.md](SKILL.md) vocabulary and GLOSSARY.md vocabulary in the brief so each sub-agent names things consistently with the architecture language and the project's domain language.
+Incluez dans le brief le vocabulaire de [SKILL.md](SKILL.md) et celui de GLOSSARY.md afin que chaque subagent nomme les choses de façon cohérente avec le langage de l'architecture et le langage de domaine du projet.
 
-Each sub-agent outputs:
+Chaque subagent produit :
 
-1. Interface (types, methods, params, plus invariants, ordering, error modes)
-2. Usage example showing how callers use it
-3. What the implementation hides behind the seam
-4. Dependency strategy and adapters (see [DEEPENING.md](DEEPENING.md))
-5. Trade-offs: where leverage is high, where it's thin
+1. Interface (types, méthodes, paramètres, plus les invariants, l'ordre, les modes d'erreur)
+2. Un exemple d'usage montrant comment les appelants l'utilisent
+3. Ce que l'implémentation cache derrière le seam
+4. Stratégie de dépendances et adaptateurs (voir [DEEPENING.md](DEEPENING.md))
+5. Compromis : où le levier est élevé, où il est mince
 
-### 3. Present and compare
+### 3. Présenter et comparer
 
-Present designs sequentially so the user can absorb each one, then compare them in prose. Contrast by **depth** (leverage at the interface), **locality** (where change concentrates), and **seam placement**.
+Présentez les conceptions séquentiellement pour que l'utilisateur puisse absorber chacune, puis comparez-les en prose. Mettez en contraste la **profondeur** (le levier au niveau de l'interface), la **localité** (où le changement se concentre) et le **placement du seam**.
 
-After comparing, give your own recommendation: which design you think is strongest and why. If elements from different designs would combine well, propose a hybrid. Be opinionated: the user wants a strong read, not a menu.
+Après la comparaison, donnez votre propre recommandation : quelle conception vous semble la plus solide et pourquoi. Si des éléments de conceptions différentes se combineraient bien, proposez un hybride. Ayez un avis tranché : l'utilisateur veut une lecture nette, pas un menu.
