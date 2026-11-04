@@ -1,37 +1,37 @@
 ---
 name: scaffold-exercises
-description: Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.
+description: Crée des arborescences d'exercices avec sections, énoncés, solutions et explications qui passent le lint. Utilisez-le quand l'utilisateur veut générer la structure d'exercices, créer des stubs d'exercices, ou préparer une nouvelle section de cours.
 ---
 
-# Scaffold Exercises
+# Générer la structure des exercices
 
-Create exercise directory structures that pass `pnpm ai-hero-cli internal lint`, then commit with `git commit`.
+Créez des arborescences d'exercices qui passent `pnpm ai-hero-cli internal lint`, puis committez avec `git commit`.
 
-## Directory naming
+## Nommage des répertoires
 
-- **Sections**: `XX-section-name/` inside `exercises/` (e.g., `01-retrieval-skill-building`)
-- **Exercises**: `XX.YY-exercise-name/` inside a section (e.g., `01.03-retrieval-with-bm25`)
-- Section number = `XX`, exercise number = `XX.YY`
-- Names are dash-case (lowercase, hyphens)
+- **Sections** : `XX-section-name/` dans `exercises/` (par exemple, `01-retrieval-skill-building`)
+- **Exercices** : `XX.YY-exercise-name/` dans une section (par exemple, `01.03-retrieval-with-bm25`)
+- Numéro de section = `XX`, numéro d'exercice = `XX.YY`
+- Les noms sont en dash-case (minuscules, tirets)
 
-## Exercise variants
+## Variantes d'exercice
 
-Each exercise needs at least one of these subfolders:
+Chaque exercice doit avoir au moins un de ces sous-dossiers :
 
-- `problem/` - student workspace with TODOs
-- `solution/` - reference implementation
-- `explainer/` - conceptual material, no TODOs
+- `problem/` - espace de travail de l'étudiant avec des TODO
+- `solution/` - implémentation de référence
+- `explainer/` - contenu conceptuel, sans TODO
 
-When stubbing, default to `explainer/` unless the plan specifies otherwise.
+Lorsque vous créez des stubs, utilisez `explainer/` par défaut, sauf si le plan indique autre chose.
 
-## Required files
+## Fichiers requis
 
-Each subfolder (`problem/`, `solution/`, `explainer/`) needs a `readme.md` that:
+Chaque sous-dossier (`problem/`, `solution/`, `explainer/`) doit avoir un `readme.md` qui :
 
-- Is **not empty** (must have real content, even a single title line works)
-- Has no broken links
+- N'est **pas vide** (il doit avoir du vrai contenu, même une seule ligne de titre suffit)
+- N'a pas de liens cassés
 
-When stubbing, create a minimal readme with a title and a description:
+Lorsque vous créez des stubs, écrivez un readme minimal avec un titre et une description :
 
 ```md
 # Exercise Title
@@ -39,46 +39,46 @@ When stubbing, create a minimal readme with a title and a description:
 Description here
 ```
 
-If the subfolder has code, it also needs a `main.ts` (>1 line). But for stubs, a readme-only exercise is fine.
+Si le sous-dossier contient du code, il lui faut aussi un `main.ts` (>1 ligne). Mais pour des stubs, un exercice avec seulement un readme suffit.
 
-## Workflow
+## Déroulé
 
-1. **Parse the plan** - extract section names, exercise names, and variant types
-2. **Create directories** - `mkdir -p` for each path
-3. **Create stub readmes** - one `readme.md` per variant folder with a title
-4. **Run lint** - `pnpm ai-hero-cli internal lint` to validate
-5. **Fix any errors** - iterate until lint passes
+1. **Analyser le plan** - extraire les noms de sections, les noms d'exercices et les types de variantes
+2. **Créer les répertoires** - `mkdir -p` pour chaque chemin
+3. **Créer les readmes de stub** - un `readme.md` par dossier de variante, avec un titre
+4. **Lancer le lint** - `pnpm ai-hero-cli internal lint` pour valider
+5. **Corriger les erreurs** - itérer jusqu'à ce que le lint passe
 
-## Lint rules summary
+## Récapitulatif des règles de lint
 
-The linter (`pnpm ai-hero-cli internal lint`) checks:
+Le linter (`pnpm ai-hero-cli internal lint`) vérifie que :
 
-- Each exercise has subfolders (`problem/`, `solution/`, `explainer/`)
-- At least one of `problem/`, `explainer/`, or `explainer.1/` exists
-- `readme.md` exists and is non-empty in the primary subfolder
-- No `.gitkeep` files
-- No `speaker-notes.md` files
-- No broken links in readmes
-- No `pnpm run exercise` commands in readmes
-- `main.ts` required per subfolder unless it's readme-only
+- Chaque exercice a des sous-dossiers (`problem/`, `solution/`, `explainer/`)
+- Au moins un de `problem/`, `explainer/` ou `explainer.1/` existe
+- `readme.md` existe et n'est pas vide dans le sous-dossier principal
+- Aucun fichier `.gitkeep`
+- Aucun fichier `speaker-notes.md`
+- Aucun lien cassé dans les readmes
+- Aucune commande `pnpm run exercise` dans les readmes
+- `main.ts` est requis dans chaque sous-dossier, sauf s'il n'y a qu'un readme
 
-## Moving/renaming exercises
+## Déplacer et renommer des exercices
 
-When renumbering or moving exercises:
+Lorsque vous renumérotez ou déplacez des exercices :
 
-1. Use `git mv` (not `mv`) to rename directories - preserves git history
-2. Update the numeric prefix to maintain order
-3. Re-run lint after moves
+1. Utilisez `git mv` (pas `mv`) pour renommer les répertoires - cela préserve l'historique git
+2. Mettez à jour le préfixe numérique pour maintenir l'ordre
+3. Relancez le lint après les déplacements
 
-Example:
+Exemple :
 
 ```bash
 git mv exercises/01-retrieval/01.03-embeddings exercises/01-retrieval/01.04-embeddings
 ```
 
-## Example: stubbing from a plan
+## Exemple : créer des stubs à partir d'un plan
 
-Given a plan like:
+Étant donné un plan comme :
 
 ```
 Section 05: Memory Skill Building
@@ -87,7 +87,7 @@ Section 05: Memory Skill Building
 - 05.03 Long-term Memory
 ```
 
-Create:
+Créez :
 
 ```bash
 mkdir -p exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer
@@ -95,7 +95,7 @@ mkdir -p exercises/05-memory-skill-building/05.02-short-term-memory/{explainer,p
 mkdir -p exercises/05-memory-skill-building/05.03-long-term-memory/explainer
 ```
 
-Then create readme stubs:
+Puis créez les readmes de stub :
 
 ```
 exercises/05-memory-skill-building/05.01-introduction-to-memory/explainer/readme.md -> "# Introduction to Memory"

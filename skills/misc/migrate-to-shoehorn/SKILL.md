@@ -1,33 +1,33 @@
 ---
 name: migrate-to-shoehorn
-description: Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.
+description: Migre les fichiers de test des assertions de type `as` vers @total-typescript/shoehorn. Utilisez-le quand l'utilisateur mentionne shoehorn, veut remplacer `as` dans les tests, ou a besoin de données de test partielles.
 ---
 
-# Migrate to Shoehorn
+# Migrer vers Shoehorn
 
-## Why shoehorn?
+## Pourquoi shoehorn ?
 
-`shoehorn` lets you pass partial data in tests while keeping TypeScript happy. It replaces `as` assertions with type-safe alternatives.
+`shoehorn` vous permet de passer des données partielles dans les tests tout en gardant TypeScript satisfait. Il remplace les assertions `as` par des alternatives sûres en matière de types.
 
-**Test code only.** Never use shoehorn in production code.
+**Uniquement pour le code de test.** N'utilisez jamais shoehorn dans du code de production.
 
-Problems with `as` in tests:
+Problèmes posés par `as` dans les tests :
 
-- Trained not to use it
-- Must manually specify target type
-- Double-as (`as unknown as Type`) for intentionally wrong data
+- On nous apprend à ne pas l'utiliser
+- Il faut spécifier manuellement le type cible
+- Le double `as` (`as unknown as Type`) pour des données volontairement erronées
 
-## Install
+## Installation
 
 ```bash
 npm i @total-typescript/shoehorn
 ```
 
-## Migration patterns
+## Schémas de migration
 
-### Large objects with few needed properties
+### Gros objets avec peu de propriétés utiles
 
-Before:
+Avant :
 
 ```ts
 type Request = {
@@ -48,7 +48,7 @@ it("gets user by id", () => {
 });
 ```
 
-After:
+Après :
 
 ```ts
 import { fromPartial } from "@total-typescript/shoehorn";
@@ -64,13 +64,13 @@ it("gets user by id", () => {
 
 ### `as Type` → `fromPartial()`
 
-Before:
+Avant :
 
 ```ts
 getUser({ body: { id: "123" } } as Request);
 ```
 
-After:
+Après :
 
 ```ts
 import { fromPartial } from "@total-typescript/shoehorn";
@@ -80,13 +80,13 @@ getUser(fromPartial({ body: { id: "123" } }));
 
 ### `as unknown as Type` → `fromAny()`
 
-Before:
+Avant :
 
 ```ts
 getUser({ body: { id: 123 } } as unknown as Request); // wrong type on purpose
 ```
 
-After:
+Après :
 
 ```ts
 import { fromAny } from "@total-typescript/shoehorn";
@@ -94,25 +94,25 @@ import { fromAny } from "@total-typescript/shoehorn";
 getUser(fromAny({ body: { id: 123 } }));
 ```
 
-## When to use each
+## Quand utiliser chaque fonction
 
-| Function        | Use case                                           |
-| --------------- | -------------------------------------------------- |
-| `fromPartial()` | Pass partial data that still type-checks           |
-| `fromAny()`     | Pass intentionally wrong data (keeps autocomplete) |
-| `fromExact()`   | Force full object (swap with fromPartial later)    |
+| Fonction        | Cas d'usage                                                          |
+| --------------- | -------------------------------------------------------------------- |
+| `fromPartial()` | Passer des données partielles qui passent quand même la vérification |
+| `fromAny()`     | Passer des données volontairement erronées (garde l'autocomplétion)  |
+| `fromExact()`   | Forcer un objet complet (à échanger avec fromPartial plus tard)      |
 
-## Workflow
+## Déroulé
 
-1. **Gather requirements** - ask user:
-   - What test files have `as` assertions causing problems?
-   - Are they dealing with large objects where only some properties matter?
-   - Do they need to pass intentionally wrong data for error testing?
+1. **Recueillir les besoins** - demandez à l'utilisateur :
+   - Quels fichiers de test ont des assertions `as` qui posent problème ?
+   - A-t-il affaire à de gros objets dont seules certaines propriétés comptent ?
+   - Doit-il passer des données volontairement erronées pour tester les erreurs ?
 
-2. **Install and migrate**:
-   - [ ] Install: `npm i @total-typescript/shoehorn`
-   - [ ] Find test files with `as` assertions: `grep -r " as [A-Z]" --include="*.test.ts" --include="*.spec.ts"`
-   - [ ] Replace `as Type` with `fromPartial()`
-   - [ ] Replace `as unknown as Type` with `fromAny()`
-   - [ ] Add imports from `@total-typescript/shoehorn`
-   - [ ] Run type check to verify
+2. **Installer et migrer** :
+   - [ ] Installer : `npm i @total-typescript/shoehorn`
+   - [ ] Trouver les fichiers de test avec des assertions `as` : `grep -r " as [A-Z]" --include="*.test.ts" --include="*.spec.ts"`
+   - [ ] Remplacer `as Type` par `fromPartial()`
+   - [ ] Remplacer `as unknown as Type` par `fromAny()`
+   - [ ] Ajouter les imports depuis `@total-typescript/shoehorn`
+   - [ ] Lancer la vérification de types pour valider
