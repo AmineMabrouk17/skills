@@ -1,61 +1,61 @@
-# UI Prototype
+# Prototype d'UI
 
-Generate **several radically different UI variations** on a single route, switchable from a floating bottom bar. The user flips between variants in the browser, picks one (or steals bits from each), then throws the rest away.
+Générez **plusieurs variations d'UI radicalement différentes** sur une seule route, commutables depuis une barre flottante en bas. L'utilisateur bascule entre les variantes dans le navigateur, en choisit une (ou vole des morceaux à chacune), puis jette le reste.
 
-If the question is about logic/state rather than what something looks like, this is the wrong branch. Use [LOGIC.md](LOGIC.md).
+Si la question porte sur la logique/l'état plutôt que sur l'apparence de quelque chose, c'est la mauvaise branche. Utilisez [LOGIC.md](LOGIC.md).
 
-## When this is the right shape
+## Quand c'est la bonne forme
 
-- "What should this page look like?"
-- "I want to see a few options for this dashboard before committing."
-- "Try a different layout for the settings screen."
-- Any time the user would otherwise spend a day picking between three vague mockups in their head.
+- « À quoi cette page devrait-elle ressembler ? »
+- « Je veux voir quelques options pour ce tableau de bord avant de m'engager. »
+- « Essaie une mise en page différente pour l'écran de réglages. »
+- Chaque fois que l'utilisateur passerait sinon une journée à choisir mentalement entre trois maquettes floues.
 
-## Two sub-shapes: strongly prefer sub-shape A
+## Deux sous-formes : préférez fortement la sous-forme A
 
-A UI prototype is much easier to judge when it's **butting up against the rest of the app**: real header, real sidebar, real data, real density. A throwaway route on its own is a vacuum: every variant looks fine in isolation. Default to sub-shape A whenever there's a plausible existing page to host the variants. Only reach for sub-shape B if the prototype genuinely has no nearby home.
+Un prototype d'UI est bien plus facile à juger quand il **touche au reste de l'application** : vrai en-tête, vraie barre latérale, vraies données, vraie densité. Une route jetable toute seule est un vide : chaque variante paraît correcte isolément. Prenez la sous-forme A par défaut chaque fois qu'une page existante plausible peut héberger les variantes. Ne recourez à la sous-forme B que si le prototype n'a réellement pas de foyer proche.
 
-### Sub-shape A: adjustment to an existing page (preferred)
+### Sous-forme A : ajustement à une page existante (préférée)
 
-The route already exists. Variants are rendered **on the same route**, gated by a `?variant=` URL search param. The existing data fetching, params, and auth all stay. Only the rendering swaps. This is the default; pick it unless there's a specific reason not to.
+La route existe déjà. Les variantes sont rendues **sur la même route**, contrôlées par un paramètre de recherche d'URL `?variant=`. Le chargement de données, les paramètres et l'authentification existants restent tous. Seul le rendu permute. C'est le défaut ; choisissez-le sauf raison précise de ne pas le faire.
 
-If the prototype is for something that doesn't yet have a page but *would naturally live inside one* (a new section of the dashboard, a new card on the settings screen, a new step in an existing flow), it's still sub-shape A. Mount the variants inside the host page.
+Si le prototype concerne quelque chose qui n'a pas encore de page mais qui *vivrait naturellement dans une page* (une nouvelle section du tableau de bord, une nouvelle carte sur l'écran de réglages, une nouvelle étape d'un flux existant), c'est encore la sous-forme A. Montez les variantes à l'intérieur de la page hôte.
 
-### Sub-shape B: a new page (last resort)
+### Sous-forme B : une nouvelle page (en dernier recours)
 
-Only use this when the thing being prototyped genuinely has no existing page to live inside (e.g. an entirely new top-level surface, or a flow that can't be embedded anywhere sensible).
+Ne l'utilisez que quand la chose prototypée n'a réellement aucune page existante où vivre (par ex. une surface entièrement nouvelle de premier niveau, ou un flux qui ne peut pas être intégré ailleurs de façon sensée).
 
-Create a **throwaway route** following whatever routing convention the project already uses. Don't invent a new top-level structure. Name it so it's obviously a prototype (e.g. include the word `prototype` in the path or filename). Same `?variant=` pattern.
+Créez une **route jetable** en suivant la convention de routage que le projet utilise déjà. N'inventez pas une nouvelle structure de premier niveau. Nommez-la pour qu'elle soit manifestement un prototype (par ex. incluez le mot `prototype` dans le chemin ou le nom de fichier). Même motif `?variant=`.
 
-Before committing to sub-shape B, sanity-check: is there really no existing page this could be embedded in? An empty route hides design problems that a populated one would expose.
+Avant de vous engager sur la sous-forme B, vérifiez : n'y a-t-il vraiment aucune page existante où cela pourrait s'intégrer ? Une route vide cache des problèmes de conception qu'une route peuplée révélerait.
 
-In both sub-shapes the floating bottom bar is identical.
+Dans les deux sous-formes, la barre flottante en bas est identique.
 
-## Process
+## Processus
 
-### 1. State the question and pick N
+### 1. Énoncer la question et choisir N
 
-Default to **3 variants**. More than 5 stops being radically different and starts being noise, so cap there.
+Prenez **3 variantes** par défaut. Au-delà de 5, elles cessent d'être radicalement différentes et deviennent du bruit, donc plafonnez là.
 
-Write down the plan in one line, in the prototype's location or a top-of-file comment:
+Notez le plan en une ligne, à l'emplacement du prototype ou dans un commentaire en haut de fichier :
 
-> "Three variants of the settings page, switchable via `?variant=`, on the existing `/settings` route."
+> « Trois variantes de la page de réglages, commutables via `?variant=`, sur la route `/settings` existante. »
 
-This works whether the user is here to push back or not.
+Cela marche que l'utilisateur soit là pour objecter ou non.
 
-### 2. Generate radically different variants
+### 2. Générer des variantes radicalement différentes
 
-Draft each variant. Hold each one to:
+Esquissez chaque variante. Tenez chacune à :
 
-- The page's purpose and the data it has access to.
-- The project's component library / styling system (TailwindCSS, shadcn, MUI, plain CSS, whatever).
-- A clear exported component name, e.g. `VariantA`, `VariantB`, `VariantC`.
+- La raison d'être de la page et les données auxquelles elle a accès.
+- La bibliothèque de composants / le système de style du projet (TailwindCSS, shadcn, MUI, CSS simple, peu importe).
+- Un nom de composant exporté clair, par ex. `VariantA`, `VariantB`, `VariantC`.
 
-Variants must be **structurally different**: different layout, different information hierarchy, different primary affordance, not just different colours. Three slightly-tweaked card grids isn't a UI prototype, it's wallpaper. If two drafts come out too similar, redo one with explicit "do not use a card grid" guidance.
+Les variantes doivent être **structurellement différentes** : mise en page différente, hiérarchie de l'information différente, affordance principale différente, pas seulement des couleurs différentes. Trois grilles de cartes à peine retouchées, ce n'est pas un prototype d'UI, c'est du papier peint. Si deux esquisses se ressemblent trop, refaites-en une avec la consigne explicite « n'utilise pas de grille de cartes ».
 
-### 3. Wire them together
+### 3. Les câbler ensemble
 
-Create a single switcher component on the route:
+Créez un composant de commutation unique sur la route :
 
 ```tsx
 // pseudo-code, adapt to the project's framework
@@ -70,43 +70,43 @@ return (
 );
 ```
 
-For sub-shape A (existing page): keep all the existing data fetching above the switcher; only the rendered subtree changes per variant.
+Pour la sous-forme A (page existante) : gardez tout le chargement de données existant au-dessus du commutateur ; seul le sous-arbre rendu change selon la variante.
 
-For sub-shape B (new page): the throwaway route under `/prototype/<name>` mounts the same switcher.
+Pour la sous-forme B (nouvelle page) : la route jetable sous `/prototype/<name>` monte le même commutateur.
 
-### 4. Build the floating switcher
+### 4. Construire le commutateur flottant
 
-A small fixed-position bar at the bottom-centre of the screen with three pieces:
+Une petite barre en position fixe, en bas au centre de l'écran, avec trois pièces :
 
-- **Left arrow**: cycles to the previous variant (wraps around).
-- **Variant label**: shows the current variant key and, if the variant exports a name, that name too. e.g. `B (Sidebar layout)`.
-- **Right arrow**: cycles forward (wraps around).
+- **Flèche gauche** : passe à la variante précédente (en boucle).
+- **Label de variante** : montre la clé de la variante courante et, si la variante exporte un nom, ce nom aussi. Par ex. `B (Sidebar layout)`.
+- **Flèche droite** : passe à la suivante (en boucle).
 
-Behaviour:
+Comportement :
 
-- Clicking an arrow updates the URL search param (use the framework's router, e.g. `router.replace` on Next, `navigate` on React Router, etc) so the variant is shareable and reload-stable.
-- Keyboard: `←` and `→` arrow keys also cycle. Don't intercept arrow keys when an `<input>`, `<textarea>`, or `[contenteditable]` is focused.
-- Visually distinct from the page (e.g. high-contrast pill, subtle shadow) so it's obviously not part of the design being evaluated.
-- Hidden in production builds: gate on `process.env.NODE_ENV !== 'production'` or an equivalent check, so a stray prototype merge can't ship the bar to users.
+- Cliquer sur une flèche met à jour le paramètre de recherche d'URL (utilisez le routeur du framework, par ex. `router.replace` sur Next, `navigate` sur React Router, etc.) pour que la variante soit partageable et stable au rechargement.
+- Clavier : les touches fléchées `←` et `→` font aussi défiler. N'interceptez pas les touches fléchées quand un `<input>`, un `<textarea>` ou un `[contenteditable]` a le focus.
+- Visuellement distinct de la page (par ex. pilule à fort contraste, ombre subtile) pour qu'il ne fasse manifestement pas partie du design évalué.
+- Masqué dans les builds de production : conditionnez-le sur `process.env.NODE_ENV !== 'production'` ou une vérification équivalente, pour qu'un merge de prototype égaré ne puisse pas livrer la barre aux utilisateurs.
 
-Put the switcher in a single shared component so both sub-shapes can reuse it. Locate it wherever shared UI lives in the project.
+Placez le commutateur dans un composant partagé unique pour que les deux sous-formes puissent le réutiliser. Localisez-le là où vit l'UI partagée dans le projet.
 
-### 5. Hand it over
+### 5. Transmettez-le
 
-Surface the URL (and the `?variant=` keys). The user will flip through whenever they get to it. The interesting feedback is usually **"I want the header from B with the sidebar from C"**, which is the actual design they want.
+Communiquez l'URL (et les clés `?variant=`). L'utilisateur basculera quand il y arrivera. Le retour intéressant est généralement **« je veux l'en-tête de B avec la barre latérale de C »**, qui est le design qu'il veut réellement.
 
-### 6. Capture the answer and clean up
+### 6. Consigner la réponse et nettoyer
 
-Once a variant has won, capture the answer (which variant and why), then capture the prototype the way the [SKILL](SKILL.md) describes. Fold the winner into the real code and move the rest onto the throwaway branch, not into main:
+Une fois qu'une variante a gagné, consignez la réponse (quelle variante et pourquoi), puis consignez le prototype comme le décrit le [SKILL](SKILL.md). Intégrez la gagnante au vrai code et déplacez le reste vers la branche jetable, pas dans `main` :
 
-- **Sub-shape A**: fold the winner into the existing page; drop the losing variants and the switcher from main.
-- **Sub-shape B**: promote the winning variant to a real route; drop the throwaway route and the switcher from main.
+- **Sous-forme A** : intégrez la gagnante à la page existante ; retirez de `main` les variantes perdantes et le commutateur.
+- **Sous-forme B** : promouvez la variante gagnante en vraie route ; retirez de `main` la route jetable et le commutateur.
 
-The full set of variants is the primary source, so it lands on the throwaway branch, not the bin, since variant components and the switcher left in the main branch rot fast and confuse the next reader.
+L'ensemble complet des variantes est la source primaire, donc il atterrit sur la branche jetable, pas à la poubelle, car des composants de variante et un commutateur laissés dans la branche principale pourrissent vite et embrouillent le prochain lecteur.
 
-## Anti-patterns
+## Anti-motifs
 
-- **Variants that differ only in colour or copy.** That's a tweak, not a prototype. Real variants disagree about structure.
-- **Sharing too much code between variants.** A shared `<Header>` is fine; a shared `<Layout>` defeats the point. Each variant should be free to throw out the layout.
-- **Wiring variants to real mutations.** Read-only prototypes are fine. If a variant needs to mutate, point it at a stub: the question is "what should this look like", not "does the backend work".
-- **Promoting the prototype directly to production.** The variant code was written under prototype constraints (no tests, minimal error handling). Rewrite it properly when you fold it in.
+- **Des variantes qui ne diffèrent que par la couleur ou le texte.** C'est une retouche, pas un prototype. De vraies variantes sont en désaccord sur la structure.
+- **Partager trop de code entre variantes.** Un `<Header>` partagé va bien ; un `<Layout>` partagé tue l'intérêt. Chaque variante doit être libre de jeter la mise en page.
+- **Câbler des variantes à de vraies mutations.** Les prototypes en lecture seule sont très bien. Si une variante doit muter, pointez-la vers un stub : la question est « à quoi cela devrait-il ressembler », pas « est-ce que le backend marche ».
+- **Promouvoir le prototype directement en production.** Le code des variantes a été écrit sous contraintes de prototype (pas de tests, gestion d'erreurs minimale). Réécrivez-le correctement quand vous l'intégrez.

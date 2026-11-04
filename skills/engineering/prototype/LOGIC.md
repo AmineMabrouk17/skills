@@ -1,67 +1,67 @@
-# Logic Prototype
+# Prototype de logique
 
-A single, self-contained HTML file (a **shareable demo**) that lets anyone drive a state model by clicking buttons. Use this when the question is about **business logic, state transitions, or data shape**: the kind of thing that looks reasonable on paper but only feels wrong once you push it through real cases.
+Un seul fichier HTML autonome (une **démo partageable**) qui permet à quiconque de piloter un modèle d'état en cliquant sur des boutons. Utilisez ceci quand la question porte sur la **logique métier, les transitions d'état ou la forme des données** : le genre de chose qui paraît raisonnable sur le papier mais ne se sent fausse qu'une fois poussée à travers de vrais cas.
 
-Because it's one file with nothing to install, you can hand it to a non-developer (a designer, a PM, a domain expert) and let them feel the model for themselves. So it speaks their language, not the code's.
+Comme c'est un seul fichier, sans rien à installer, vous pouvez le confier à une personne non développeuse (un designer, un PM, un expert du domaine) et la laisser ressentir le modèle par elle-même. Il parle donc son langage, pas celui du code.
 
-## When this is the right shape
+## Quand c'est la bonne forme
 
-- "I'm not sure if this state machine handles the edge case where X then Y."
-- "Does this data model actually let me represent the case where..."
-- "I want to feel out what the API should look like before writing it."
-- Anything where someone wants to **press buttons and watch state change**.
+- « Je ne suis pas sûr que cette machine à états gère le cas limite où X puis Y. »
+- « Ce modèle de données me permet-il vraiment de représenter le cas où… »
+- « Je veux sentir à quoi l'API devrait ressembler avant de l'écrire. »
+- Tout cas où quelqu'un veut **appuyer sur des boutons et voir l'état changer**.
 
-If the question is "what should this look like," this is the wrong branch. Use [UI.md](UI.md).
+Si la question est « à quoi cela devrait-il ressembler », c'est la mauvaise branche. Utilisez [UI.md](UI.md).
 
-## Process
+## Processus
 
-### 1. State the question
+### 1. Énoncer la question
 
-Before writing code, write down what state model and what question you're prototyping. One paragraph, at the top of the demo (in a visible intro, not just a comment). A logic prototype that answers the wrong question is pure waste, so make the question explicit so it can be checked later, whether the user is watching now or returning to it AFK.
+Avant d'écrire du code, notez quel modèle d'état et quelle question vous prototypez. Un paragraphe, en haut de la démo (dans une intro visible, pas seulement un commentaire). Un prototype de logique qui répond à la mauvaise question est un pur gâchis, donc rendez la question explicite pour qu'elle puisse être vérifiée plus tard, que l'utilisateur regarde maintenant ou y revienne plus tard sans être devant l'écran.
 
-### 2. Isolate the logic in a portable module
+### 2. Isoler la logique dans un module portable
 
-Put the actual logic (the bit that's answering the question) in a single `<script>` block written as a small, pure module that could be lifted out and dropped into the real codebase later. The page around it is throwaway; this module isn't.
+Placez la logique réelle (la partie qui répond à la question) dans un seul bloc `<script>` écrit comme un petit module pur qu'on pourrait extraire et déposer ensuite dans la vraie base de code. La page autour est jetable ; ce module ne l'est pas.
 
-The right shape depends on the question:
+La bonne forme dépend de la question :
 
-- **A pure reducer**: `(state, action) => state`. Good when actions are discrete events and state is a single value.
-- **A state machine**: explicit states and transitions. Good when "which actions are even legal right now" is part of the question.
-- **A small set of pure functions** over a plain data type. Good when there's no implicit current state, just transformations.
-- **A class or module with a clear method surface** when the logic genuinely owns ongoing internal state.
+- **Un reducer pur** : `(state, action) => state`. Bon quand les actions sont des événements discrets et que l'état est une valeur unique.
+- **Une machine à états** : des états et des transitions explicites. Bon quand « quelles actions sont même légales en ce moment » fait partie de la question.
+- **Un petit ensemble de fonctions pures** sur un type de données simple. Bon quand il n'y a pas d'état courant implicite, seulement des transformations.
+- **Une classe ou un module avec une surface de méthodes claire** quand la logique possède réellement un état interne persistant.
 
-Pick whichever shape best fits the question being asked, *not* whichever is easiest to wire to a page. Keep it pure: no DOM, no `document`, no button handlers reaching inside it. The page calls into it; nothing flows the other direction. This is what makes the prototype useful past its own lifetime: once the question's answered, the validated reducer / machine / function set lifts into the real module on its own.
+Choisissez la forme qui colle le mieux à la question posée, *pas* celle qui est la plus facile à brancher à une page. Gardez-la pure : pas de DOM, pas de `document`, pas de gestionnaires de boutons qui y entrent. La page l'appelle ; rien ne circule dans l'autre sens. C'est ce qui rend le prototype utile au-delà de sa propre durée de vie : une fois la question résolue, le reducer / la machine / l'ensemble de fonctions validé s'extrait tout seul vers le vrai module.
 
-### 3. Build the shareable HTML file
+### 3. Construire le fichier HTML partageable
 
-One file, plain HTML/CSS/JS: no framework, no bundler, no server, everything inline so it opens by double-click and survives being emailed around. Anyone should be able to run it by opening it.
+Un seul fichier, HTML/CSS/JS simple : pas de framework, pas de bundler, pas de serveur, tout en ligne pour qu'il s'ouvre par double-clic et survive à un envoi par e-mail. N'importe qui devrait pouvoir le faire tourner en l'ouvrant.
 
-Write it for a non-developer. Every label is in **domain language**, not code: buttons and state read like the business, not the reducer. Explain in plain words what's happening.
+Écrivez-le pour une personne non développeuse. Chaque label est en **langage de domaine**, pas en code : les boutons et l'état se lisent comme le métier, pas comme le reducer. Expliquez en mots simples ce qui se passe.
 
-Lay it out with a clean hierarchy, top to bottom:
+Agencez-le selon une hiérarchie propre, de haut en bas :
 
-1. **Title and one-line explanation** of what this demo lets you explore (the question from step 1).
-2. **Current state**: the full relevant state, rendered as a readable panel (labelled fields, not a raw JSON dump), re-rendered after every click so the change is visible. Where it helps a non-developer follow, call out what just changed.
-3. **Free-play buttons**: one button per action, always available, so anyone can poke at the model in any order. Each click dispatches its action and re-renders the state.
-4. **Guided walkthroughs**: a set of **scenarios**, one per tab. Each tab holds a short plain-language description of the scenario (the situation it sets up and what to watch for) and underneath it, the ordered **buttons to press** for that scenario. Each step is a real button: clicking it performs that action and moves to the next step. Starting a walkthrough resets to a known initial state so the scenario runs the same way every time.
+1. **Titre et explication en une ligne** de ce que cette démo permet d'explorer (la question de l'étape 1).
+2. **État courant** : l'état pertinent complet, rendu sous forme de panneau lisible (champs étiquetés, pas un vidage JSON brut), re-rendu après chaque clic pour que le changement soit visible. Là où cela aide une personne non développeuse à suivre, signalez ce qui vient de changer.
+3. **Boutons de jeu libre** : un bouton par action, toujours disponible, pour que quiconque puisse manipuler le modèle dans n'importe quel ordre. Chaque clic déclenche son action et re-rend l'état.
+4. **Parcours guidés** : un ensemble de **scénarios**, un par onglet. Chaque onglet contient une courte description du scénario en langage simple (la situation qu'il installe et ce qu'il faut observer) et, en dessous, les **boutons à presser** dans l'ordre pour ce scénario. Chaque étape est un vrai bouton : cliquer dessus effectue cette action et passe à l'étape suivante. Démarrer un parcours réinitialise vers un état initial connu pour que le scénario se déroule de la même façon à chaque fois.
 
-Choose scenarios that demonstrate the awkward cases, the ones hard to reason about on paper: the happy path, a tricky edge case, an attempt at something that should be illegal.
+Choisissez des scénarios qui montrent les cas gênants, ceux difficiles à raisonner sur le papier : le chemin nominal, un cas limite délicat, une tentative de quelque chose qui devrait être illégal.
 
-Keep it beautiful but restrained: clean typography, generous spacing, one accent colour. No animations, no gimmicks: nothing that competes with the state and the buttons.
+Gardez-le beau mais sobre : typographie propre, espacement généreux, une seule couleur d'accent. Pas d'animations, pas de gadgets : rien qui concurrence l'état et les boutons.
 
-### 4. Hand it over
+### 4. Transmettez-le
 
-Send them the file, or open it for them. They'll click through the walkthroughs and free-play whenever they get to it; the interesting moments are when they say "wait, that shouldn't be possible" or "huh, I assumed X would be different"; those are the bugs in the _idea_, which is the whole point. If they want new actions or a new scenario, add them. Prototypes evolve.
+Envoyez-leur le fichier, ou ouvrez-le pour eux. Ils cliqueront dans les parcours et en jeu libre quand ils y arriveront ; les moments intéressants sont quand ils disent « attends, ça ne devrait pas être possible » ou « tiens, je pensais que X serait différent » ; ce sont les bugs de l'_idée_, et c'est tout l'intérêt. S'ils veulent de nouvelles actions ou un nouveau scénario, ajoutez-les. Les prototypes évoluent.
 
-### 5. Capture the answer and the prototype
+### 5. Consigner la réponse et le prototype
 
-Once the prototype has answered its question, capture the answer, then capture the prototype the way the [SKILL](SKILL.md) describes. The logic-specific mapping: the validated reducer / machine / function set lifts into the real module (the decision, absorbed); the HTML shell rides along to the throwaway branch that keeps the prototype as a primary source, and being one self-contained file, it stays trivially re-runnable there.
+Une fois que le prototype a répondu à sa question, consignez la réponse, puis consignez le prototype comme le décrit le [SKILL](SKILL.md). La correspondance propre à la logique : le reducer / la machine / l'ensemble de fonctions validé s'extrait vers le vrai module (la décision, absorbée) ; la coquille HTML suit vers la branche jetable qui conserve le prototype comme source primaire, et comme c'est un fichier autonome, il y reste trivialement re-exécutable.
 
-## Anti-patterns
+## Anti-motifs
 
-- **Don't add tests.** A prototype that needs tests is no longer a prototype.
-- **Don't wire it to the real database.** Use in-memory state unless the question is specifically about persistence.
-- **Don't generalise.** No "what if we wanted to support X later." The prototype answers one question.
-- **Don't blur the logic and the page together.** If the pure module references the DOM, `document`, or button handlers, it's no longer liftable. Keep the page as a thin shell over a pure module.
-- **Don't reach for a framework, bundler, or server.** One file the recipient double-clicks; a React app or a dev server defeats "shareable".
-- **Don't ship the HTML shell into production.** The page is optimised for being clicked through by hand. The logic module behind it is the bit worth keeping.
+- **N'ajoutez pas de tests.** Un prototype qui a besoin de tests n'est plus un prototype.
+- **Ne le branchez pas à la vraie base de données.** Utilisez un état en mémoire, sauf si la question porte spécifiquement sur la persistance.
+- **Ne généralisez pas.** Pas de « et si on voulait supporter X plus tard ». Le prototype répond à une seule question.
+- **Ne mélangez pas la logique et la page.** Si le module pur référence le DOM, `document` ou des gestionnaires de boutons, il n'est plus extractible. Gardez la page comme une fine coquille au-dessus d'un module pur.
+- **Ne recourez pas à un framework, un bundler ou un serveur.** Un seul fichier que le destinataire double-clique ; une application React ou un serveur de dev tue le côté « partageable ».
+- **Ne livrez pas la coquille HTML en production.** La page est optimisée pour être cliquée à la main. Le module de logique derrière est la partie qui vaut la peine d'être gardée.

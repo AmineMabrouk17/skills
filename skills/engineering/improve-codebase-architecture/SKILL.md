@@ -1,71 +1,71 @@
 ---
 name: improve-codebase-architecture
-description: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+description: Analysez une base de code pour repérer des occasions d'approfondissement, présentez-les dans un rapport HTML visuel, puis passez au crible celle que vous choisissez.
 disable-model-invocation: true
 ---
 
-# Improve Codebase Architecture
+# Améliorer l'architecture d'une base de code
 
-Surface architectural friction and propose **deepening opportunities**: refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
+Faites émerger les frictions architecturales et proposez des **occasions d'approfondissement** : des refactorings qui transforment des modules superficiels en modules profonds. L'objectif est la testabilité et la navigabilité par l'IA.
 
-This command is _informed_ by the project's domain model and built on a shared design vocabulary:
+Cette commande est _éclairée_ par le modèle de domaine du projet et s'appuie sur un vocabulaire de conception partagé :
 
-- Call the Skill tool with "codebase-design" for the architecture vocabulary (**module**, **interface**, **depth**, **seam**, **adapter**, **leverage**, **locality**) and its principles (the deletion test, "the interface is the test surface", "one adapter = hypothetical seam, two = real"). Use these terms exactly in every suggestion, and don't drift into "component," "service," "API," or "boundary."
-- The domain language in `GLOSSARY.md` gives names to good seams; ADRs in `docs/adr/` record decisions this command should not re-litigate.
+- Appelez l'outil Skill avec « codebase-design » pour le vocabulaire d'architecture (**module**, **interface**, **profondeur**, **seam**, **adaptateur**, **levier**, **localité**) et ses principes (le test de suppression, « l'interface est la surface de test », « un adaptateur = seam hypothétique, deux = seam réel »). Utilisez ces termes exactement dans chaque suggestion, et ne dérivez pas vers « composant », « service », « API » ou « frontière ».
+- Le langage de domaine dans `GLOSSARY.md` donne des noms aux bons seams ; les ADR dans `docs/adr/` consignent des décisions que cette commande ne doit pas remettre en cause.
 
-## Process
+## Processus
 
-### 1. Explore
+### 1. Explorer
 
-**Scope before you scan: YAGNI.** Deepening a module pays off by making future changes to it easier, so put extra weight on the parts of the codebase that have recently changed. Decide *where* to look before you look:
+**Délimitez avant de balayer : YAGNI.** Approfondir un module est rentable parce que cela rend ses changements futurs plus faciles, donc accordez un poids supplémentaire aux parties de la base de code qui ont changé récemment. Décidez *où* regarder avant de regarder :
 
-- If the user named a direction (a module, a subsystem, a pain point), take it, and skip the inference below.
-- Otherwise, walk back a good stretch of the commit history (`git log --oneline`) to find the codebase's hot spots, the files and areas that keep coming up, and let those paths pull your attention first. If the changes are scattered with no clear hot spot, widen the net.
+- Si l'utilisateur a nommé une direction (un module, un sous-système, un point de douleur), prenez-la et sautez l'inférence ci-dessous.
+- Sinon, remontez une bonne partie de l'historique des commits (`git log --oneline`) pour trouver les points chauds de la base de code, les fichiers et zones qui reviennent sans cesse, et laissez ces chemins attirer votre attention en premier. Si les changements sont éparpillés sans point chaud évident, élargissez le filet.
 
-Read the project's domain glossary (`GLOSSARY.md`) and any ADRs in the area you're touching first.
+Lisez d'abord le glossaire de domaine du projet (`GLOSSARY.md`) et les ADR de la zone que vous touchez.
 
-Then spawn a sub-agent with a fresh context window to walk the codebase. Don't follow rigid heuristics; explore organically and note where you experience friction:
+Ensuite, lancez un subagent avec une fenêtre de contexte neuve pour parcourir la base de code. Ne suivez pas d'heuristiques rigides ; explorez de façon organique et notez où vous rencontrez de la friction :
 
-- Where does understanding one concept require bouncing between many small modules?
-- Where are modules **shallow**, with an interface nearly as complex as the implementation?
-- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called (no **locality**)?
-- Where do tightly-coupled modules leak across their seams?
-- Which parts of the codebase are untested, or hard to test through their current interface?
+- Où comprendre un concept oblige-t-il à rebondir entre beaucoup de petits modules ?
+- Où les modules sont-ils **superficiels**, avec une interface presque aussi complexe que l'implémentation ?
+- Où des fonctions pures ont-elles été extraites juste pour la testabilité, alors que les vrais bugs se cachent dans la façon dont elles sont appelées (pas de **localité**) ?
+- Où des modules étroitement couplés fuient-ils à travers leurs seams ?
+- Quelles parties de la base de code sont non testées, ou difficiles à tester à travers leur interface actuelle ?
 
-Apply the **deletion test** to anything you suspect is shallow: would deleting it concentrate complexity, or just move it? A "yes, concentrates" is the signal you want.
+Appliquez le **test de suppression** à tout ce que vous soupçonnez d'être superficiel : le supprimer concentrerait-il la complexité, ou la déplacerait-il simplement ? Un « oui, cela concentre » est le signal que vous voulez.
 
-### 2. Present candidates as an HTML report
+### 2. Présenter les candidats dans un rapport HTML
 
-Write a self-contained HTML file to the OS temp directory so nothing lands in the repo. Resolve the temp dir from `$TMPDIR`, falling back to `/tmp` (or `%TEMP%` on Windows), and write to `<tmpdir>/architecture-review-<timestamp>.html` so each run gets a fresh file. Open it for the user (`xdg-open <path>` on Linux, `open <path>` on macOS, `start <path>` on Windows) and tell them the absolute path.
+Écrivez un fichier HTML autonome dans le répertoire temporaire du système pour que rien n'atterrisse dans le repo. Résolvez le répertoire temporaire à partir de `$TMPDIR`, avec repli sur `/tmp` (ou `%TEMP%` sous Windows), et écrivez dans `<tmpdir>/architecture-review-<timestamp>.html` pour que chaque exécution obtienne un fichier neuf. Ouvrez-le pour l'utilisateur (`xdg-open <path>` sous Linux, `open <path>` sous macOS, `start <path>` sous Windows) et donnez-lui le chemin absolu.
 
-The report uses **Tailwind via CDN** for layout and styling, and **Mermaid via CDN** for diagrams where a graph/flow/sequence reliably communicates the structure. Mix Mermaid with hand-crafted CSS/SVG visuals: use Mermaid when relationships are graph-shaped (call graphs, dependencies, sequences), and hand-built divs/SVG when you want something more editorial (mass diagrams, cross-sections, collapse animations). Each candidate gets a **before/after visualisation**. Be visual.
+Le rapport utilise **Tailwind via CDN** pour la mise en page et le style, et **Mermaid via CDN** pour les diagrammes là où un graphe/flux/séquence communique la structure de façon fiable. Mélangez Mermaid avec des visuels CSS/SVG faits main : utilisez Mermaid quand les relations sont en forme de graphe (graphes d'appels, dépendances, séquences), et des divs/SVG construits à la main quand vous voulez quelque chose de plus éditorial (diagrammes de masse, coupes transversales, animations d'effondrement). Chaque candidat reçoit une **visualisation avant/après**. Soyez visuel.
 
-For each candidate, render a card with:
+Pour chaque candidat, rendez une carte avec :
 
-- **Files**: which files/modules are involved
-- **Problem**: why the current architecture is causing friction
-- **Solution**: plain English description of what would change
-- **Benefits**: explained in terms of locality and leverage, and how tests would improve
-- **Before / After diagram**: side-by-side, custom-drawn, illustrating the shallowness and the deepening
-- **Recommendation strength**: one of `Strong`, `Worth exploring`, `Speculative`, rendered as a badge
+- **Fichiers** : quels fichiers/modules sont concernés
+- **Problème** : pourquoi l'architecture actuelle crée de la friction
+- **Solution** : description en français simple de ce qui changerait
+- **Bénéfices** : expliqués en termes de localité et de levier, et comment les tests s'amélioreraient
+- **Diagramme Avant / Après** : côte à côte, dessiné sur mesure, illustrant la superficialité et l'approfondissement
+- **Force de la recommandation** : l'une de `Strong`, `Worth exploring`, `Speculative`, rendue en badge
 
-End the report with a **Top recommendation** section: which candidate you'd tackle first and why.
+Terminez le rapport par une section **Recommandation principale** : quel candidat vous attaqueriez en premier et pourquoi.
 
-**Use GLOSSARY.md vocabulary for the domain, and the `/codebase-design` vocabulary for the architecture.** If `GLOSSARY.md` defines "Order," talk about "the Order intake module," not "the FooBarHandler," and not "the Order service."
+**Utilisez le vocabulaire de GLOSSARY.md pour le domaine, et le vocabulaire de `/codebase-design` pour l'architecture.** Si `GLOSSARY.md` définit « Order », parlez du « module d'admission des commandes », pas du « FooBarHandler », et pas du « service Order ».
 
-**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting the ADR. Mark it clearly in the card (e.g. a warning callout: _"contradicts ADR-0007, but worth reopening because…"_). Don't list every theoretical refactor an ADR forbids.
+**Conflits d'ADR** : si un candidat contredit un ADR existant, ne le signalez que quand la friction est assez réelle pour justifier de revisiter l'ADR. Marquez-le clairement dans la carte (ex. un encadré d'avertissement : _« contredit l'ADR-0007, mais vaut la peine d'être rouvert parce que… »_). Ne listez pas tous les refactorings théoriques qu'un ADR interdit.
 
-See [HTML-REPORT.md](HTML-REPORT.md) for the full HTML scaffold, diagram patterns, and styling guidance.
+Voir [HTML-REPORT.md](HTML-REPORT.md) pour l'échafaudage HTML complet, les motifs de diagramme et les conseils de style.
 
-Do NOT propose interfaces yet. After the file is written, ask the user: "Which of these would you like to explore?"
+Ne proposez PAS encore d'interfaces. Une fois le fichier écrit, demandez à l'utilisateur : « Lequel de ceux-là aimeriez-vous explorer ? »
 
-### 3. Grilling loop
+### 3. Boucle de grillage
 
-Once the user picks a candidate, call the Skill tool with "grilling" to walk the decision tree with them: constraints, dependencies, the shape of the deepened module, what sits behind the seam, what tests survive.
+Une fois que l'utilisateur a choisi un candidat, appelez l'outil Skill avec « grilling » pour parcourir l'arbre de décision avec lui : contraintes, dépendances, la forme du module approfondi, ce qui se trouve derrière le seam, quels tests survivent.
 
-Side effects happen inline as decisions crystallize; call the Skill tool with "domain-modeling" to keep the domain model current as you go:
+Les effets de bord se produisent en ligne au fil des décisions ; appelez l'outil Skill avec « domain-modeling » pour garder le modèle de domaine à jour en cours de route :
 
-- **Naming a deepened module after a concept not in `GLOSSARY.md`?** Add the term to `GLOSSARY.md`. Create the file lazily if it doesn't exist.
-- **Sharpening a fuzzy term during the conversation?** Update `GLOSSARY.md` right there.
-- **User rejects the candidate with a load-bearing reason?** Offer an ADR, framed as: _"Want me to record this as an ADR so future architecture reviews don't re-suggest it?"_ Only offer when the reason would actually be needed by a future explorer to avoid re-suggesting the same thing; skip ephemeral reasons ("not worth it right now") and self-evident ones.
-- **Want to explore alternative interfaces for the deepened module?** Call the Skill tool with "codebase-design" and use its design-it-twice parallel sub-agent pattern.
+- **Vous nommez un module approfondi d'après un concept absent de `GLOSSARY.md` ?** Ajoutez le terme à `GLOSSARY.md`. Créez le fichier paresseusement s'il n'existe pas.
+- **Vous affinez un terme flou pendant la conversation ?** Mettez à jour `GLOSSARY.md` sur-le-champ.
+- **L'utilisateur rejette le candidat avec une raison porteuse ?** Proposez un ADR, formulé ainsi : _« Voulez-vous que je consigne cela dans un ADR pour que les futures revues d'architecture ne le resuggèrent pas ? »_ Ne le proposez que si la raison serait réellement nécessaire à un futur explorateur pour éviter de resuggérer la même chose ; sautez les raisons éphémères (« pas le moment ») et celles qui vont de soi.
+- **Vous voulez explorer des interfaces alternatives pour le module approfondi ?** Appelez l'outil Skill avec « codebase-design » et utilisez son motif de sous-agents parallèles « design-it-twice ».
