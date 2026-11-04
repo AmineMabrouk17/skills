@@ -1,6 +1,6 @@
-# GLOSSARY.md Format
+# Format de GLOSSARY.md
 
-`GLOSSARY.md` is the canonical language for this teaching workspace. All explainers, exercises, and learning records should adhere to its terminology. Building it is itself part of learning: compressing a concept into a tight definition is evidence the user understands it.
+`GLOSSARY.md` est le langage canonique de cet espace de travail pédagogique. Tous les documents explicatifs, les exercices et les learning records doivent s'en tenir à sa terminologie. Le construire fait partie de l'apprentissage : compresser un concept en une définition serrée est la preuve que l'utilisateur le comprend.
 
 ## Structure
 
@@ -24,12 +24,12 @@ A 1–10 self-rating of how hard a set felt, where 10 is failure and 8 means two
 _Avoid_: Effort score, intensity rating
 ```
 
-## Rules
+## Règles
 
-- **Add a term only when the user understands it.** The glossary is a record of compressed knowledge, not a dictionary the user reads to learn. If the user has just been introduced to a concept, wait until they can use it correctly before promoting it here.
-- **Be opinionated.** When several words exist for the same concept, pick the best one and list the rest as aliases to avoid. This is how language compresses.
-- **Keep definitions tight.** One or two sentences. Define what the term IS, not what it does or how to do it.
-- **Use the glossary's own terms inside definitions.** Once a term is in the glossary, prefer it everywhere, including inside other definitions. This is what makes complex terms easier to grasp later.
-- **Group under subheadings** when natural clusters emerge (e.g. `## Anatomy`, `## Programming`). A flat list is fine when terms cohere.
-- **Flag ambiguities explicitly.** If a term is used loosely in the wider field, note the resolution: "In this workspace, 'set' always means a working set; warm-ups are tracked separately."
-- **Revise as understanding deepens.** A definition the user wrote in week one may be wrong by week six. Update in place; do not leave stale entries.
+- **N'ajoutez un terme que lorsque l'utilisateur le comprend.** Le glossaire est un registre de connaissances compressées, pas un dictionnaire que l'utilisateur lit pour apprendre. Si un concept vient d'être présenté, attendez que l'utilisateur sache l'employer correctement avant de le promouvoir ici.
+- **Prenez parti.** Quand plusieurs mots existent pour le même concept, choisissez le meilleur et listez les autres comme alias à éviter. C'est ainsi que la langue se compresse.
+- **Gardez des définitions serrées.** Une ou deux phrases. Définissez ce que le terme EST, pas ce qu'il fait ni comment le faire.
+- **Employez les termes du glossaire dans les définitions.** Une fois un terme dans le glossaire, préférez-le partout, y compris dans les autres définitions. C'est ce qui rend les termes complexes plus faciles à saisir ensuite.
+- **Regroupez sous des sous-titres** quand des grappes naturelles apparaissent (par ex. `## Anatomy`, `## Programming`). Une liste à plat convient quand les termes forment un ensemble cohérent.
+- **Signalez explicitement les ambiguïtés.** Si un terme est employé de façon floue dans le domaine au sens large, notez la résolution : « Dans cet espace de travail, "set" désigne toujours une série de travail ; les échauffements sont suivis séparément. »
+- **Révisez à mesure que la compréhension s'approfondit.** Une définition écrite par l'utilisateur en semaine un peut être fausse en semaine six. Mettez à jour sur place ; ne laissez pas d'entrées obsolètes.

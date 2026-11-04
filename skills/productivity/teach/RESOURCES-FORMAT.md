@@ -1,6 +1,6 @@
-# RESOURCES.md Format
+# Format de RESOURCES.md
 
-`RESOURCES.md` is the curated set of trusted sources for this topic. Knowledge for explainers should be drawn from here, not from parametric guesses. Wisdom comes from the communities listed here.
+`RESOURCES.md` est l'ensemble curaté de sources de confiance pour ce sujet. Les connaissances destinées aux documents explicatifs doivent en être tirées, pas de suppositions paramétriques. La sagesse vient des communautés listées ici.
 
 ## Structure
 
@@ -22,11 +22,11 @@
   Use for: real-time coaching feedback on lifts.
 ```
 
-## Rules
+## Règles
 
-- **High-trust only.** Prefer primary sources, recognised experts, peer-reviewed work, and communities with strong moderation. If a resource is marketing dressed as education, leave it out.
-- **Annotate every entry.** A bare link is useless in three months. Add one line: what it covers and when to reach for it.
-- **Group by Knowledge / Wisdom.** Mirrors the philosophy in [SKILL.md](./SKILL.md). It is fine for a resource to appear in only one group.
-- **Surface gaps explicitly.** If no good resource exists for an area the mission needs, write a `## Gaps` section listing what is missing. This drives future search.
-- **Prune ruthlessly.** A resource that turned out to be wrong, shallow, or off-mission should be removed, not buried. Better five sharp sources than thirty mediocre ones.
-- **Record community preferences.** If the user has opted out of joining communities, note it here so future sessions don't keep proposing them.
+- **Uniquement des sources de confiance.** Préférez les sources primaires, les experts reconnus, les travaux évalués par les pairs et les communautés fortement modérées. Si une ressource est du marketing déguisé en pédagogie, laissez-la de côté.
+- **Annotez chaque entrée.** Un lien nu est inutile dans trois mois. Ajoutez une ligne : ce qu'il couvre et quand y recourir.
+- **Groupez par Knowledge / Wisdom.** Cela reflète la philosophie exposée dans [SKILL.md](./SKILL.md). Une ressource peut très bien n'apparaître que dans un seul groupe.
+- **Faites émerger explicitement les lacunes.** S'il n'existe aucune bonne ressource pour un domaine dont la mission a besoin, écrivez une section `## Gaps` listant ce qui manque. Cela oriente la recherche future.
+- **Élaguez sans pitié.** Une ressource qui s'est révélée fausse, superficielle ou hors mission doit être retirée, pas enfouie. Mieux vaut cinq sources affûtées que trente médiocres.
+- **Consignez les préférences de communauté.** Si l'utilisateur a choisi de ne pas rejoindre de communautés, notez-le ici pour que les sessions futures cessent de les proposer.

@@ -1,8 +1,8 @@
-# MISSION.md Format
+# Format de MISSION.md
 
-`MISSION.md` lives at the workspace root. It captures the _reason_ the user is learning this topic. Every teaching decision (what to teach next, which resources to surface, which exercises to design) should trace back to this document.
+`MISSION.md` vit à la racine de l'espace de travail. Il consigne la _raison_ pour laquelle l'utilisateur apprend ce sujet. Chaque décision pédagogique (quoi enseigner ensuite, quelles ressources faire émerger, quels exercices concevoir) doit pouvoir se rattacher à ce document.
 
-## Template
+## Modèle
 
 ```md
 # Mission: {Topic}
@@ -22,10 +22,10 @@
 - {Adjacent topics the user explicitly does not want to chase right now, protecting the zone of proximal development}
 ```
 
-## Rules
+## Règles
 
-- **One mission per workspace.** If the user wants to learn two unrelated things, that is two workspaces.
-- **Concrete over abstract.** "Run a half marathon by October" beats "get fitter." "Ship a Rust CLI to my team" beats "learn Rust."
-- **Push back on vagueness.** If the user cannot articulate why, interview them before writing anything. A bad mission is worse than no mission.
-- **Revise when reality shifts.** Missions change. When the user's goal moves, update this file: don't leave a stale mission steering future sessions.
-- **Keep it short.** If `MISSION.md` runs past a screen, it has stopped being a compass and started being a plan.
+- **Une mission par espace de travail.** Si l'utilisateur veut apprendre deux choses sans rapport, cela fait deux espaces de travail.
+- **Le concret plutôt que l'abstrait.** « Courir un semi-marathon d'ici octobre » vaut mieux que « être plus en forme ». « Livrer un CLI Rust à mon équipe » vaut mieux que « apprendre Rust ».
+- **Recadrez le flou.** Si l'utilisateur n'arrive pas à formuler le pourquoi, interrogez-le avant d'écrire quoi que ce soit. Une mauvaise mission est pire que pas de mission.
+- **Révisez quand la réalité change.** Les missions changent. Quand l'objectif de l'utilisateur évolue, mettez ce fichier à jour : ne laissez pas une mission obsolète orienter les sessions futures.
+- **Restez court.** Si `MISSION.md` dépasse un écran, il a cessé d'être une boussole pour devenir un plan.

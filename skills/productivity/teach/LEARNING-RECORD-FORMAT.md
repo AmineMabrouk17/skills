@@ -1,10 +1,10 @@
-# Learning Record Format
+# Format des learning records
 
-Learning records live in `./learning-records/` and use sequential numbering: `0001-slug.md`, `0002-slug.md`, etc. Create the directory lazily: only when the first record is written.
+Les learning records vivent dans `./learning-records/` et utilisent une numérotation séquentielle : `0001-slug.md`, `0002-slug.md`, etc. Créez le répertoire paresseusement : seulement quand le premier record est écrit.
 
-They are the teaching equivalent of ADRs: they capture non-obvious lessons, key insights, and stated prior knowledge that will steer future sessions. They are used to calculate the zone of proximal development.
+Ils sont l'équivalent pédagogique des ADR : ils capturent des leçons non évidentes, des insights clés et des connaissances préalables déclarées qui orienteront les sessions futures. Ils servent à calculer la zone de développement proximal.
 
-## Template
+## Modèle
 
 ```md
 # {Short title of what was learned or established}
@@ -12,35 +12,35 @@ They are the teaching equivalent of ADRs: they capture non-obvious lessons, key 
 {1-3 sentences: what was learned (or what prior knowledge was established), and why it matters for future sessions.}
 ```
 
-That is the whole format. A learning record can be a single paragraph. The value is recording _that_ this is now known and _why_ it changes what to teach next, not in filling out sections.
+C'est tout le format. Un learning record peut tenir en un seul paragraphe. La valeur est de consigner _que_ ce point est désormais connu et _pourquoi_ cela change ce qu'il faut enseigner ensuite, pas de remplir des sections.
 
-## Optional sections
+## Sections facultatives
 
-Only include these when they add genuine value. Most records won't need them.
+Ne les incluez que lorsqu'elles apportent une valeur réelle. La plupart des records n'en auront pas besoin.
 
-- **Status** frontmatter (`active | superseded by LR-NNNN`): useful when an earlier understanding turns out to be wrong and is replaced.
-- **Evidence**: how the user demonstrated the understanding (a question answered, an exercise completed, prior experience cited). Useful when the claim might be revisited.
-- **Implications**: what this unlocks or rules out for future sessions. Worth recording when non-obvious.
+- **Status** en frontmatter (`active | superseded by LR-NNNN`) : utile quand une compréhension antérieure s'avère fausse et se voit remplacée.
+- **Preuves** : comment l'utilisateur a démontré la compréhension (une question à laquelle il a répondu, un exercice terminé, une expérience antérieure citée). Utile quand l'affirmation pourrait être réexaminée.
+- **Implications** : ce que cela débloque ou exclut pour les sessions futures. À consigner quand ce n'est pas évident.
 
-## Numbering
+## Numérotation
 
-Scan `./learning-records/` for the highest existing number and increment by one.
+Parcourez `./learning-records/` pour trouver le plus grand numéro existant et incrémentez-le de un.
 
-## When to write a learning record
+## Quand écrire un learning record
 
-Write one when any of these is true:
+Écrivez-en un dès que l'une de ces conditions est vraie :
 
-1. **The user demonstrated genuine understanding of something non-trivial**: not just exposure, but evidence they can use the concept correctly. This sets a new floor for what to teach next.
-2. **The user disclosed prior knowledge**: "I already know X." Record it so future sessions don't re-teach it. Also record the _depth_ claimed.
-3. **A misconception was corrected**: the user previously believed something wrong and now sees why. These are high-value: they predict future stumbling blocks for related topics.
-4. **The mission shifted in response to learning**: the user discovered they cared about something different than they thought. Cross-link to [[MISSION.md]] and update it.
+1. **L'utilisateur a démontré une compréhension réelle de quelque chose de non trivial** : pas seulement une exposition, mais la preuve qu'il sait employer le concept correctement. Cela fixe un nouveau plancher pour ce qu'il faut enseigner ensuite.
+2. **L'utilisateur a déclaré des connaissances préalables** : « Je connais déjà X. » Consignez-le pour que les sessions futures ne le réenseignent pas. Consignez aussi la _profondeur_ revendiquée.
+3. **Une idée fausse a été corrigée** : l'utilisateur croyait auparavant quelque chose de faux et voit désormais pourquoi. Ce sont des records de grande valeur : ils prédisent les futurs points de blocage sur des sujets liés.
+4. **La mission a changé en réponse à l'apprentissage** : l'utilisateur a découvert qu'il tenait à autre chose que ce qu'il pensait. Faites un lien croisé vers [[MISSION.md]] et mettez-le à jour.
 
-### What does _not_ qualify
+### Ce qui ne compte _pas_
 
-- Material that was merely covered. Coverage is not learning. Wait for evidence.
-- Anything already captured tersely in [[GLOSSARY.md]] as a term definition. Don't duplicate.
-- Session-by-session activity logs. Learning records are not a journal: they are decision-grade insights.
+- Une matière qui a simplement été couverte. Couvrir n'est pas apprendre. Attendez des preuves.
+- Tout ce qui est déjà consigné de façon concise dans [[GLOSSARY.md]] comme définition d'un terme. Ne dupliquez pas.
+- Des journaux d'activité session par session. Les learning records ne sont pas un journal : ce sont des insights d'une qualité qui permet de décider.
 
-## Supersession
+## Remplacement
 
-When a later record contradicts an earlier one (the user's understanding deepened or corrected), mark the old record `Status: superseded by LR-NNNN` rather than deleting it. The history of how understanding evolved is itself useful signal.
+Quand un record ultérieur contredit un record antérieur (la compréhension de l'utilisateur s'est approfondie ou corrigée), marquez l'ancien record `Status: superseded by LR-NNNN` plutôt que de le supprimer. L'histoire de l'évolution de la compréhension est elle-même un signal utile.
