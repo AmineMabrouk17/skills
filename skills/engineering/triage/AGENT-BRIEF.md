@@ -1,42 +1,42 @@
-# Writing Agent Briefs
+# Rédiger des agent briefs
 
-An agent brief is a structured comment posted on a GitHub issue or PR when it moves to `ready-for-agent`. It is the authoritative specification that an AFK agent will work from. The original body and discussion are context: the agent brief is the contract.
+Un agent brief est un commentaire structuré publié sur une issue ou une PR GitHub lorsqu'elle passe à `ready-for-agent`. C'est la spécification faisant autorité à partir de laquelle un agent AFK travaillera. Le corps original et la discussion sont du contexte : l'agent brief est le contrat.
 
-The brief states **what the agent should do**, which stretches to both surfaces: for an issue, that's building the change from nothing; for a PR, it's what's left to do *to the existing diff*: finish it, close gaps, address review points. Same principles either way; the PR example below shows the difference.
+L'agent brief énonce **ce que l'agent doit faire**, ce qui s'étend aux deux surfaces : pour une issue, il s'agit de construire le changement à partir de rien ; pour une PR, il s'agit de ce qui reste à faire *au diff existant* : le terminer, combler les lacunes, répondre aux points de revue. Mêmes principes dans les deux cas ; l'exemple de PR ci-dessous montre la différence.
 
-## Principles
+## Principes
 
-### Durability over precision
+### Durabilité plutôt que précision
 
-The issue may sit in `ready-for-agent` for days or weeks. The codebase will change in the meantime. Write the brief so it stays useful even as files are renamed, moved, or refactored.
+L'issue peut rester dans `ready-for-agent` pendant des jours ou des semaines. La base de code changera entre-temps. Rédigez l'agent brief de façon à ce qu'il reste utile même lorsque des fichiers sont renommés, déplacés ou refactorisés.
 
-- **Do** describe interfaces, types, and behavioral contracts
-- **Do** name specific types, function signatures, or config shapes that the agent should look for or modify
-- **Don't** reference file paths: they go stale
-- **Don't** reference line numbers
-- **Don't** assume the current implementation structure will remain the same
+- **Faites** : décrivez les interfaces, les types et les contrats comportementaux
+- **Faites** : nommez les types, signatures de fonctions ou formes de configuration spécifiques que l'agent doit rechercher ou modifier
+- **Ne faites pas** : référencez des chemins de fichiers, ils deviennent obsolètes
+- **Ne faites pas** : référencez des numéros de ligne
+- **Ne partez pas du principe** que la structure d'implémentation actuelle restera la même
 
-### Behavioral, not procedural
+### Comportemental, pas procédural
 
-Describe **what** the system should do, not **how** to implement it. The agent will explore the codebase fresh and make its own implementation decisions.
+Décrivez **ce que** le système doit faire, pas **comment** l'implémenter. L'agent explorera la base de code à neuf et prendra ses propres décisions d'implémentation.
 
-- **Good:** "The `SkillConfig` type should accept an optional `schedule` field of type `CronExpression`"
-- **Bad:** "Open src/types/skill.ts and add a schedule field on line 42"
-- **Good:** "When a user runs `/triage` with no arguments, they should see a summary of issues needing attention"
-- **Bad:** "Add a switch statement in the main handler function"
+- **Bien :** « Le type `SkillConfig` devrait accepter un champ optionnel `schedule` de type `CronExpression` »
+- **Mauvais :** « Ouvrez src/types/skill.ts et ajoutez un champ schedule à la ligne 42 »
+- **Bien :** « Lorsqu'un utilisateur exécute `/triage` sans argument, il devrait voir un résumé des issues qui nécessitent attention »
+- **Mauvais :** « Ajoutez une instruction switch dans la fonction de gestion principale »
 
-### Complete acceptance criteria
+### Critères d'acceptation complets
 
-The agent needs to know when it's done. Every agent brief must have concrete, testable acceptance criteria. Each criterion should be independently verifiable.
+L'agent doit savoir quand il a terminé. Chaque agent brief doit avoir des critères d'acceptation concrets et testables. Chaque critère doit être vérifiable indépendamment.
 
-- **Good:** "Running `gh issue list --label needs-triage` returns issues that have been through initial classification"
-- **Bad:** "Triage should work correctly"
+- **Bien :** « Exécuter `gh issue list --label needs-triage` renvoie les issues qui sont passées par la classification initiale »
+- **Mauvais :** « Le triage devrait fonctionner correctement »
 
-### Explicit scope boundaries
+### Limites de périmètre explicites
 
-State what is out of scope. This prevents the agent from gold-plating or making assumptions about adjacent features.
+Indiquez ce qui est hors périmètre. Cela empêche l'agent de surenchérir ou de faire des suppositions sur des fonctionnalités adjacentes.
 
-## Template
+## Modèle
 
 ```markdown
 ## Agent Brief
@@ -67,9 +67,9 @@ Be specific about edge cases and error conditions.
 - Adjacent feature that might seem related but is separate
 ```
 
-## Examples
+## Exemples
 
-### Good agent brief (bug)
+### Bon agent brief (bug)
 
 ```markdown
 ## Agent Brief
@@ -104,7 +104,7 @@ and append "..." to indicate truncation.
 - Multi-line description support
 ```
 
-### Good agent brief (enhancement)
+### Bon agent brief (amélioration)
 
 ```markdown
 ## Agent Brief
@@ -145,9 +145,9 @@ checked for matches.
 - Bug reports (only enhancement rejections go to `.out-of-scope/`)
 ```
 
-### Good agent brief (PR)
+### Bon agent brief (PR)
 
-For a PR, "Current behavior" describes the state of the diff, and the brief asks the agent to finish or fix it rather than build from scratch.
+Pour une PR, le « Current behavior » décrit l'état du diff, et l'agent brief demande à l'agent de le terminer ou de le corriger plutôt que de construire à partir de zéro.
 
 ```markdown
 ## Agent Brief
@@ -182,7 +182,7 @@ is untouched when the flag is absent.
 - Changing the JSON shape of the success payload the PR already defined
 ```
 
-### Bad agent brief
+### Mauvais agent brief
 
 ```markdown
 ## Agent Brief
@@ -198,10 +198,10 @@ The function around line 150 has the issue.
 - src/types.ts (line 42)
 ```
 
-This is bad because:
-- No category
-- Vague description ("the triage thing is broken")
-- References file paths and line numbers that will go stale
-- No acceptance criteria
-- No scope boundaries
-- No description of current vs desired behavior
+C'est mauvais parce que :
+- Pas de catégorie
+- Description vague (« le truc de triage est cassé »)
+- Références à des chemins de fichiers et des numéros de ligne qui deviendront obsolètes
+- Pas de critères d'acceptation
+- Pas de limites de périmètre
+- Pas de description du comportement actuel par rapport au comportement souhaité
