@@ -1,38 +1,38 @@
 ---
 name: tdd
-description: Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions "red-green-refactor", or wants integration tests.
+description: Développement piloté par les tests. À utiliser quand l'utilisateur veut construire des fonctionnalités ou corriger des bugs en commençant par les tests, mentionne « red-green-refactor », ou veut des tests d'intégration.
 ---
 
-# Test-Driven Development
+# Développement piloté par les tests (TDD)
 
-TDD is the red → green loop. This skill is the reference that makes that loop produce tests worth keeping: what a good test is, where tests go, the anti-patterns, and the rules of the loop. Every section applies on every cycle: consult them before and during the loop, not after.
+TDD est la boucle red → green. Ce skill est la référence qui fait de cette boucle un producteur de tests qui valent la peine d'être conservés : ce qu'est un bon test, où vont les tests, les anti-patrons et les règles de la boucle. Chaque section s'applique à chaque cycle : consultez-les avant et pendant la boucle, pas après.
 
-When exploring the codebase, read `GLOSSARY.md` (if it exists) so test names and interface vocabulary match the project's domain language, and respect ADRs in the area you're touching.
+Quand vous explorez la base de code, lisez `GLOSSARY.md` (s'il existe) pour que les noms de tests et le vocabulaire d'interface correspondent à la langue métier du projet, et respectez les ADR de la zone que vous touchez.
 
-## What a good test is
+## Ce qu'est un bon test
 
-Tests verify behavior through public interfaces, not implementation details. Code can change entirely; tests shouldn't. A good test reads like a specification: "user can checkout with valid cart" tells you exactly what capability exists, and it survives refactors because it doesn't care about internal structure.
+Les tests vérifient le comportement à travers les interfaces publiques, pas les détails d'implémentation. Le code peut changer entièrement ; les tests ne doivent pas changer. Un bon test se lit comme une spécification : « user can checkout with valid cart » vous dit exactement quelle capacité existe, et il survit aux refactorings parce qu'il ne se soucie pas de la structure interne.
 
-See [tests.md](tests.md) for examples and [mocking.md](mocking.md) for mocking guidelines.
+Voir [tests.md](tests.md) pour des exemples et [mocking.md](mocking.md) pour les recommandations sur le mocking.
 
-## Seams: where tests go
+## Les seams : où vont les tests
 
-A **seam** is the public boundary you test at: the interface where you observe behavior without reaching inside. Tests live at seams, never against internals.
+Un **seam** est la frontière publique au niveau de laquelle vous testez : l'interface où vous observez le comportement sans regarder à l'intérieur. Les tests vivent aux seams, jamais contre les internes.
 
-**Test only at pre-agreed seams.** Before writing any test, write down the seams under test and confirm them with the user. No test is written at an unconfirmed seam. You can't test everything, so agreeing the seams up front is how testing effort lands on the critical paths and complex logic instead of every edge case.
+**Ne testez qu'aux seams convenus à l'avance.** Avant d'écrire le moindre test, notez les seams à tester et confirmez-les avec l'utilisateur. Aucun test n'est écrit sur un seam non confirmé. Vous ne pouvez pas tout tester : convenir des seams en amont est donc la façon de concentrer l'effort de test sur les chemins critiques et la logique complexe plutôt que sur chaque cas limite.
 
-Ask: "What's the public interface, and which seams should we test?" Give each proposed seam a one-line note on what it catches and what it misses.
+Demandez : « Quelle est l'interface publique, et quels seams devons-nous tester ? » Ajoutez pour chaque seam proposé une note d'une ligne sur ce qu'il attrape et ce qu'il laisse passer.
 
-When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
+Quand la forme de cette interface est elle-même en question (quelle est la profondeur du module, où se situe le seam, ce que l'interface doit exposer), appelez l'outil Skill avec « codebase-design » pour le vocabulaire. C'est la source partagée des termes module, interface, depth, seam, adapter, leverage et locality, et c'est une référence à consulter, pas une session à lancer.
 
-## Anti-patterns
+## Anti-patrons
 
-- **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
-- **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
-- **Horizontal slicing**: writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead: one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
+- **Couplé à l'implémentation** : utilise des mocks sur des collaborateurs internes, teste des méthodes privées ou vérifie via un canal latéral (interroger la base de données au lieu d'utiliser l'interface). Le signe : le test casse quand vous refactorisez alors que le comportement n'a pas changé.
+- **Tautologique** : l'assertion recalcule la valeur attendue de la même façon que le code (`expect(add(a, b)).toBe(a + b)`, un snapshot dérivé à la main de la même manière, une constante comparée à elle-même), donc elle passe par construction et ne peut jamais être en désaccord avec le code. Les valeurs attendues doivent venir d'une source de vérité indépendante : un littéral connu comme correct, un exemple travaillé, la spec.
+- **Découpage horizontal** : écrire tous les tests d'abord, puis toute l'implémentation. Les tests en masse vérifient un comportement _imaginé_ : vous testez la _forme_ des choses plutôt que le comportement visible par l'utilisateur, les tests deviennent insensibles aux vrais changements, et vous vous engagez sur la structure des tests avant de comprendre l'implémentation. Travaillez plutôt en **tranches verticales** : un test → une implémentation → on recommence, chaque test étant une **tracer bullet** qui répond à ce que le cycle précédent vous a appris.
 
-## Rules of the loop
+## Règles de la boucle
 
-- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
-- **One slice at a time.** One seam, one test, one minimal implementation per cycle.
-- **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.
+- **Red avant green.** Écrivez d'abord le test qui échoue, puis seulement le code nécessaire pour le faire passer. N'anticipez pas les tests futurs et n'ajoutez pas de fonctionnalités spéculatives.
+- **Une tranche à la fois.** Un seam, un test, une implémentation minimale par cycle.
+- **Le refactoring ne fait pas partie de la boucle.** Il appartient à l'étape de revue (voir le skill `code-review`), pas au cycle d'implémentation red → green.
