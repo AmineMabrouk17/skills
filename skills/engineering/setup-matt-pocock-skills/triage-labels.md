@@ -1,15 +1,15 @@
-# Triage Labels
+# Labels de triage
 
-The skills speak in terms of five canonical triage roles. This file maps those roles to the actual label strings used in this repo's issue tracker.
+Les skills parlent en termes de cinq rôles de triage canoniques. Ce fichier associe ces rôles aux chaînes de labels réellement utilisées dans l'issue tracker de ce repo.
 
-| Label in mattpocock/skills | Label in our tracker | Meaning                                  |
-| -------------------------- | -------------------- | ---------------------------------------- |
-| `needs-triage`             | `needs-triage`       | Maintainer needs to evaluate this issue  |
-| `needs-info`               | `needs-info`         | Waiting on reporter for more information |
-| `ready-for-agent`          | `ready-for-agent`    | Fully specified, ready for an AFK agent  |
-| `ready-for-human`          | `ready-for-human`    | Requires human implementation            |
-| `wontfix`                  | `wontfix`            | Will not be actioned                     |
+| Label dans mattpocock/skills | Label dans notre tracker | Signification                                   |
+| ---------------------------- | ------------------------ | ----------------------------------------------- |
+| `needs-triage`               | `needs-triage`           | Le mainteneur doit évaluer cette issue          |
+| `needs-info`                 | `needs-info`             | En attente d'informations supplémentaires       |
+| `ready-for-agent`            | `ready-for-agent`        | Entièrement spécifiée, prête pour un agent AFK  |
+| `ready-for-human`            | `ready-for-human`        | Nécessite une implémentation humaine            |
+| `wontfix`                    | `wontfix`                | Ne sera pas traité                              |
 
-When a skill mentions a role (e.g. "apply the AFK-ready triage label"), use the corresponding label string from this table.
+Quand un skill mentionne un rôle (par ex. « appliquer le label de triage prêt pour l'AFK »), utilisez la chaîne de label correspondante de ce tableau.
 
-Edit the "Label in our tracker" column to match whatever vocabulary you actually use.
+Modifiez la colonne « Label dans notre tracker » pour qu'elle corresponde au vocabulaire que vous utilisez réellement.

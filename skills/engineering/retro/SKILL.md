@@ -1,44 +1,44 @@
 ---
 name: retro
-description: "Conduct a retrospective on a coding session."
+description: "Menez une rétrospective sur une session de codage."
 disable-model-invocation: true
 ---
 
-The user has asked for a **retrospective**. You are suggesting improvements to the coding agent's **environment** to improve future runs.
+L'utilisateur a demandé une **rétrospective**. Vous suggérez des améliorations à l'**environnement** de l'agent de codage pour améliorer les exécutions futures.
 
-## Steps
+## Étapes
 
-1. Call the Skill tool with `writing-for-agents` for the writing style guide.
+1. Appelez l'outil Skill avec `writing-for-agents` pour obtenir le guide de style d'écriture.
 
-2. Read the primary sources for the session the user specifies. This may mean searching through session logs on this machine. If the user doesn't specify a session, default to the current one.
+2. Lisez les sources primaires de la session indiquée par l'utilisateur. Cela peut impliquer de fouiller les journaux de session sur cette machine. Si l'utilisateur ne précise pas de session, prenez celle en cours par défaut.
 
-3. Look for candidates for improvement in these categories.
+3. Cherchez des candidats d'amélioration dans ces catégories.
 
-- **Navigation**: how easy was it for the agent to find the right files? Are there hidden dependencies between files? Would a **navigation pointer** make it easier? _Use when_ the session took a long time to find a piece of information.
-- **Automated checks**: are there automated checks that could catch errors the agent made? Linting, typing, tests, filesystem linters? Read the repo's own check command first (its `package.json`/build-tool `lint`/`check` scripts, its CI workflow), so a check that already exists but sits unwired or silently broken is the finding, not a reinvention. A repo with no **guardrail** (no pre-commit hook and no CI job running its lint/typecheck/test command) is itself a finding: an un-linted repo is a standing missed opportunity, not a neutral default. _Use when_ the agent made a mistake an automated check could have caught, or the repo has no guardrail at all.
-- **Coding standards**: should the **reviewer agent** be given a new rule to enforce? Should an existing rule be removed or clarified? Classify the violation first: a **mechanical** one (a fixed syntactic pattern, a banned API, an import shape, a file-location rule) gets a deterministic check, full stop: a custom rule in the repo's own linter, a new pre-commit hook, or a new CI job, whichever the repo's language and existing guardrail make cheapest. Default to building the check over writing the rule. Reserve `CODING_STANDARDS.md` for genuine **judgement calls** (cross-file consistency, "matches the surrounding style," anything no guardrail could ever substitute for). _Use when_ the reviewer agent failed to catch a mistake.
-- **Global AGENTS.md**: are there any steering instructions that should be moved to coding standards (or automated checks) instead? _Use when_ the AGENTS.md file is particularly large - in the repo OR the user's global scope.
-- **Tool economy**: did the agent make expensive tool calls that could be streamlined? Is there any custom tooling (CLI's, MCP's) that is particularly token-inefficient? _Use when_ the agent made an expensive tool call.
-- **No-ops**: look for instructions in steering files that don't modify the agent's behavior. _Use when_ the steering files are large and unwieldy.
-- **Information access**: look for opportunities to increase the agent's access to information. Teeing dev server logs, readonly access to third-party services. _Use when_ a crucial piece of information was not available to the agent.
+- **Navigation** : dans quelle mesure l'agent a-t-il trouvé facilement les bons fichiers ? Existe-t-il des dépendances cachées entre fichiers ? Un **pointeur de navigation** faciliterait-il les choses ? _À utiliser quand_ la session a mis longtemps à trouver une information.
+- **Vérifications automatisées** : existe-t-il des vérifications automatisées qui pourraient attraper les erreurs commises par l'agent ? Linting, vérification de types, tests, linters de système de fichiers ? Lisez d'abord la commande de vérification du repo lui-même (ses `package.json`/scripts `lint`/`check` de l'outil de build, son workflow CI), de sorte qu'une vérification déjà existante mais non branchée ou silencieusement cassée constitue le constat, et non une réinvention. Un repo sans **garde-fou** (aucun hook pre-commit et aucune tâche CI lançant sa commande de lint/typecheck/test) est en soi un constat : un repo non linté est une occasion manquée permanente, pas un défaut neutre. _À utiliser quand_ l'agent a commis une erreur qu'une vérification automatisée aurait pu attraper, ou que le repo n'a aucun garde-fou.
+- **Standards de codage** : faut-il donner une nouvelle règle à appliquer à l'**agent de revue** ? Faut-il supprimer ou clarifier une règle existante ? Classez d'abord la violation : une violation **mécanique** (un motif syntaxique figé, une API bannie, une forme d'import, une règle de placement de fichier) appelle une vérification déterministe, point final : une règle personnalisée dans le linter du repo, un nouveau hook pre-commit ou une nouvelle tâche CI, selon ce que le langage du repo et le garde-fou existant rendent le moins coûteux. Privilégiez par défaut la construction de la vérification plutôt que l'écriture de la règle. Réservez `CODING_STANDARDS.md` aux véritables **jugements** (cohérence entre fichiers, « correspond au style environnant », tout ce qu'aucun garde-fou ne saurait remplacer). _À utiliser quand_ l'agent de revue n'a pas réussi à attraper une erreur.
+- **AGENTS.md global** : y a-t-il des instructions de pilotage qui devraient plutôt être déplacées vers les standards de codage (ou les vérifications automatisées) ? _À utiliser quand_ le fichier AGENTS.md est particulièrement volumineux, dans le repo OU dans la portée globale de l'utilisateur.
+- **Économie d'outils** : l'agent a-t-il fait des appels d'outils coûteux qui pourraient être rationalisés ? Existe-t-il un outillage personnalisé (CLI, MCP) particulièrement inefficace en tokens ? _À utiliser quand_ l'agent a fait un appel d'outil coûteux.
+- **Instructions inopérantes** : cherchez dans les fichiers de pilotage des instructions qui ne modifient pas le comportement de l'agent. _À utiliser quand_ les fichiers de pilotage sont volumineux et difficiles à manier.
+- **Accès à l'information** : cherchez des occasions d'accroître l'accès de l'agent à l'information. Rediriger les journaux du serveur de développement, un accès en lecture seule aux services tiers. _À utiliser quand_ une information cruciale n'était pas disponible pour l'agent.
 
-4. Present these candidates to the user, in order of severity.
+4. Présentez ces candidats à l'utilisateur, par ordre de gravité.
 
-## Reference
+## Référence
 
-### Implementation vs Review
+### Implémentation vs revue
 
-Remember that all work goes through two stages: implementation and review. The implementation agent has the most **context pressure**. They are responsible for exploration, writing code, and debugging failures.
+Rappelez-vous que tout travail passe par deux étapes : l'implémentation et la revue. L'agent d'implémentation subit la plus forte **pression de contexte**. Il est responsable de l'exploration, de l'écriture du code et du débogage des échecs.
 
-The review agent has the least context pressure - it receives a diff, so no exploration needed. It often does not need to write code or debug.
+L'agent de revue subit la plus faible pression de contexte : il reçoit un diff, donc aucune exploration n'est nécessaire. Il n'a souvent pas besoin d'écrire du code ni de déboguer.
 
-This means that the review agent should be responsible for imposing coding standards, not the implementation agent.
+Cela signifie que l'agent de revue devrait être chargé d'imposer les standards de codage, et non l'agent d'implémentation.
 
-### Files
+### Fichiers
 
-You have access to several files in the repo:
+Vous avez accès à plusieurs fichiers dans le repo :
 
-- `CLAUDE.md`/`AGENTS.md`: these files are pushed to the context window of any agent working in this repo. They should be used incredibly sparingly, usually only for **navigation pointers** to other files.
-- `CODING_STANDARDS.md`: this file is read during review, not implementation. Add **navigation pointers** to docs folders if the standards file gets more than 1,000 lines long.
-- Docs: use docs as references files, pointed to by other files. Look for existing docs before writing new ones.
-- Skills: use skills for docs (since their description goes into the agent's context window), or for user-invoked commands. Follow the advice in the `writing-for-agents` skill.
+- `CLAUDE.md`/`AGENTS.md` : ces fichiers sont poussés dans la fenêtre de contexte de tout agent travaillant dans ce repo. Ils doivent être utilisés avec une grande parcimonie, généralement uniquement pour des **pointeurs de navigation** vers d'autres fichiers.
+- `CODING_STANDARDS.md` : ce fichier est lu pendant la revue, pas pendant l'implémentation. Ajoutez des **pointeurs de navigation** vers les dossiers de documentation si le fichier de standards dépasse 1,000 lignes.
+- Docs : utilisez la documentation comme fichiers de référence, pointés par d'autres fichiers. Cherchez la documentation existante avant d'en écrire de nouvelles.
+- Skills : utilisez les skills pour la documentation (puisque leur description entre dans la fenêtre de contexte de l'agent), ou pour les commandes invoquées par l'utilisateur. Suivez les conseils du skill `writing-for-agents`.

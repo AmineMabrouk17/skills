@@ -1,22 +1,22 @@
-# Skill mechanics
+# Mécanique des skills
 
-The skill-specific branch of [`writing-for-agents`](SKILL.md): what changes when the document is a skill (frontmatter, the invocation choice, and router skills). Everything else about writing it is the universal reference in `SKILL.md`.
+La branche propre aux skills de [`writing-for-agents`](SKILL.md) : ce qui change quand le document est un skill (le frontmatter, le choix d'invocation et les skills routeurs). Tout le reste de son écriture relève de la référence universelle de `SKILL.md`.
 
 ## Invocation
 
-Two choices, trading the two loads:
+Deux choix, qui échangent les deux charges :
 
-- A **model-invoked** skill keeps a `description`, so the agent can fire it autonomously, and other skills can reach it. You can still type its name: model-invocation always _includes_ user reach; a description only ever adds agent discovery, never removes the human's. The description is the skill's top-level context pointer, forced to stay loaded at all times: permanent context load in exchange for discoverability. A model-invoked skill whose content is all reference is also one home for shared reference: another skill can invoke it, so reference needed by several skills lives in one place. Mechanics: omit `disable-model-invocation`, and write a model-facing description carrying the trigger branches (the pointer-writing rules in `SKILL.md` apply in full).
-- A **user-invoked** skill strips the description from the agent's reach: only the human typing its name can invoke it, and no other skill can. Zero context load, but it spends cognitive load: you are the index that must remember it exists. Mechanics: set `disable-model-invocation: true`; the `description` becomes human-facing: a one-line summary, trigger lists stripped.
+- Un skill **invoqué par le modèle** garde une `description`, pour que l'agent puisse le déclencher de façon autonome et que d'autres skills puissent l'atteindre. Vous pouvez toujours taper son nom : l'invocation par le modèle _inclut_ toujours l'accès par l'utilisateur ; une description ne fait qu'ajouter la découverte par l'agent, jamais retirer celle de l'humain. La description est le pointeur de contexte de premier niveau du skill, forcé de rester chargé en permanence : une charge de contexte permanente en échange de la découvrabilité. Un skill invoqué par le modèle dont le contenu est tout en référence est aussi un foyer pour la référence partagée : un autre skill peut l'invoquer, donc une référence nécessaire à plusieurs skills vit à un seul endroit. Mécanique : omettez `disable-model-invocation`, et écrivez une description tournée vers le modèle qui porte les branches de déclenchement (les règles d'écriture de pointeurs de `SKILL.md` s'appliquent intégralement).
+- Un skill **invoqué par l'utilisateur** retire la description de la portée de l'agent : seul l'humain qui tape son nom peut l'invoquer, et aucun autre skill ne le peut. Charge de contexte nulle, mais il dépense de la charge cognitive : c'est vous l'index qui devez vous souvenir qu'il existe. Mécanique : réglez `disable-model-invocation: true` ; la `description` devient tournée vers l'humain : un résumé d'une ligne, les listes de déclencheurs retirées.
 
-Pick model-invocation only when the agent must reach the skill on its own, or another skill must. If it only ever fires by hand, make it user-invoked and pay no context load.
+Choisissez l'invocation par le modèle seulement quand l'agent doit atteindre le skill de lui-même, ou quand un autre skill le doit. S'il ne se déclenche jamais qu'à la main, rendez-le invoqué par l'utilisateur et ne payez aucune charge de contexte.
 
-Shared reference that two user-invoked skills both need can live in neither: with no descriptions, neither can fire the other. Push it to a plain file outside the skill system: external reference any skill can point at.
+Une référence partagée dont deux skills invoqués par l'utilisateur ont tous deux besoin ne peut vivre dans aucun des deux : sans descriptions, ni l'un ni l'autre ne peut déclencher l'autre. Poussez-la dans un fichier ordinaire hors du système de skills : une référence externe que n'importe quel skill peut viser.
 
-## Splitting by invocation
+## Scinder par invocation
 
-The invocation cut of splitting (the sequence cut lives in `SKILL.md`): split off a model-invoked skill when you have a distinct leading word that should trigger it on its own (a trigger word you actually use in your prompts), or another skill must reach it. You pay context load for the new always-loaded description, so that independent reach has to be worth it.
+La coupe par invocation (la coupe par séquence vit dans `SKILL.md`) : détachez un skill invoqué par le modèle quand vous avez un mot directeur distinct qui doit le déclencher de lui-même (un mot déclencheur que vous employez réellement dans vos prompts), ou quand un autre skill doit l'atteindre. Vous payez la charge de contexte de la nouvelle description toujours chargée, donc cet accès indépendant doit le valoir.
 
-## Router skills
+## Skills routeurs
 
-When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each, so the human has one skill to remember instead of many. It can only hint, never fire them: user-invoked skills have no description, so nothing but the human can reach them.
+Quand les skills invoqués par l'utilisateur se multiplient au-delà de ce que vous pouvez retenir, cette charge cognitive accumulée se soigne avec un **skill routeur** : un skill invoqué par l'utilisateur qui nomme les autres et quand recourir à chacun, pour que l'humain n'ait qu'un skill à retenir au lieu de beaucoup. Il ne peut que faire signe, jamais les déclencher : les skills invoqués par l'utilisateur n'ont pas de description, donc rien d'autre que l'humain ne peut les atteindre.

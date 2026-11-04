@@ -1,6 +1,6 @@
 ---
 name: pr
-description: "Use when writing a PR body."
+description: "À utiliser lors de la rédaction d'un corps de pull request."
 metadata:
   credits:
     skill: show-me
@@ -9,38 +9,38 @@ metadata:
     url: "https://github.com/humanlayer/skills/blob/main/plugins/show-me/skills/show-me/SKILL.md"
 ---
 
-Use this template for writing the PR body:
+Utilisez ce modèle pour rédiger le corps de la pull request :
 
 ```markdown
-## Summary
+## Résumé
 
-<diagram, diff-sketch, or tree>
+<diagramme, croquis de diff ou arbre>
 
-## Evidence
+## Preuves
 
-- **Before:** <screenshot/output/failing test run>
-  **After:** <screenshot/output/passing test run>
+- **Avant :** <capture d'écran/sortie/exécution de test en échec>
+  **Après :** <capture d'écran/sortie/exécution de test réussie>
 
-## Merge Danger
+## Danger du merge
 
-**Door:** <one-way or two-way>
+**Porte :** <à sens unique ou à double sens>
 
-<optional: description>
+<facultatif : description>
 
-**Blast Radius:** <one-word description>
+**Rayon d'impact :** <description en un mot>
 
-<optional: potential ramifications of merge>
+<facultatif : ramifications potentielles du merge>
 ```
 
 ## Sections
 
-Skip all preambles and keep prose brief. Use the user's domain language from `GLOSSARY.md`.
+Sautez tous les préambules et restez bref dans la prose. Utilisez le langage de domaine de l'utilisateur, issu de `GLOSSARY.md`.
 
-### Summary
+### Résumé
 
-Pick the smallest view that makes the key point clear.
+Choisissez la plus petite vue qui rend le point clé clair.
 
-- Show logic or an algorithm as pseudocode:
+- Montrez la logique ou un algorithme en pseudocode :
 
 ```text
 on(save)
@@ -50,7 +50,7 @@ on(save)
   return fresh result
 ```
 
-- Show runtime control flow as a call tree:
+- Montrez le flux de contrôle à l'exécution sous forme d'arbre d'appels :
 
 ```text
 submitForm
@@ -60,7 +60,7 @@ submitForm
   navigateToSession
 ```
 
-- Show UI structure as a component tree, including state and module boundaries that matter:
+- Montrez la structure de l'UI sous forme d'arbre de composants, en incluant l'état et les frontières de modules qui comptent :
 
 ```text
 <SessionPage> (apps/example/src/routes/session.tsx)
@@ -69,7 +69,7 @@ submitForm
     <RunSkillButton> (packages/ui)
 ```
 
-- Show file responsibility or a broad refactor as a shallow file tree:
+- Montrez la responsabilité d'un fichier ou un refactoring large sous forme d'arbre de fichiers superficiel :
 
 ```text
 src/
@@ -78,7 +78,7 @@ src/
 └── transport/      # sends API requests
 ```
 
-- Show component interaction, control flow, or data flow with Mermaid:
+- Montrez l'interaction entre composants, le flux de contrôle ou le flux de données avec Mermaid :
 
 ```mermaid
 sequenceDiagram
@@ -90,9 +90,9 @@ sequenceDiagram
     Daemon-->>UI: stream result
 ```
 
-- Use `diff` when the point is what changes and the surrounding shape already exists. Match the diff shape to the topic.
+- Utilisez `diff` quand le point est ce qui change et que la forme environnante existe déjà. Faites correspondre la forme du diff au sujet.
 
-For a component change:
+Pour un changement de composant :
 
 ```diff
  <SessionPage>
@@ -103,7 +103,7 @@ For a component change:
 +    <SkillResultCard />
 ```
 
-For a file-layout change:
+Pour un changement d'agencement de fichiers :
 
 ```diff
  src/
@@ -116,7 +116,7 @@ For a file-layout change:
 +    └── stream.ts
 ```
 
-For a call-tree or call-stack change:
+Pour un changement d'arbre d'appels ou de pile d'appels :
 
 ```diff
  submitForm
@@ -129,7 +129,7 @@ For a call-tree or call-stack change:
 +    subscribeToEvents
 ```
 
-For a state or control-flow change:
+Pour un changement d'état ou de flux de contrôle :
 
 ```diff
  on(save)
@@ -140,7 +140,7 @@ For a state or control-flow change:
 +  invalidate cache
 ```
 
-- Show the whole block when most of it is new, when omitted context would hide ownership or order, or when the user needs a copyable target shape:
+- Montrez le bloc entier quand l'essentiel est nouveau, quand le contexte omis masquerait la propriété ou l'ordre, ou quand l'utilisateur a besoin d'une forme cible copiable :
 
 ```ts
 function expandSkill(command: string): string {
@@ -149,22 +149,22 @@ function expandSkill(command: string): string {
 }
 ```
 
-#### Guidance
+#### Conseils
 
-Place each visual next to the short text it supports. Keep only the calls, files, props, states, and boundaries needed to answer the user's current question or the options to resolve the current discussion point.
+Placez chaque visuel à côté du court texte qu'il étaye. Ne gardez que les appels, fichiers, props, états et frontières nécessaires pour répondre à la question actuelle de l'utilisateur ou aux options permettant de résoudre le point de discussion en cours.
 
-You may use one of these, you may use several, it is unlikely you will use all of them. Use your judgement and don't overwhelm the user.
+Vous pouvez en utiliser un, vous pouvez en utiliser plusieurs, il est peu probable que vous les utilisiez tous. Faites preuve de jugement et ne submergez pas l'utilisateur.
 
-### Evidence
+### Preuves
 
-Concrete evidence that the change works. Show a before and after.
+Des preuves concrètes que le changement fonctionne. Montrez un avant et un après.
 
-Screenshots are S-tier - when the environment is set up for it and the change is visual.
+Les captures d'écran sont de rang S, quand l'environnement est configuré pour cela et que le changement est visuel.
 
-Execution-based evidence is A-tier. Test results, console output. Show the exact test that now fails and passes, using pseudocode.
+Les preuves issues de l'exécution sont de rang A. Résultats de tests, sortie console. Montrez le test exact qui échoue désormais et passe, en pseudocode.
 
-### Merge Danger
+### Danger du merge
 
-Describe whether it's a one-way or two-way door. You can walk back through two-way doors, but not one-way doors. A PR that is cheap to roll back is lower risk. Changes that involve destructive actions or hard-to-reverse decisions are one-way doors.
+Décrivez s'il s'agit d'une porte à sens unique ou d'une porte à double sens. On peut revenir en arrière par une porte à double sens, pas par une porte à sens unique. Une PR dont le retour en arrière est peu coûteux est moins risquée. Les changements qui impliquent des actions destructrices ou des décisions difficiles à inverser sont des portes à sens unique.
 
-The blast radius is the potential impact or scope of the changes introduced by this PR. Consider all possibilities. Examples are layout shift, breakages for consumers, mobile responsiveness, etc.
+Le rayon d'impact est l'effet potentiel ou la portée des changements introduits par cette PR. Envisagez toutes les possibilités. Des exemples sont un décalage de mise en page, des casses pour les consommateurs, la réactivité mobile, etc.

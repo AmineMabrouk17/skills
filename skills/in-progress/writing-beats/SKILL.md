@@ -1,67 +1,67 @@
 ---
 name: writing-beats
-description: Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.
+description: Écriture, exploit ; assemblez de la matière brute en un parcours de beats, en ancrant chaque terme avant qu'un beat ne s'appuie dessus.
 disable-model-invocation: true
 ---
 
 <what-to-do>
 
-The user has passed (or will pass) a markdown file of raw material. This is **exploit**: the exploring is done, the pile is fixed. Commit to a path through it and mine the pile to fill each beat.
+L'utilisateur a passé (ou passera) un fichier markdown de matière brute. C'est de l'**exploit** : l'exploration est terminée, la pile est figée. Engagez-vous sur un chemin à travers elle et puisez dans la pile pour remplir chaque beat.
 
-If the user did not say where to save the article, ask once and remember the path.
+Si l'utilisateur n'a pas indiqué où enregistrer l'article, demandez-le une fois et retenez le chemin.
 
-Then run a beat-by-beat journey, choose-your-own-adventure style:
+Puis déroulez un parcours beat par beat, à la manière d'un livre dont vous êtes le héros :
 
-1. **Establish the prerequisites.** Before any beats, settle with the user what the audience already knows walking in: the concepts that are **grounded** from the start. Everything else must be grounded by a beat before a later beat can use it. See [Grounding](#grounding).
-2. Write 2–3 candidate **starting beats**, drawn from the raw material. Each is a different entry point into the article. Each may only lean on grounded concepts; note what new concepts each one grounds. Show the user the beats before writing to the article file. The user picks one. Preview what beats that pick unlocks, as if the user is seeing a little way down the path.
-3. Once the user picks a starting beat, write **only that beat** to the article file. A beat may be one sentence or several paragraphs, whatever that beat naturally is. Stop there.
-4. Re-read the article file from disk. Then offer 2–3 candidate **next beats**: different directions the journey could pivot to from where the article now stands. Each must be reachable from the current grounded set; note what each one grounds.
-5. Loop steps 3–5 until the article reaches a natural end.
+1. **Établissez les prérequis.** Avant tout beat, convenez avec l'utilisateur de ce que le public sait déjà en entrant : les concepts **ancrés** dès le départ. Tout le reste doit être ancré par un beat avant qu'un beat ultérieur puisse l'utiliser. Voir [Ancrage](#ancrage).
+2. Écrivez 2–3 **beats de départ** candidats, tirés de la matière brute. Chacun est un point d'entrée différent dans l'article. Chacun ne peut s'appuyer que sur des concepts ancrés ; notez quels nouveaux concepts il ancre. Montrez les beats à l'utilisateur avant d'écrire dans le fichier de l'article. L'utilisateur en choisit un. Préfigurez les beats que ce choix débloque, comme si l'utilisateur voyait un peu plus loin sur le chemin.
+3. Une fois que l'utilisateur a choisi un beat de départ, écrivez **uniquement ce beat** dans le fichier de l'article. Un beat peut tenir en une phrase ou en plusieurs paragraphes, selon ce qu'il est naturellement. Arrêtez-vous là.
+4. Relisez le fichier de l'article depuis le disque. Proposez ensuite 2–3 **beats suivants** candidats : différentes directions vers lesquelles le parcours pourrait pivoter depuis là où l'article en est. Chacun doit être atteignable depuis l'ensemble ancré actuel ; notez ce que chacun ancre.
+5. Bouclez sur les étapes 3–5 jusqu'à ce que l'article atteigne une fin naturelle.
 
 </what-to-do>
 
 <supporting-info>
 
-## Grounding
+## Ancrage
 
-Every **concept** has to be **grounded** before a beat can lean on it: the audience either walked in knowing it or met it in an earlier beat. A beat that reaches for an ungrounded concept loses the reader; that is the one move the journey can't make. The unit is the concept, not the word for it: a beat can lean on an idea the reader lacks even with no jargon in sight. Where a concept has a name (a **term**), grounding it means landing the idea and the term together.
+Chaque **concept** doit être **ancré** avant qu'un beat puisse s'appuyer dessus : soit le public le connaissait en entrant, soit il l'a rencontré dans un beat précédent. Un beat qui tend vers un concept non ancré perd le lecteur ; c'est le seul mouvement que le parcours ne peut pas faire. L'unité est le concept, pas le mot qui le désigne : un beat peut s'appuyer sur une idée qui manque au lecteur même sans aucun jargon visible. Quand un concept a un nom (un **terme**), l'ancrer signifie poser l'idée et le terme ensemble.
 
-A concept gets grounded one of two ways:
+Un concept s'ancre de deux façons :
 
-- **Prerequisite**: grounded before the first beat. The audience brings it. Fixed at the start.
-- **Introduced**: a beat establishes it, and from then on it's grounded for every later beat.
+- **Prérequis** : ancré avant le premier beat. Le public l'apporte. Fixé au départ.
+- **Introduit** : un beat l'établit, et à partir de là il est ancré pour tous les beats suivants.
 
-So each beat does two jobs: it **requires** concepts that are already grounded, and it **grounds** new ones. Keep a running list of what's grounded so far, and update it each time a beat lands.
+Ainsi chaque beat fait deux choses : il **requiert** des concepts déjà ancrés, et il **ancre** les nouveaux. Tenez une liste à jour de ce qui est ancré jusqu'ici, et actualisez-la chaque fois qu'un beat se pose.
 
-This is what shapes the choose-your-own-adventure. A candidate beat is only reachable if everything it requires is already grounded; picking a beat that grounds concept X unlocks every beat that was waiting on X. When you offer next beats, they must all be reachable from the current grounded set, and say what each one grounds, so the user can see which paths it opens.
+C'est ce qui donne sa forme au livre dont vous êtes le héros. Un beat candidat n'est atteignable que si tout ce qu'il requiert est déjà ancré ; choisir un beat qui ancre le concept X débloque tous les beats qui attendaient X. Quand vous proposez des beats suivants, ils doivent tous être atteignables depuis l'ensemble ancré actuel, et vous devez dire ce que chacun ancre, pour que l'utilisateur voie quels chemins il ouvre.
 
-The big lever is what you make a prerequisite versus what you ground inside the piece. Demand too much up front and you shut out readers who don't have it; ground too much inside and the early beats drown in definitions. Settle this with the user when you establish prerequisites, and revisit it whenever a tempting beat turns out to require a concept nothing has grounded yet: the fix is either a grounding beat before it, or promoting the concept to a prerequisite.
+Le grand levier, c'est ce que vous érigez en prérequis par rapport à ce que vous ancrez dans le texte. Exigez trop en amont et vous excluez les lecteurs qui ne l'ont pas ; ancrez trop à l'intérieur et les premiers beats se noient dans les définitions. Réglez cela avec l'utilisateur quand vous établissez les prérequis, et revenez-y chaque fois qu'un beat tentant s'avère requérir un concept que rien n'a encore ancré : la solution est soit un beat d'ancrage avant lui, soit la promotion du concept au rang de prérequis.
 
-## What is a beat
+## Qu'est-ce qu'un beat
 
-A beat is one move in the journey. It does one thing: sets a scene, lands a point, asks a question, drops an aside, twists the angle. Then it stops, leaving the reader at a place where the next beat can pivot.
+Un beat est un mouvement dans le parcours. Il fait une seule chose : poser une scène, faire atterrir un point, poser une question, glisser une digression, infléchir l'angle. Puis il s'arrête, laissant le lecteur à un endroit d'où le beat suivant peut pivoter.
 
-A beat is sized by what it needs:
+La taille d'un beat est dictée par ce dont il a besoin :
 
-- A single sentence if that's all the move is ("And then nothing happened for three weeks.").
-- A short paragraph if the move needs setup.
-- Multiple paragraphs if the beat is a self-contained vignette, argument, or example.
+- Une seule phrase si le mouvement n'est que cela (« Et puis rien ne s'est passé pendant trois semaines. »).
+- Un paragraphe court si le mouvement a besoin d'être préparé.
+- Plusieurs paragraphes si le beat est une vignette, une argumentation ou un exemple autonome.
 
-If a "beat" needs five paragraphs and three subheadings, it's not a beat; it's two beats glued together. Split it.
+Si un « beat » a besoin de cinq paragraphes et de trois sous-titres, ce n'est pas un beat ; ce sont deux beats collés ensemble. Séparez-les.
 
-## Pulling from the pile
+## Puiser dans la pile
 
-Pull material from the raw pile to populate each beat. You can paraphrase, split, recombine, or quote. The pile is a quarry.
+Puisez de la matière dans la pile brute pour nourrir chaque beat. Vous pouvez paraphraser, découper, recombiner ou citer. La pile est une carrière.
 
-## Ending the journey
+## Terminer le parcours
 
-The article ends when the journey is complete, not when the pile is empty. Most piles will have leftover fragments that don't make it in. That is fine; that is the point of having more raw material than you need.
+L'article se termine quand le parcours est complet, pas quand la pile est vide. La plupart des piles laisseront des fragments de côté qui n'entreront pas. C'est très bien ; c'est tout l'intérêt d'avoir plus de matière brute que nécessaire.
 
-## Writing rhythm
+## Rythme d'écriture
 
-- Append one beat at a time. Never write ahead.
-- Re-read the article file from disk before every write. Preserve user edits absolutely.
-- If the user edits a previous beat substantially, let it change what comes next.
-- If the user says "rewrite that beat" or "go back and try a different beat 3", do it: edit in place, leave the rest alone.
+- Ajoutez un beat à la fois. N'écrivez jamais en avance.
+- Relisez le fichier de l'article depuis le disque avant chaque écriture. Préservez absolument les modifications de l'utilisateur.
+- Si l'utilisateur modifie substantiellement un beat précédent, laissez cela changer la suite.
+- Si l'utilisateur dit « réécris ce beat » ou « reviens et essaie un autre beat 3 », faites-le : modifiez sur place, laissez le reste intact.
 
 </supporting-info>

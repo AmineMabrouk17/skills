@@ -1,13 +1,13 @@
 ---
 name: grilling
-description: Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.
+description: Interrogez l'utilisateur sans relâche sur un plan, une décision ou une idée. À utiliser quand l'utilisateur veut mettre sa réflexion à l'épreuve, ou emploie l'une des phrases déclencheuses « grill ».
 ---
 
-Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
+Interrogez l'utilisateur sans relâche jusqu'à ce que vous atteigniez une compréhension partagée. Cartographiez cela comme un **arbre de conception** : chaque décision se ramifie en décisions qui en dépendent.
 
-Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
+Parcourez l'arbre en **tours**. La **frontière** est l'ensemble des décisions dont les prérequis sont déjà réglés : les questions que vous pouvez poser _maintenant_ sans deviner des réponses que vous n'avez pas encore entendues. Posez toute la frontière en un seul tour : numérotez chaque question et donnez votre réponse recommandée. Attendez ensuite les réponses de l'utilisateur avant le tour suivant.
 
-Format a round like so:
+Formatez un tour comme ceci :
 
 ```
 ❓ **Q1** - **<question title>**: <question body, might be multiple paragraphs, including multiple choices>
@@ -21,10 +21,10 @@ Format a round like so:
 ➡️ <your recommended answer>
 ```
 
-Word each question so "yes" accepts your recommended answer.
+Formulez chaque question de sorte que « oui » accepte votre réponse recommandée.
 
-Each round the user answers reshapes the tree: settled decisions push the frontier outward and unblock questions that depended on them. Recompute the frontier and ask the next round. A question whose answer depends on another question still open in this round belongs to a _later_ round, not this one.
+Chaque tour au cours duquel l'utilisateur répond remodèle l'arbre : les décisions réglées poussent la frontière vers l'extérieur et débloquent les questions qui en dépendaient. Recalculez la frontière et posez le tour suivant. Une question dont la réponse dépend d'une autre question encore ouverte dans ce tour appartient à un tour _ultérieur_, pas à celui-ci.
 
-Finding _facts_ is your job, never the user's. When a frontier question needs a fact from the environment (filesystem, tools, etc.), dispatch a sub-agent with a fresh context window to find it; don't ask the user for anything you could look up yourself. Don't block on it: a running exploration is an unsettled prerequisite, so only the questions downstream of it wait for the sub-agent to report; ask the rest of the frontier now. The _decisions_ are the user's: put each to them and wait.
+Trouver des _faits_ est votre travail, jamais celui de l'utilisateur. Quand une question de la frontière a besoin d'un fait venant de l'environnement (système de fichiers, outils, etc.), envoyez un sub-agent avec une fenêtre de contexte neuve pour le trouver ; ne demandez pas à l'utilisateur quelque chose que vous pourriez chercher vous-même. Ne restez pas bloqué dessus : une exploration en cours est un prérequis non réglé, donc seules les questions en aval attendent le rapport du sub-agent ; posez le reste de la frontière maintenant. Les _décisions_ appartiennent à l'utilisateur : soumettez-les-lui une par une et attendez.
 
-The session is done when the frontier is empty: every branch of the design tree visited, nothing left silently assumed. Do not act on it until the user confirms you have reached a shared understanding.
+La session est terminée quand la frontière est vide : chaque branche de l'arbre de conception visitée, rien laissé implicitement supposé. N'agissez pas dessus avant que l'utilisateur confirme que vous avez atteint une compréhension partagée.

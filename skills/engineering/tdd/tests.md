@@ -1,8 +1,8 @@
-# Good and Bad Tests
+# Bons et mauvais tests
 
-## Good Tests
+## Bons tests
 
-**Integration-style**: Test through real interfaces, not mocks of internal parts.
+**Style intégration** : testez à travers de vraies interfaces, pas des mocks de parties internes.
 
 ```typescript
 // GOOD: Tests observable behavior
@@ -14,17 +14,17 @@ test("user can checkout with valid cart", async () => {
 });
 ```
 
-Characteristics:
+Caractéristiques :
 
-- Tests behavior users/callers care about
-- Uses public API only
-- Survives internal refactors
-- Describes WHAT, not HOW
-- One logical assertion per test
+- Teste le comportement qui compte pour les utilisateurs/appelants
+- N'utilise que l'API publique
+- Survit aux refactorings internes
+- Décrit QUOI, pas COMMENT
+- Une seule assertion logique par test
 
-## Bad Tests
+## Mauvais tests
 
-**Implementation-detail tests**: Coupled to internal structure.
+**Tests de détail d'implémentation** : couplés à la structure interne.
 
 ```typescript
 // BAD: Tests implementation details
@@ -35,14 +35,14 @@ test("checkout calls paymentService.process", async () => {
 });
 ```
 
-Red flags:
+Signaux d'alerte :
 
-- Mocking internal collaborators
-- Testing private methods
-- Asserting on call counts/order
-- Test breaks when refactoring without behavior change
-- Test name describes HOW not WHAT
-- Verifying through external means instead of interface
+- Mocker des collaborateurs internes
+- Tester des méthodes privées
+- Faire des assertions sur le nombre/ordre des appels
+- Le test casse lors d'un refactoring sans changement de comportement
+- Le nom du test décrit COMMENT, pas QUOI
+- Vérifier par des moyens externes au lieu de l'interface
 
 ```typescript
 // BAD: Bypasses interface to verify
@@ -60,7 +60,7 @@ test("createUser makes user retrievable", async () => {
 });
 ```
 
-**Tautological tests**: Expected value restates the implementation, so the test passes by construction.
+**Tests tautologiques** : la valeur attendue reformule l'implémentation, donc le test passe par construction.
 
 ```typescript
 // BAD: Expected value is recomputed the way the code computes it

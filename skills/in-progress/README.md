@@ -1,17 +1,17 @@
-# In Progress
+# En cours
 
-Beta. These skills are public on purpose: try them and tell me what breaks. They're excluded from the plugin and the top-level README until they graduate to a stable bucket, they get no docs pages, and they can change or disappear without warning.
+Bêta. Ces skills sont publics à dessein : essayez-les et dites-moi ce qui casse. Ils sont exclus du plugin et du README de premier niveau jusqu'à ce qu'ils passent dans un bucket stable, ils n'ont pas de page de docs, et ils peuvent changer ou disparaître sans prévenir.
 
-The plugin won't give you these. Install one directly:
+Le plugin ne vous les fournira pas. Installez-en un directement :
 
 ```bash
 npx skills@latest add mattpocock/skills --skill=<name>
 ```
 
-- **[loop-me](./loop-me/SKILL.md)**: Grill yourself into implementable workflow specs over multiple sessions, using the current directory as a stateful workspace. User-invoked.
-- **[writing-beats](./writing-beats/SKILL.md)**: Shape an article as a journey of beats, choose-your-own-adventure style. Pick a starting beat, write only that beat, then pivot to the next, until the article reaches a natural end.
-- **[writing-fragments](./writing-fragments/SKILL.md)**: Grilling session that mines you for fragments (heterogeneous nuggets of writing) and appends them to a single document as raw material for a future article.
-- **[writing-shape](./writing-shape/SKILL.md)**: Take a markdown file of raw material and shape it into an article paragraph by paragraph, arguing format choices at each step.
-- **[claude-handoff](./claude-handoff/SKILL.md)**: Hand the current conversation off to a fresh background agent that picks up the work immediately, seeded with a handoff summary via `claude --bg`. User-invoked.
-- **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)**: Wire dependency-cruiser into a TypeScript repo so each package is a deep module: implementation hidden in subfolders, reachable only through its entry-point files, tests exercising it through those. User-invoked.
-- **[software-factory](./software-factory/SKILL.md)**: Shared language for designing a software factory: the tasks it runs and the services it plugs into. Call it alongside a grilling session. User-invoked.
+- **[loop-me](./loop-me/SKILL.md)** : Interrogez-vous jusqu'à obtenir des specs de workflow implémentables, sur plusieurs sessions, en utilisant le répertoire courant comme espace de travail avec état. Invoqué par l'utilisateur.
+- **[writing-beats](./writing-beats/SKILL.md)** : Façonnez un article comme un parcours de beats, à la manière d'un livre dont vous êtes le héros. Choisissez un beat de départ, n'écrivez que ce beat, puis basculez vers le suivant, jusqu'à ce que l'article atteigne une fin naturelle.
+- **[writing-fragments](./writing-fragments/SKILL.md)** : Session de grilling qui vous extrait des fragments (des pépites d'écriture hétérogènes) et les ajoute à un document unique comme matière première pour un futur article.
+- **[writing-shape](./writing-shape/SKILL.md)** : Prenez un fichier markdown de matière première et façonnez-le en article paragraphe par paragraphe, en argumentant les choix de format à chaque étape.
+- **[claude-handoff](./claude-handoff/SKILL.md)** : Passez la conversation en cours à un agent en arrière-plan neuf qui reprend le travail immédiatement, amorcé par un résumé de passation via `claude --bg`. Invoqué par l'utilisateur.
+- **[setup-ts-deep-modules](./setup-ts-deep-modules/SKILL.md)** : Branchez dependency-cruiser sur un repo TypeScript pour que chaque package soit un module profond : implémentation cachée dans des sous-dossiers, accessible uniquement via ses fichiers points d'entrée, et tests qui l'exercent à travers eux. Invoqué par l'utilisateur.
+- **[software-factory](./software-factory/SKILL.md)** : Langage partagé pour concevoir une usine logicielle : les tâches qu'elle exécute et les services auxquels elle se branche. Appelez-le en parallèle d'une session de grilling. Invoqué par l'utilisateur.

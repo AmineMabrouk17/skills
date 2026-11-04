@@ -1,18 +1,18 @@
 ---
 name: claude-handoff
-description: Hand the current conversation off to a fresh background agent that picks up the work immediately.
+description: Passer la conversation en cours à un agent en arrière-plan neuf qui reprend le travail immédiatement.
 argument-hint: "What will the next session be used for?"
 disable-model-invocation: true
 ---
 
-Write a handoff summary of the current conversation so a fresh agent can continue the work. Save it to the temporary directory of the user's OS, then launch a background agent seeded with it as its prompt: `claude --bg --name "<descriptive name>" -- "$(cat <summary file>)"`. Passing the file keeps the shell from running backticks or expanding `$` in the summary. It starts in the current working directory and returns immediately; the user manages it with `claude agents`.
+Écrivez un résumé de passation de la conversation en cours pour qu'un agent neuf puisse continuer le travail. Enregistrez-le dans le répertoire temporaire du système d'exploitation de l'utilisateur, puis lancez un agent en arrière-plan amorcé avec ce résumé comme prompt : `claude --bg --name "<descriptive name>" -- "$(cat <summary file>)"`. Passer le fichier évite que le shell exécute les backticks ou développe les `$` du résumé. Il démarre dans le répertoire de travail courant et rend la main immédiatement ; l'utilisateur le gère avec `claude agents`.
 
-Always pass `-n`/`--name` with a descriptive name (e.g. `--name "Fix login bug"`); it sets the display name shown in the job list, session picker, and terminal title.
+Passez toujours `-n`/`--name` avec un nom descriptif (par exemple `--name "Fix login bug"`) ; il définit le nom affiché dans la liste des jobs, le sélecteur de session et le titre du terminal.
 
-Include a "suggested skills" section in the summary, naming which skills the next agent should call the Skill tool for.
+Incluez une section « skills suggérés » dans le résumé, en nommant les skills pour lesquels le prochain agent devra appeler l'outil Skill.
 
-Do not duplicate content already captured in other artifacts (specs, plans, ADRs, issues, commits, diffs). Reference them by path or URL instead.
+Ne dupliquez pas le contenu déjà consigné dans d'autres artefacts (specs, plans, ADR, issues, commits, diffs). Référencez-les par chemin ou par URL.
 
-Redact any sensitive information, such as API keys, passwords, or personally identifiable information, since the summary becomes the agent's prompt.
+Caviardez toute information sensible, comme les clés d'API, les mots de passe ou les informations personnelles identifiables, puisque le résumé devient le prompt de l'agent.
 
-If the user passed arguments, treat them as a description of what the next session will focus on and tailor the summary accordingly.
+Si l'utilisateur a passé des arguments, traitez-les comme une description de ce sur quoi la prochaine session portera et adaptez le résumé en conséquence.

@@ -1,18 +1,18 @@
-# Domain Docs
+# Docs de domaine
 
-How the engineering skills should consume this repo's domain documentation when exploring the codebase.
+Comment les skills d'ingénierie doivent consommer la documentation de domaine de ce repo lors de l'exploration de la base de code.
 
-## Before exploring, read these
+## Avant d'explorer, lisez ceci
 
-- **`GLOSSARY.md`** at the repo root, or
-- **`GLOSSARY-MAP.md`** at the repo root if it exists: it points at one `GLOSSARY.md` per context. Read each one relevant to the topic.
-- **`docs/adr/`**: read ADRs that touch the area you're about to work in. In multi-context repos, also check `src/<context>/docs/adr/` for context-scoped decisions.
+- **`GLOSSARY.md`** à la racine du repo, ou
+- **`GLOSSARY-MAP.md`** à la racine du repo s'il existe : il pointe vers un `GLOSSARY.md` par contexte. Lisez chacun de ceux qui sont pertinents pour le sujet.
+- **`docs/adr/`** : lisez les ADR qui touchent la zone dans laquelle vous allez travailler. Dans les repos multi-contextes, vérifiez aussi `src/<context>/docs/adr/` pour les décisions propres à un contexte.
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
+Si l'un de ces fichiers n'existe pas, **continuez sans rien signaler**. Ne signalez pas leur absence ; ne suggérez pas de les créer d'emblée. Le skill `/domain-modeling` (accessible via `/grill-with-docs` et `/improve-codebase-architecture`) les crée à la demande, quand des termes ou des décisions sont réellement tranchés.
 
-## File structure
+## Structure des fichiers
 
-Single-context repo (most repos):
+Repo mono-contexte (la plupart des repos) :
 
 ```
 /
@@ -23,7 +23,7 @@ Single-context repo (most repos):
 └── src/
 ```
 
-Multi-context repo (presence of `GLOSSARY-MAP.md` at the root):
+Repo multi-contexte (présence de `GLOSSARY-MAP.md` à la racine) :
 
 ```
 /
@@ -38,14 +38,14 @@ Multi-context repo (presence of `GLOSSARY-MAP.md` at the root):
         └── docs/adr/
 ```
 
-## Use the glossary's vocabulary
+## Utilisez le vocabulaire du glossaire
 
-When your output names a domain concept (in an issue title, a refactor proposal, a hypothesis, a test name), use the term as defined in `GLOSSARY.md`. Don't drift to synonyms the glossary explicitly avoids.
+Quand votre sortie nomme un concept de domaine (dans un titre d'issue, une proposition de refactoring, une hypothèse, un nom de test), utilisez le terme tel que défini dans `GLOSSARY.md`. Ne dérivez pas vers des synonymes que le glossaire évite explicitement.
 
-If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
+Si le concept dont vous avez besoin n'est pas encore dans le glossaire, c'est un signal : soit vous inventez un langage que le projet n'utilise pas (reconsidérez), soit il y a un vrai manque (notez-le pour `/domain-modeling`).
 
-## Flag ADR conflicts
+## Signalez les conflits d'ADR
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
+Si votre sortie contredit un ADR existant, signalez-le explicitement plutôt que de le contourner en silence :
 
-> _Contradicts ADR-0007 (event-sourced orders), but worth reopening because…_
+> _Contredit l'ADR-0007 (event-sourced orders), mais mérite d'être rouvert parce que…_

@@ -1,25 +1,25 @@
-# When to Mock
+# Quand utiliser le mock
 
-Mock at **system boundaries** only:
+Utilisez le mock uniquement aux **frontières du système** :
 
-- External APIs (payment, email, etc.)
-- Databases (sometimes - prefer test DB)
-- Time/randomness
-- File system (sometimes)
+- API externes (paiement, e-mail, etc.)
+- Bases de données (parfois, préférez une base de test)
+- Temps/aléatoire
+- Système de fichiers (parfois)
 
-Don't mock:
+N'utilisez pas de mock pour :
 
-- Your own classes/modules
-- Internal collaborators
-- Anything you control
+- Vos propres classes/modules
+- Les collaborateurs internes
+- Tout ce que vous contrôlez
 
-## Designing for Mockability
+## Concevoir pour le mocking
 
-At system boundaries, design interfaces that are easy to mock:
+Aux frontières du système, concevez des interfaces faciles à mocker :
 
-**1. Use dependency injection**
+**1. Utilisez l'injection de dépendances**
 
-Pass external dependencies in rather than creating them internally:
+Passez les dépendances externes en paramètre plutôt que de les créer à l'intérieur :
 
 ```typescript
 // Easy to mock
@@ -34,9 +34,9 @@ function processPayment(order) {
 }
 ```
 
-**2. Prefer SDK-style interfaces over generic fetchers**
+**2. Préférez les interfaces de style SDK aux fetchers génériques**
 
-Create specific functions for each external operation instead of one generic function with conditional logic:
+Créez des fonctions spécifiques pour chaque opération externe au lieu d'une seule fonction générique avec de la logique conditionnelle :
 
 ```typescript
 // GOOD: Each function is independently mockable
@@ -52,8 +52,8 @@ const api = {
 };
 ```
 
-The SDK approach means:
-- Each mock returns one specific shape
-- No conditional logic in test setup
-- Easier to see which endpoints a test exercises
-- Type safety per endpoint
+L'approche SDK signifie :
+- Chaque mock renvoie une forme spécifique
+- Pas de logique conditionnelle dans la configuration du test
+- Il est plus facile de voir quels endpoints un test exerce
+- Sûreté de typage par endpoint

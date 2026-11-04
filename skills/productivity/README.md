@@ -1,20 +1,20 @@
-# Productivity
+# Productivité
 
-General workflow tools, not code-specific.
+Outils de workflow généraux, non spécifiques au code.
 
-## User-invoked
+## Invoqués par l'utilisateur
 
-Reachable only when you type them (Claude Code: `disable-model-invocation: true`; Codex: `policy.allow_implicit_invocation: false` in `agents/openai.yaml`).
+Atteignables uniquement quand vous les tapez (Claude Code : `disable-model-invocation: true` ; Codex : `policy.allow_implicit_invocation: false` dans `agents/openai.yaml`).
 
-- **[grill-me](./grill-me/SKILL.md)**: Get relentlessly interviewed about a plan or design until every branch of the design tree is resolved.
-- **[handoff](./handoff/SKILL.md)**: Compact the current conversation into a handoff document so another agent can continue the work.
-- **[teach](./teach/SKILL.md)**: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
-- **[to-questionnaire](./to-questionnaire/SKILL.md)**: Turn a decision you can't answer alone into a Markdown questionnaire for the one person who can (filled in async, or together over a meeting).
-- **[wait-what](./wait-what/SKILL.md)**: Fire this the moment a message doesn't land. The agent re-pitches it with the context you're missing, in plain English, using your `GLOSSARY.md` vocabulary.
+- **[grill-me](./grill-me/SKILL.md)** : Soyez interrogé sans relâche sur un plan ou une conception jusqu'à ce que chaque branche de l'arbre de conception soit résolue.
+- **[handoff](./handoff/SKILL.md)** : Compactez la conversation actuelle en un document de passation pour qu'un autre agent puisse poursuivre le travail.
+- **[teach](./teach/SKILL.md)** : Enseignez à l'utilisateur un nouveau skill ou concept sur plusieurs sessions, en utilisant le répertoire courant comme espace de travail d'enseignement avec état.
+- **[to-questionnaire](./to-questionnaire/SKILL.md)** : Transformez une décision que vous ne pouvez pas trancher seul en un questionnaire Markdown pour la seule personne qui le peut (rempli en asynchrone, ou ensemble lors d'une réunion).
+- **[wait-what](./wait-what/SKILL.md)** : Déclenchez ceci dès qu'un message ne passe pas. L'agent le reformule avec le contexte qui vous manque, en anglais simple, en utilisant le vocabulaire de votre `GLOSSARY.md`.
 
-## Model-invoked
+## Invoqués par le modèle
 
-Model- or user-reachable (rich trigger phrasing so the model can reach for them).
+Atteignables par le modèle ou l'utilisateur (formulations déclencheuses riches pour que le modèle puisse y recourir).
 
-- **[grilling](./grilling/SKILL.md)**: Interview the user relentlessly about a plan, decision, or idea until every branch of the design tree is resolved.
-- **[writing-for-agents](./writing-for-agents/SKILL.md)**: Writing documents for agents: skills, AGENTS.md/CLAUDE.md, and any doc an agent reaches by a pointer.
+- **[grilling](./grilling/SKILL.md)** : Interrogez l'utilisateur sans relâche sur un plan, une décision ou une idée jusqu'à ce que chaque branche de l'arbre de conception soit résolue.
+- **[writing-for-agents](./writing-for-agents/SKILL.md)** : Écrire des documents pour les agents : skills, AGENTS.md/CLAUDE.md, et tout document qu'un agent atteint par un pointeur.

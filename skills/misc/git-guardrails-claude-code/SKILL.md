@@ -1,44 +1,44 @@
 ---
 name: git-guardrails-claude-code
-description: Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.
+description: Configure des hooks Claude Code pour bloquer les commandes git dangereuses (push, reset --hard, clean, branch -D, etc.) avant leur exécution. Utilisez-le quand l'utilisateur veut empêcher des opérations git destructrices, ajouter des hooks de sécurité git, ou bloquer git push/reset dans Claude Code.
 ---
 
-# Setup Git Guardrails
+# Mettre en place les garde-fous Git
 
-Sets up a PreToolUse hook that intercepts and blocks dangerous git commands before Claude executes them.
+Met en place un hook PreToolUse qui intercepte et bloque les commandes git dangereuses avant que Claude ne les exécute.
 
-## What Gets Blocked
+## Ce qui est bloqué
 
-- `git push` (all variants including `--force`)
+- `git push` (toutes les variantes, y compris `--force`)
 - `git reset --hard`
 - `git clean -f` / `git clean -fd`
 - `git branch -D`
 - `git checkout .` / `git restore .`
 
-When blocked, Claude sees a message telling it that it does not have authority to access these commands.
+Lorsqu'une commande est bloquée, Claude voit un message lui indiquant qu'il n'a pas l'autorisation d'accéder à ces commandes.
 
-## Steps
+## Étapes
 
-### 1. Ask scope
+### 1. Demander la portée
 
-Ask the user: install for **this project only** (`.claude/settings.json`) or **all projects** (`~/.claude/settings.json`)?
+Demandez à l'utilisateur : installer pour **ce projet uniquement** (`.claude/settings.json`) ou **tous les projets** (`~/.claude/settings.json`) ?
 
-### 2. Copy the hook script
+### 2. Copier le script du hook
 
-The bundled script is at: [scripts/block-dangerous-git.sh](scripts/block-dangerous-git.sh)
+Le script fourni se trouve ici : [scripts/block-dangerous-git.sh](scripts/block-dangerous-git.sh)
 
-Copy it to the target location based on scope:
+Copiez-le à l'emplacement cible selon la portée :
 
-- **Project**: `.claude/hooks/block-dangerous-git.sh`
-- **Global**: `~/.claude/hooks/block-dangerous-git.sh`
+- **Projet** : `.claude/hooks/block-dangerous-git.sh`
+- **Global** : `~/.claude/hooks/block-dangerous-git.sh`
 
-Make it executable with `chmod +x`.
+Rendez-le exécutable avec `chmod +x`.
 
-### 3. Add hook to settings
+### 3. Ajouter le hook dans la configuration
 
-Add to the appropriate settings file:
+Ajoutez-le au fichier de configuration approprié :
 
-**Project** (`.claude/settings.json`):
+**Projet** (`.claude/settings.json`) :
 
 ```json
 {
@@ -58,7 +58,7 @@ Add to the appropriate settings file:
 }
 ```
 
-**Global** (`~/.claude/settings.json`):
+**Global** (`~/.claude/settings.json`) :
 
 ```json
 {
@@ -78,18 +78,18 @@ Add to the appropriate settings file:
 }
 ```
 
-If the settings file already exists, merge the hook into the existing `hooks.PreToolUse` array. Don't overwrite other settings.
+Si le fichier de configuration existe déjà, fusionnez le hook dans le tableau `hooks.PreToolUse` existant. N'écrasez pas les autres réglages.
 
-### 4. Ask about customization
+### 4. Demander la personnalisation
 
-Ask if user wants to add or remove any patterns from the blocked list. Edit the copied script accordingly.
+Demandez si l'utilisateur veut ajouter ou retirer des motifs de la liste bloquée. Modifiez le script copié en conséquence.
 
-### 5. Verify
+### 5. Vérifier
 
-Run a quick test:
+Lancez un test rapide :
 
 ```bash
 echo '{"tool_input":{"command":"git push origin main"}}' | <path-to-script>
 ```
 
-Should exit with code 2 and print a BLOCKED message to stderr.
+Le script doit se terminer avec le code 2 et afficher un message BLOCKED sur stderr.

@@ -1,80 +1,80 @@
-# Example tasks
+# Tâches d'exemple
 
-Tasks grouped by the problem they solve. Each names the trigger that starts its runs, what a run does, and what it triggers next. Most factories start as one of these and grow by chaining the next.
+Des tâches regroupées par le problème qu'elles résolvent. Chacune nomme le déclencheur qui démarre ses exécutions, ce que fait une exécution, et ce qu'elle déclenche ensuite. La plupart des factories commencent par l'une d'elles et grandissent en enchaînant la suivante.
 
-## Untriaged tickets pile up
+## Les tickets non triés s'accumulent
 
-**Explore task**
-- Trigger: a ticket is created, or a human labels it.
-- Does: checks the ticket against the codebase and sorts it into a category (easy call, needs a human, not a bug).
-- Triggers: an implementer run for easy calls. Anything else ends with the ticket labelled as waiting for a human.
+**Tâche d'exploration**
+- Déclencheur : un ticket est créé, ou un humain lui pose un label.
+- Fait : confronte le ticket à la base de code et le classe dans une catégorie (cas simple, besoin d'un humain, pas un bug).
+- Déclenche : une exécution d'implémentation pour les cas simples. Tout le reste se termine avec le ticket labellisé comme en attente d'un humain.
 
-## Ready tickets wait for someone to build them
+## Les tickets prêts attendent que quelqu'un les construise
 
-**Implementer task**
-- Trigger: a ticket is labelled ready, by a human or an explore run.
-- Does: builds the ticket until the automated checks pass, and opens a draft PR.
-- Triggers: an automated review run.
+**Tâche d'implémentation**
+- Déclencheur : un ticket est labellisé prêt, par un humain ou par une exécution d'exploration.
+- Fait : construit le ticket jusqu'à ce que les vérifications automatisées passent, et ouvre une PR en brouillon.
+- Déclenche : une exécution de revue automatisée.
 
-## PRs wait for review
+## Les PR attendent une revue
 
-**Automated review task**
-- Trigger: a PR opens with no automated review yet, or a human labels it.
-- Does: reviews the diff against the codebase's standards and the ticket it came from.
-- Triggers: a rework run on a fail. On a pass it ends, and the PR waits for human review before a human merges it.
+**Tâche de revue automatisée**
+- Déclencheur : une PR s'ouvre sans revue automatisée, ou un humain lui pose un label.
+- Fait : examine le diff au regard des standards de la base de code et du ticket dont elle vient.
+- Déclenche : une exécution de reprise en cas d'échec. En cas de succès, elle se termine, et la PR attend la revue humaine avant qu'un humain ne la merge.
 
-## Failed automated reviews sit unfixed
+## Les revues automatisées en échec restent sans correction
 
-**Rework task**
-- Trigger: an automated review run fails a PR.
-- Does: fixes only what the automated review named, and pushes.
-- Triggers: an automated review run. After a set number of fails, it ends with the PR labelled as waiting for a human.
+**Tâche de reprise**
+- Déclencheur : une exécution de revue automatisée met une PR en échec.
+- Fait : corrige uniquement ce que la revue automatisée a nommé, et pousse.
+- Déclenche : une exécution de revue automatisée. Après un nombre défini d'échecs, elle se termine avec la PR labellisée comme en attente d'un humain.
 
-## Specs are too big for one run
+## Les specs sont trop grosses pour une seule exécution
 
-**Decompose task**
-- Trigger: a spec ticket is labelled.
-- Does: splits the spec into tickets, each recording which tickets it depends on.
-- Triggers: an implementer run.
+**Tâche de décomposition**
+- Déclencheur : un ticket de spec reçoit un label.
+- Fait : découpe la spec en tickets, chacun enregistrant les tickets dont il dépend.
+- Déclenche : une exécution d'implémentation.
 
-The implementer run here picks the next ticket whose dependencies are all closed, and triggers itself again until no ticket is left.
+L'exécution d'implémentation pioche ici le prochain ticket dont toutes les dépendances sont fermées, et se redéclenche jusqu'à ce qu'il ne reste aucun ticket.
 
-## Migrating to a stricter automated check
+## Migrer vers une vérification automatisée plus stricte
 
-A new lint rule (or a stricter type setting) is switched on, but only some files pass it. The rule enforces on the passing files, and the failing ones sit on an exception list.
+Une nouvelle règle de lint (ou un réglage de types plus strict) est activée, mais seuls certains fichiers la respectent. La règle s'applique aux fichiers qui passent, et les autres restent sur une liste d'exceptions.
 
-**Ratchet task**
-- Trigger: a daily clock.
-- Does: takes one file off the exception list, fixes it until the stricter check passes, and opens a PR.
-- Triggers: an automated review run. Once the exception list is empty, the ratchet run has nothing to take and the migration is done.
+**Tâche ratchet**
+- Déclencheur : une horloge quotidienne.
+- Fait : retire un fichier de la liste d'exceptions, le corrige jusqu'à ce que la vérification plus stricte passe, et ouvre une PR.
+- Déclenche : une exécution de revue automatisée. Une fois la liste d'exceptions vide, l'exécution ratchet n'a plus rien à prendre et la migration est terminée.
 
-One small PR a day keeps human review cheap, and the check only ever gets stricter.
+Une petite PR par jour garde la revue humaine bon marché, et la vérification ne fait que se durcir.
 
-## Users report bugs nobody reads
+## Les utilisateurs signalent des bugs que personne ne lit
 
-A feedback button in the app is a ticket source: it files each report as a ticket with the explore label already on it. The explore run does the rest.
+Un bouton de feedback dans l'application est une source de tickets : il crée chaque signalement comme un ticket déjà porteur du label explore. L'exécution d'exploration fait le reste.
 
-## Production problems are found late
+## Les problèmes de production sont détectés trop tard
 
-A monitor (slow queries, error rates) is a ticket source. It files a ticket per problem, and comments on the open ticket instead when it sees the same problem again. After a fix merges, it reopens the ticket if the problem persists.
+Un moniteur (requêtes lentes, taux d'erreur) est une source de tickets. Il crée un ticket par problème, et commente le ticket ouvert à la place quand il revoit le même problème. Après le merge d'une correction, il rouvre le ticket si le problème persiste.
 
-## The factory's own runs fail
+## Les exécutions de la factory elle-même échouent
 
-**Fix task**
-- Trigger: the orchestrator reports a failed run.
-- Does: files the failing log as a ticket, and attempts a fix as a PR when the failure is fixable.
-- Triggers: an automated review run. A failure in a fix run's own work triggers nothing, so fixes never chain. Because the fix changes the factory itself, it always gets human review.
+**Tâche de correction**
+- Déclencheur : l'orchestrateur signale une exécution en échec.
+- Fait : crée un ticket à partir du log de l'échec, et tente une correction sous forme de PR quand l'échec est corrigeable.
+- Déclenche : une exécution de revue automatisée. Un échec dans le travail d'une exécution de correction ne déclenche rien, donc les corrections ne s'enchaînent jamais. Comme la correction modifie la factory elle-même, elle passe toujours par une revue humaine.
 
-## The codebase drifts
+## La base de code dérive
 
-**Architecture task**
-- Trigger: a nightly clock.
-- Does: scans recent changes for refactoring candidates and files them as one ticket.
-- Triggers: nothing. A human picks a candidate and labels it, which starts the usual chain.
+**Tâche d'architecture**
+- Déclencheur : une horloge nocturne.
+- Fait : parcourt les changements récents à la recherche de candidats au refactoring et les regroupe dans un seul ticket.
+- Déclenche : rien. Un humain choisit un candidat et lui pose un label, ce qui démarre la chaîne habituelle.
 
-## The same mistakes keep coming back
+## Les mêmes erreurs reviennent
 
-**Retro task**
-- Trigger: a PR merges, throttled to one merged PR in ten.
-- Does: reads the PR, its ticket, its automated reviews and its run logs, and proposes changes to the factory's own instructions as a PR.
-- Triggers: an automated review run.
+**Tâche rétro**
+- Déclencheur : une PR est mergée, à raison d'une PR mergée sur dix.
+- Fait : lit la PR, son ticket, ses revues automatisées et ses logs d'exécution, et propose des changements aux instructions de la factory elle-même sous forme de PR.
+- Déclenche : une exécution de revue automatisée.

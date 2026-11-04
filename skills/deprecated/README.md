@@ -1,3 +1,3 @@
-# Deprecated
+# Déprécié
 
-Skills I no longer use. This bucket is currently empty: a retired skill is deleted, and the changeset that removes it names whatever replaced it.
+Des skills que je n'utilise plus. Ce compartiment est actuellement vide : un skill retiré est supprimé, et le changeset qui le retire nomme ce qui l'a remplacé.

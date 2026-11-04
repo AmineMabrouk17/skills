@@ -1,32 +1,32 @@
 ---
 name: loop-me
-description: Grill me about specs for the workflows I want to build, within this workspace.
+description: Interrogez-moi sans relâche sur les specs des workflows que je veux construire, dans cet espace de travail.
 disable-model-invocation: true
 argument-hint: "A workflow to design, or nothing to go find one"
 ---
 
-Run a stateful `/grilling` session whose only output is **workflow** specs. Use the grilling discipline (relentless, a round of questions at a time, a recommended answer attached to each) aimed at the vocabulary and goal below. Create, edit, and delete specs as the grilling resolves things.
+Lancez une session `/grilling` avec état dont la seule sortie est des specs de **workflow**. Utilisez la discipline du grilling (sans relâche, une série de questions à la fois, une réponse recommandée attachée à chacune) orientée vers le vocabulaire et l'objectif ci-dessous. Créez, modifiez et supprimez les specs à mesure que le grilling tranche les choses.
 
-## The loop lens
+## La lentille des boucles
 
-A **loop** is a recurring pattern in the user's life: their career, their week, their morning, a single repeated activity. Picturing a life as loops within loops reveals how predictable its activities really are, which is what makes them worth **delegating**. Use the lens to find loops worth specifying, and propose ones the user hasn't noticed.
+Une **boucle** est un motif récurrent dans la vie de l'utilisateur : sa carrière, sa semaine, son matin, une activité répétée. Se représenter une vie comme des boucles imbriquées révèle à quel point ses activités sont réellement prévisibles, et c'est ce qui les rend dignes d'être **déléguées**. Utilisez la lentille pour trouver les boucles qui valent une spec, et proposez-en que l'utilisateur n'a pas remarquées.
 
-A **workflow** is the spec of one loop, made real. You run a workflow on a loop: the loop is its running instantiation. Workflows live in `workflows/*.md` and are the source of truth.
+Un **workflow** est la spec d'une boucle, rendue réelle. Vous exécutez un workflow sur une boucle : la boucle est son instanciation en cours. Les workflows vivent dans `workflows/*.md` et sont la source de vérité.
 
-## Vocabulary
+## Vocabulaire
 
-A shared language, reached for only when a workflow calls for it: never a checklist. **Mandate nothing structural**: a workflow needs no AI, no checkpoint, and no schedule unless the grilling shows it does.
+Un langage partagé, mobilisé seulement quand un workflow le réclame : jamais une checklist. **N'imposez rien de structurel** : un workflow n'a besoin ni d'IA, ni de point de contrôle, ni de planification, sauf si le grilling montre le contraire.
 
-- **Trigger**: what fires each run, an **event** (a new email, a new issue) or a **schedule** (every morning). Event-triggering is usually the more efficient.
-- **Checkpoint**: a human-in-the-loop point where the user is asked to verify or decide. Some workflows have none and run autonomously; some use no AI at all.
-- **Push right**: defer the checkpoint as far as it will go. Do maximal work before involving the human, so they are asked once, late, with everything prepared.
-- **Brief**: what a checkpoint presents, a tight, decision-ready summary (what was produced, why, and a link down to the asset itself), never the raw output. The user reads a brief, not a draft. Speed of review is imperative.
+- **Déclencheur** : ce qui lance chaque exécution, un **événement** (un nouvel email, une nouvelle issue) ou une **planification** (chaque matin). Le déclenchement par événement est généralement le plus efficace.
+- **Point de contrôle** : un point avec un humain dans la boucle où l'on demande à l'utilisateur de vérifier ou de décider. Certains workflows n'en ont aucun et tournent de façon autonome ; d'autres n'utilisent aucune IA du tout.
+- **Pousser à droite** : différez le point de contrôle aussi loin que possible. Faites le maximum de travail avant d'impliquer l'humain, pour qu'on ne lui demande qu'une fois, tard, avec tout préparé.
+- **Brief** : ce que présente un point de contrôle, un résumé serré et prêt à décider (ce qui a été produit, pourquoi, et un lien vers l'actif lui-même), jamais la sortie brute. L'utilisateur lit un brief, pas un brouillon. La vitesse de revue est impérative.
 
-## Definition of done
+## Critères d'achèvement
 
-A workflow spec is done when an implementer agent could build it without asking a single question. Grill until then; nothing is done while a question remains.
+Une spec de workflow est terminée quand un agent implémenteur pourrait la construire sans poser une seule question. Interrogez jusqu'à ce point ; rien n'est terminé tant qu'une question subsiste.
 
-## The workspace
+## L'espace de travail
 
-- `workflows/*.md`: one spec per workflow.
-- `NOTES.md`: raw notes on the user's world, the tools they use, the channels they process, and their own terminology for both. When it is empty or thin, interview them about their world before specifying anything. Sharpen fuzzy terms into canonical ones as they surface, and record them here.
+- `workflows/*.md` : une spec par workflow.
+- `NOTES.md` : notes brutes sur le monde de l'utilisateur, les outils qu'il utilise, les canaux qu'il traite et sa propre terminologie pour les deux. Quand il est vide ou maigre, interrogez-le sur son monde avant de spécifier quoi que ce soit. Affinez les termes flous en termes canoniques à mesure qu'ils apparaissent, et consignez-les ici.

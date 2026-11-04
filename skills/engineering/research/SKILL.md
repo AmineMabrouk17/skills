@@ -1,12 +1,12 @@
 ---
 name: research
-description: Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.
+description: Étudiez une question à partir de sources primaires fiables et consignez les résultats dans un fichier Markdown du repo. Utilisez ceci lorsque l'utilisateur veut qu'un sujet soit étudié, que des faits sur une documentation ou une API soient rassemblés, ou que le travail de lecture soit délégué à un agent en arrière-plan.
 ---
 
-Spin up a **background agent** to do the research, so you keep working while it reads. Start it with a fresh context window.
+Lancez un **agent en arrière-plan** pour mener la recherche, afin que vous puissiez continuer à travailler pendant qu'il lit. Démarrez-le avec une fenêtre de contexte neuve.
 
-Its job:
+Son rôle :
 
-1. Investigate the question against **primary sources** (official docs, source code, specs, first-party APIs), not a secondary write-up of them. Follow every claim back to the source that owns it.
-2. Write the findings to a single Markdown file, citing each claim's source.
-3. Save it where the repo already keeps such notes; match the existing convention, and if there is none, put it somewhere sensible and say where.
+1. Étudier la question à partir de **sources primaires** (documentation officielle, code source, specs, API first-party), et non d'un compte rendu secondaire. Rattacher chaque affirmation à la source qui la porte.
+2. Écrire les résultats dans un seul fichier Markdown, en citant la source de chaque affirmation.
+3. L'enregistrer là où le repo conserve déjà ce type de notes ; respecter la convention existante et, s'il n'y en a aucune, le placer à un endroit pertinent et indiquer où.
