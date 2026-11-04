@@ -1,98 +1,98 @@
 ---
 name: software-factory
-description: Shared language for designing a software factory: the tasks it runs and the services it plugs into.
+description: Langage commun pour concevoir une software factory : les tâches qu'elle exécute et les services auxquels elle se branche.
 disable-model-invocation: true
 ---
 
-A **software factory** is a system of agents that turns tickets, PRs and schedules into merged code, deployed on remote infrastructure the user chooses. This skill is the language for designing one. Use these terms, and only these, when discussing or whiteboarding a factory; when the user reaches for a word under _Avoid_, name the canonical term.
+Une **software factory** est un système d'agents qui transforme des tickets, des PR et des planifications en code mergé, déployé sur une infrastructure distante choisie par l'utilisateur. Ce skill est le langage pour en concevoir une. Utilisez ces termes, et seulement ceux-ci, quand vous discutez d'une factory ou la dessinez au tableau ; quand l'utilisateur emploie un mot de la liste _À éviter_, nommez le terme canonique.
 
-## Tasks and runs
+## Tâches et exécutions
 
-**Task**:
-A kind of work the factory performs, defined once and run many times: review, explore, implement, ratchet. A task may work on a ticket, a PR, or the codebase as a whole.
-_Avoid_: job, workflow, action
+**Tâche** :
+Un type de travail que la factory exécute, défini une fois et exécuté de nombreuses fois : revue, exploration, implémentation, ratchet. Une tâche peut porter sur un ticket, une PR, ou la base de code dans son ensemble.
+_À éviter_ : job, workflow, action
 
-**Trigger**:
-The event that starts a run: a change in the ticket tracker or git host, a clock in the orchestrator, or another run.
+**Déclencheur** :
+L'événement qui démarre une exécution : un changement dans le ticket tracker ou l'hébergeur git, une horloge dans l'orchestrateur, ou une autre exécution.
 
-**Run**:
-One execution of a task on one runner, from its trigger to its finish, treated as a black box. A run triggers further runs either directly, through logic in the orchestrator, or by changing the ticket tracker or git host. A run never waits for a human: it ends, and the human's later change to the ticket tracker or git host triggers a new run.
-_Avoid_: session
+**Exécution** :
+Une exécution d'une tâche sur un runner, de son déclencheur à sa fin, traitée comme une boîte noire. Une exécution en déclenche d'autres, soit directement, par la logique de l'orchestrateur, soit en modifiant le ticket tracker ou l'hébergeur git. Une exécution n'attend jamais un humain : elle se termine, et le changement ultérieur de l'humain dans le ticket tracker ou l'hébergeur git déclenche une nouvelle exécution.
+_À éviter_ : session
 
-**Runner**:
-The disposable machine a run executes on. Nothing on it survives the run, even when the machine itself is long-lived: a run's only memory of earlier runs is the ticket tracker, the git host and the orchestrator.
-_Avoid_: server, host, box, compute, sandbox
+**Runner** :
+La machine jetable sur laquelle s'exécute une exécution. Rien de ce qu'elle porte ne survit à l'exécution, même quand la machine elle-même est durable : la seule mémoire qu'une exécution garde des exécutions précédentes, ce sont le ticket tracker, l'hébergeur git et l'orchestrateur.
+_À éviter_ : serveur, hôte, machine, compute, sandbox
 
 ## Services
 
-**Ticket tracker**:
-Where tickets live, and the factory's human interface: humans schedule work by filing tickets, talk to agents in their comments, and their changes to tickets trigger runs.
-_Avoid_: issue tracker, ticket manager, project board
+**Ticket tracker** :
+Là où vivent les tickets, et l'interface humaine de la factory : les humains planifient le travail en créant des tickets, parlent aux agents dans leurs commentaires, et leurs changements de tickets déclenchent des exécutions.
+_À éviter_ : issue tracker, gestionnaire de tickets, tableau de projet
 
-**Ticket source**:
-Anything outside the factory that creates tickets in the ticket tracker: a feedback button, a monitor, an error tracker, an inbox.
-_Avoid_: data source, trigger source, intake
+**Source de tickets** :
+Tout ce qui, hors de la factory, crée des tickets dans le ticket tracker : un bouton de feedback, un moniteur, un traqueur d'erreurs, une boîte de réception.
+_À éviter_ : source de données, source de déclencheur, collecte
 
-**Git host**:
-Where branches, PRs and reviews live.
-_Avoid_: code host, forge, repo
+**Hébergeur git** :
+Là où vivent les branches, les PR et les revues.
+_À éviter_ : hébergeur de code, forge, repo
 
-**Orchestrator**:
-The component that receives triggers, starts runs on runners, and records which runs are queued, in flight or finished.
-_Avoid_: dispatcher, scheduler, control plane
+**Orchestrateur** :
+Le composant qui reçoit les déclencheurs, démarre des exécutions sur les runners, et enregistre quelles exécutions sont en file, en cours ou terminées.
+_À éviter_ : répartiteur, ordonnanceur, control plane
 
-**Observability platform**:
-Where runners send logs, traces and status, so a human can see what happened inside each run. Optional: the product filling the runner or orchestrator slot often shows enough on its own. A run never decides on it until something writes it into the ticket tracker or git host.
-_Avoid_: observability, logs, monitoring, dashboard
+**Plateforme d'observabilité** :
+Là où les runners envoient logs, traces et statut, pour qu'un humain voie ce qui s'est passé dans chaque exécution. Facultative : le produit qui remplit l'emplacement runner ou orchestrateur en montre souvent assez à lui seul. Une exécution ne prend jamais de décision à partir d'elle tant que quelque chose ne l'écrit pas dans le ticket tracker ou l'hébergeur git.
+_À éviter_ : observabilité, logs, supervision, tableau de bord
 
-## Designing a factory
+## Concevoir une factory
 
-A design has two halves: the **services**, each a slot filled with a product, and the **tasks** whose runs move work through them.
+Une conception a deux moitiés : les **services**, chacun un emplacement rempli par un produit, et les **tâches** dont les exécutions font avancer le travail à travers eux.
 
-Start from the user's problem, not the factory: untriaged tickets, PRs waiting for automated review, a stricter automated check to migrate to, bugs nobody reads. When the user names a problem or doesn't know what to build, read [EXAMPLE-TASKS.md](EXAMPLE-TASKS.md) for the tasks that solve common ones.
+Partez du problème de l'utilisateur, pas de la factory : des tickets non triés, des PR en attente de revue automatisée, une vérification automatisée plus stricte vers laquelle migrer, des bugs que personne ne lit. Quand l'utilisateur nomme un problème ou ne sait pas quoi construire, lisez [EXAMPLE-TASKS.md](EXAMPLE-TASKS.md) pour les tâches qui résolvent les plus courants.
 
-### Start slow
+### Démarrer lentement
 
-Every trigger is an accelerator. Accelerators without brakes make a slop cannon. There are three brakes:
+Chaque déclencheur est un accélérateur. Des accélérateurs sans freins font un canon à slop. Il y a trois freins :
 
-- **Automated checks**: deterministic gates (types, lint, tests) that every run must pass.
-- **Automated review**: a separate run that reads the diff cold against the codebase's standards and the ticket, when there is one.
-- **Human review**: a human reads the PR before it merges; what it catches becomes new automated checks and sharper automated review.
+- **Vérifications automatisées** : des barrières déterministes (types, lint, tests) que chaque exécution doit franchir.
+- **Revue automatisée** : une exécution séparée qui lit le diff à froid au regard des standards de la base de code et du ticket, quand il y en a un.
+- **Revue humaine** : un humain lit la PR avant son merge ; ce qu'elle attrape devient de nouvelles vérifications automatisées et une revue automatisée plus affûtée.
 
-Add one automated trigger at a time, throttled at first (one bug report in ten, a clock once a day), with human review on every PR. Open the throttle as the brakes earn trust, and cap every loop of runs at a few tries before a human.
+Ajoutez un déclencheur automatisé à la fois, en le limitant au début (un rapport de bug sur dix, une horloge une fois par jour), avec une revue humaine sur chaque PR. Ouvrez les vannes à mesure que les freins gagnent la confiance, et plafonnez chaque boucle d'exécutions à quelques essais avant un humain.
 
-### Fill every slot
+### Remplir chaque emplacement
 
-Each service is a slot. One product can fill several slots, and one server can host several services. Three designs, side by side:
+Chaque service est un emplacement. Un produit peut remplir plusieurs emplacements, et un serveur peut héberger plusieurs services. Trois conceptions, côte à côte :
 
 | Service                | All on GitHub                   | Linear tickets                 | Own tracker              |
 | ---------------------- | ------------------------------- | ------------------------------ | ------------------------ |
-| Ticket tracker         | GitHub Issues                   | Linear                         | own app                  |
-| Ticket source          | feedback button                 | feedback button, monitor       | feedback button, monitor |
-| Git host               | GitHub                          | GitHub                         | GitHub                   |
-| Orchestrator           | GitHub Actions                  | own server + database          | own app                  |
-| Runner                 | Actions runner                  | Actions, E2B, Daytona or a VPS | own app, or sandboxes    |
-| Observability platform | none: Actions run pages suffice | an LLM tracing platform        | own app                  |
+| Ticket tracker         | GitHub Issues                   | Linear                         | application maison       |
+| Source de tickets      | bouton de feedback              | bouton de feedback, moniteur   | bouton de feedback, moniteur |
+| Hébergeur git          | GitHub                          | GitHub                         | GitHub                   |
+| Orchestrateur          | GitHub Actions                  | serveur maison + base de données | application maison     |
+| Runner                 | Actions runner                  | Actions, E2B, Daytona ou un VPS | application maison, ou sandboxes |
+| Plateforme d'observabilité | aucune : les pages d'exécution d'Actions suffisent | une plateforme de traçage LLM | application maison |
 
-When the user is choosing a product for a slot, read that slot's survey to get oriented, then research the current options yourself; each survey groups the options by type and lists the questions that decide the slot:
+Quand l'utilisateur choisit un produit pour un emplacement, lisez le panorama de cet emplacement pour vous orienter, puis recherchez vous-même les options actuelles ; chaque panorama regroupe les options par type et liste les questions qui décident de l'emplacement :
 
 - [TICKET-TRACKERS.md](TICKET-TRACKERS.md)
 - [GIT-HOSTS.md](GIT-HOSTS.md)
 - [RUNNERS.md](RUNNERS.md)
 - [OBSERVABILITY-PLATFORMS.md](OBSERVABILITY-PLATFORMS.md)
 
-Buy the services and build the tasks: the tasks carry the user's design, the services are generic. Favour an off-the-shelf ticket tracker: it is robust, people already know it, and outside users are easy to let in.
+Achetez les services et construisez les tâches : les tâches portent la conception de l'utilisateur, les services sont génériques. Privilégiez un ticket tracker sur étagère : il est robuste, les gens le connaissent déjà, et les utilisateurs externes y entrent facilement.
 
-### Question every task
+### Interroger chaque tâche
 
-For each task, answer:
+Pour chaque tâche, répondez :
 
-1. What triggers it?
-2. What does it do, and which services does it read and write?
-3. What does it trigger next?
-4. Where does a human re-enter?
-5. What stops two runs doing the same work?
+1. Qu'est-ce qui la déclenche ?
+2. Que fait-elle, et quels services lit-elle et écrit-elle ?
+3. Que déclenche-t-elle ensuite ?
+4. Où un humain reprend-il la main ?
+5. Qu'est-ce qui empêche deux exécutions de faire le même travail ?
 
-For each ticket source, answer: what stops it filing the same ticket twice?
+Pour chaque source de tickets, répondez : qu'est-ce qui l'empêche de créer deux fois le même ticket ?
 
-A design is finished when every slot names a product (or, for the observability platform, a deliberate none) and every task and ticket source has an answer to every question.
+Une conception est terminée quand chaque emplacement nomme un produit (ou, pour la plateforme d'observabilité, une absence assumée) et que chaque tâche et chaque source de tickets a une réponse à chaque question.
